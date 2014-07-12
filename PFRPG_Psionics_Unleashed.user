@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document signature="Hero Lab Data">
+  <fileinfo>
+    <info_author>
+TCArknight, Poizen37, Asvaldson, and Tim Shadow (ShadowChemosh)
+    </info_author>
+    <info_history><![CDATA[
+[b]v2.5 - June 8, 2014[/b]
+[b]Bug Fixes[/b]
+-Maenad can now select their ART's (Alternate Racial Traits).
+-Fixed the Astral Juggernauts free enhancements.
+-Fixed Power Point Favored Class bonus was getting lost when a .por file was re-loaded.
+-Fixed the soulknife not getting the correct bonus feat (Wild Talent/Psionic Talent).
+-Fixed Cryptic unable to select Insight abilities.
+-Fixed missing Psychic Warrior Paths.
+-Fixed Psychic Warrior missing Spellcraft as a Class Skill.
+-Fixed Dread not having Bonus Feats to select from.
+-Fixed the trance for Survivor Path not providing DR.
+-Misc text updates to Ultimate Psionics.
+
+[b]New[/b]
+-Feats (Many still need scripts and mechanics added to be fully functional.
+--Unlocked Talent and Access Psionic Talent feats now add new tabs for selecting the Talents and Powers!!!
+-Alternate Racial Traits for the Noral have been added.
+-Cerebral Infiltrator, Enlightened Monk, Gaean Archetypes added.
+-Minor Psionics, Pajor Psionics and Psionics Feat Rogue Talents added.
+-Dazing Shot, Vanish Advanced Rogue Talents added.
+-New adjustments: Powers Known and Powers Known, Talents.
+
+[b]Data File Authoring[/b]
+-The special tag "Psionics.Class" no longer needs to be set in the editor. A mechanic now figures out if a class is psionic and adds the tag "Psionics.Class" to the Class Helper. It also assigns the correct number of Psionics.Class tags to the hero so that the PsiCrystal scripts can count levels easily.
+
+[b]v2.4 - April 30, 2014[/b]
+-With the addition of so much new stuff from Ultimate Psionics added I have changed the package name to Ultimate Psionics now.
+[b]New:[/b]
+-UP classes added: Aegis, Cryptic, Dread, Marksman, Tatician, and Vitalist.
+-Archetypes added: Traceur
+-Races added: Forgeborn & Noral
+-Powers added: 129 new powers!!!
+-Traits added: 34 new traits including racial, dream, and psionic.
+-Adjustments added: Power Points; Powers Known; Powers Known, Talents.
+[B]Data File Authoring[/B]
+-For adding new "Vitalist Methods" please see [URL="http://forums.wolflair.com/showthread.php?p=181848#post181848"]THIS[/URL] post for details.
+-Added archetype headers for new PE classes.
+-Added the psiClass.? tags for the Vitalist Methods to the Mechanic so they are loaded first.
+
+March 9, 2014 - Tim Shadow
+[b]Fixes[/b]
+-Fixed the Psion list of bonus feats to display all Psionic feats again.
+-Fixed "Psionic Body" feat to correctly calculate the number of bonus HP.
+-Fixed "Naturally Psionic" racial ability.
+-"Psion (Telepath)" can now 'Sense Motive' once again.
+-Fixed "Trance (Weaponmaster's Path)" activation on In-Play tab.
+-Looked at all the Trance abilites for the Psychic Warrior. They should all work correctly now.
+-Added the "Call Weaponry" Spell/Power adjustment. This power also gains bonuses from the "Psi-Warrior: Trance (Mind Knight's Path)" class ability.
+-Rewrote psicrystals from the ground up. If you added a psicrystal before you will need to re-add it through the "Other" tab. I have deprecated all the old Psicrystal archetypes and Psicrystal races. If you have them on your character you will have to re-add the Psicrystal on the "Other" tab.
+[b]Data File Authoring[/b]
+-Added new tags "Psionics.Class" and "Psionics.Race". When creating new races or classes be sure to set the correct tag on to the class or race. These allow some of the underlying mechanics to work correctly. In example "Naturall Psionic" racial ability.
+-Added new tags "PsyWarrior.PathPrim" and "PsyWarrior.PathSec". These new tags will be set on the Psychic Warrior custom abilities so that scripts can easily tell the Primary from the Secondary choice.
+-Added Base Class Archetype Headers. So things sort correctly in the Archetype section.
+-Added new Tag group "Psicrystal"
+--Psicrystal.Personalty: Psicrystal Personalty Selector when combined with component.Simple can be used to display all psicyrstal personality.
+--Psicrystal.Allowed: When added to the Hero lets the new minion know its valid to add a psicrystal. To be added before Final/50000
+--Psicrystal.MasterMile: Psicrystal is within 1 Mile of the master. Added at First/10000.
+--Psicrystal.MasterArm: Psicrystal is Within Arms Reach. Added at First/10000.
+--Psicyrstal.BonusLvl: Makes the psicrystal get treated as +1 level. Currently used for "Improved Psicrystal" feat. Must be applied to the Hero before First/490.
+-Created new procedure "PsicryPers" for setting up Psicrystal Personalities. This way the code can work for the race and for hte "Improved Psicrystal" feat.
+
+March 2, 2014 - Tim Shadow
+-Removed all old notes as they are way outdated and not needed.
+-Upgraded psioncis unleashed base classes and PrC's to use the new Psionics frame work that LW put in v8.8 of Pathfinder.
+-Massive change to everything in the data package.
+-This file will not only contain notes and mechanic helper objects for Psioncis.
+]]></info_history>
+    </fileinfo>
+
+
+  <!-- ============================================================================================ -->
+  <!-- New Ultimate Psionics Mechanic                                                               -->
+  <!-- ============================================================================================ -->
+  <thing id="mechS2PU" name="Ultimate Psionics Mechanic" compset="Mechanics">
+    <usesource source="pPsiUn"/>
+
+    <!-- New Global Tags defined here so they are always available -->
+    <tag group="wRangeInc" tag="15"         name="15"/>
+    <tag group="ProductId" tag="PUProdID"   name="Community Created Psionics"/>
+    <tag group="psiClass"  tag="PUVitMetGu" name="Vitalist Method - Guardian"/>
+    <tag group="psiClass"  tag="PUVitMetMe" name="Vitalist Method - Mender"/>
+    <tag group="psiClass"  tag="PUVitMetSo" name="Vitalist Method - Soulthief"/>
+
+     <!-- Only use this tag when you don't want background script to check for psionic character.
+          This is used currently on the Access Psionic Talent feat. -->
+    <tag group="fCategory" tag="PUPsionic"  name="Psionic"/>
+
+    <!-- Psionic Helper Objects -->
+    <bootstrap thing="xPwrRes"></bootstrap>
+
+    <!-- Simple Scripts -->
+    <bootstrap thing="PU0lvlPowe"></bootstrap>
+    <bootstrap thing="PUPathSk"></bootstrap>
+    <bootstrap thing="PUClassFnd"></bootstrap>
+
+    <!-- Selection Helper Objects -->
+    <bootstrap thing="zPUArtiste"></bootstrap>
+    <bootstrap thing="zPUBully"></bootstrap>
+    <bootstrap thing="zPUFocused"></bootstrap>
+    <bootstrap thing="zPUFriendl"></bootstrap>
+    <bootstrap thing="zPUHero"></bootstrap>
+    <bootstrap thing="zPULiar"></bootstrap>
+    <bootstrap thing="zPUMeticul"></bootstrap>
+    <bootstrap thing="zPUNimble"></bootstrap>
+    <bootstrap thing="zPUPoised"></bootstrap>
+    <bootstrap thing="zPUResolve"></bootstrap>
+    <bootstrap thing="zPUSage"></bootstrap>
+    <bootstrap thing="zPUSingleM"></bootstrap>
+    <bootstrap thing="zPUSneaky"></bootstrap>
+    <bootstrap thing="zPUSympath"></bootstrap>
+    </thing>
+
+  <!-- ============================================================================================ -->
+  <!-- New Psionic Base Class Headers                                                               -->
+  <!-- ============================================================================================ -->
+  <thing id="arHdPUPsi" name="Psion" compset="ClassVary" uniqueness="unique" isshowonly="yes">
+    <comment><![CDATA[This is a helper object for the "Psion" class header.]]></comment>
+    <link linkage="varies" thing="cHelpPsi"/>
+  </thing>
+  <thing id="arHdPUPWa" name="Psychic Warrior" compset="ClassVary" uniqueness="unique" isshowonly="yes">
+    <comment><![CDATA[This is a helper object for the "Psychic Warrior" class header.]]></comment>
+    <link linkage="varies" thing="cHelpPWa"/>
+  </thing>
+  <thing id="arHdPUSkn" name="Soulknife" compset="ClassVary" uniqueness="unique" isshowonly="yes">
+    <comment><![CDATA[This is a helper object for the "Soulknife" class header.]]></comment>
+    <link linkage="varies" thing="cHelpSkn"/>
+  </thing>
+  <thing id="arHdPUWld" name="Wilder" compset="ClassVary" uniqueness="unique" isshowonly="yes">
+    <comment><![CDATA[This is a helper object for the "Wilder" class header.]]></comment>
+    <link linkage="varies" thing="cHelpWld"/>
+  </thing>
+  <thing id="arHdPUAeg" name="Aegis" compset="ClassVary" uniqueness="unique" isshowonly="yes">
+    <comment><![CDATA[This is a helper object for the "Aegis" class header.]]></comment>
+    <link linkage="varies" thing="cHelpPU0"/>
+  </thing>
+  <thing id="arHdPUCry" name="Cryptic" compset="ClassVary" uniqueness="unique" isshowonly="yes">
+    <comment><![CDATA[This is a helper object for the "Cryptic" class header.]]></comment>
+    <link linkage="varies" thing="cHelpPU1"/>
+  </thing>
+  <thing id="arHdPUDrd" name="Dread" compset="ClassVary" uniqueness="unique" isshowonly="yes">
+    <comment><![CDATA[This is a helper object for the "Dread" class header.]]></comment>
+    <link linkage="varies" thing="cHelpPU2"/>
+  </thing>
+  <thing id="arHdPUMrk" name="Marksman" compset="ClassVary" uniqueness="unique" isshowonly="yes">
+    <comment><![CDATA[This is a helper object for the "Marksman" class header.]]></comment>
+    <link linkage="varies" thing="cHelpPU3"/>
+  </thing>
+  <thing id="arHdPUTac" name="Tactician" compset="ClassVary" uniqueness="unique" isshowonly="yes">
+    <comment><![CDATA[This is a helper object for the "Tactician" class header.]]></comment>
+    <link linkage="varies" thing="cHelpPU4"/>
+  </thing>
+  <thing id="arHdPUVit" name="Vitalist" compset="ClassVary" uniqueness="unique" isshowonly="yes">
+    <comment><![CDATA[This is a helper object for the "Vitalist" class header.]]></comment>
+    <link linkage="varies" thing="cHelpPU5"/>
+  </thing>
+
+  <!-- ============================================================================================ -->
+  <!-- New Psionic Minion/Hirelings Headers                                                         -->
+  <!-- ============================================================================================ -->
+  <thing id="minHdPUPsc" name="Psicrystals" compset="Minion" isshowonly="yes">
+    <tag group="gType" tag="PUPsicrsta" name="Psicrystals"/>
+  </thing>
+
+  <!-- ============================================================================================ -->
+  <!-- Helper Objects                                                                               -->
+  <!-- ============================================================================================ -->
+  <thing id="xPwrRes" name="Power Resistance" description="You have Power Resistance." compset="Ability" uniqueness="unique">
+    <fieldval field="shortname" value="PR"/>
+    <usesource source="pPsiUn"/>
+    <tag group="Helper"    tag="BaseAbil"/>
+    <tag group="Helper"    tag="ShowSpec"/>
+    <tag group="SpecType"  tag="Resist"/>
+    <tag group="Universal" tag="Universal"/>
+    <eval phase="Final" priority="20000"><![CDATA[
+      call CalcValue
+
+      ~ Use our value field as the quality of spell resistance
+      field[livename].text = field[name].text & " (" & field[abValue].value & ")"
+
+      ~ specify a shortname for consistency with other resistances
+      field[shortname].text = "powers " & field[abValue].value]]></eval>
+    </thing>
+
+
+  <!-- ============================================================================================ -->
+  <!-- Setup Helper Objects                                                                         -->
+  <!-- ============================================================================================ -->
+  <thing id="PU0lvlPowe" name="Zero Level Powers" description="This makes all zero level powers cost no power points when Psi-Focused." compset="Simple" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <eval phase="PreLevel" priority="10000"><![CDATA[
+      ~ If not Psi Focused get out now
+      doneif (hero.tagis[Hero.PsiFocus] <> 1)
+      
+      ~ Find all zero level powers/talents and make cost 0 PP
+      foreach pick in hero from BasePower where "sLevel.0 & Helper.Secondary"
+        eachpick.field[psiCost].value = 0
+      nexteach]]></eval>
+    </thing>
+
+  <thing id="PUPathSk" name="Path Skills Setup" description="This puts the PathSkill.? tags on skills." compset="Simple" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <eval phase="First" priority="50"><![CDATA[ 
+      ~ Find all zero level powers/talents and make cost 0 PP
+      foreach pick in hero from BaseSkill
+        var sTag as string
+        sTag = eachpick.tagids[thingid.?]
+        sTag = replace(sTag,"thingid","PathSkill",0)
+        ~ Create "PathSkill" tags on the skill
+        perform eachpick.assignstr[sTag]
+      nexteach
+      ]]></eval>
+    </thing>
+
+  <thing id="PUClassFnd" name="Psionic Class Found" description="This checks to see if a psionic class has been selected and if found sets the tag Psionics.Class on the hero very early." compset="Simple" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <eval phase="First" priority="100"><![CDATA[
+      var psiLevel as number
+      var iX       as number
+      ~ Find each Psionic Based class and set a Psionics.Class tag on the hero.
+      ~ This lets us know we have taken a Psionic Class. This is needed for 
+      ~ several different bootstrap conditions that need to check very early.
+      foreach pick in hero from BaseClHelp
+        ~ If we have a psionic attribute then we have to assume we are a psionic class
+        if (eachpick.islinkage[psiattr] <> 0) Then
+          ~ Set the psionic class tag on the class
+          perform eachpick.assign[Psionics.Class]
+          ~ Total up our Psionic Levels
+          psiLevel += eachpick.field[cTotalLev].value
+          ~ If no hero psionic tag already on hero than assign one
+          If (hero.tagis[Hero.Psionic] <> 1) Then
+            ~ Set the Hero.Psionic tag on the hero
+            perform hero.assign[Hero.Psionic]
+          Endif
+        Endif
+      nexteach
+      
+      ~ Assign the correct number of Psionics.Class tags to the hero
+      while (iX < psiLevel)
+        iX += 1
+        perform hero.assign[Psionics.Class]
+      loop      
+    ]]></eval>
+    </thing>
+
+  <!-- ============================================================================================ -->
+  <!-- Helper Selection Objects                                                                         -->
+  <!-- ============================================================================================ -->
+  <thing id="zPUArtiste" name="Artiste" description="Psicrystal Personalities helper" compset="Simple">
+    <usesource source="pPsiUn"/>
+    <tag group="Psicrystal" tag="Personalty" name="Psicrystal Personalty Selector"/>
+    <tag group="PsicryType" tag="Skill" name="Skill Benefit"/>
+    <tag group="PsicrysBon" tag="3"/>
+    <tag group="PsicrystID" tag="AllCraft"/>
+    </thing>
+  <thing id="zPUBully" name="Bully" description="Psicrystal Personalities helper" compset="Simple">
+    <usesource source="pPsiUn"/>
+    <tag group="Psicrystal" tag="Personalty" name="Psicrystal Personalty Selector"/>
+    <tag group="PsicryType" tag="Skill" name="Skill Benefit"/>
+    <tag group="PsicrysBon" tag="3"/>
+    <tag group="PsicrystID" tag="skIntim"/>
+    </thing>
+  <thing id="zPUFocused" name="Focused" description="Psicrystal Personalities helper" compset="Simple">
+    <usesource source="pPsiUn"/>
+    <tag group="Psicrystal" tag="Personalty" name="Psicrystal Personalty Selector"/>
+    <tag group="PsicryType" tag="Skill" name="Skill Benefit"/>
+    <tag group="PsicrysBon" tag="3"/>
+    <tag group="PsicrystID" tag="skPUAhypno"/>
+    </thing>
+  <thing id="zPUFriendl" name="Friendly" description="Psicrystal Personalities helper" compset="Simple">
+    <usesource source="pPsiUn"/>
+    <tag group="Psicrystal" tag="Personalty" name="Psicrystal Personalty Selector"/>
+    <tag group="PsicryType" tag="Skill" name="Skill Benefit"/>
+    <tag group="PsicrysBon" tag="3"/>
+    <tag group="PsicrystID" tag="skDiplo"/>
+    </thing>
+  <thing id="zPUHero" name="Hero" description="Psicrystal Personalities helper" compset="Simple">
+    <usesource source="pPsiUn"/>
+    <tag group="Psicrystal" tag="Personalty" name="Psicrystal Personalty Selector"/>
+    <tag group="PsicryType" tag="Skill" name="Save Benefit"/>
+    <tag group="PsicrysBon" tag="2"/>
+    <tag group="PsicrystID" tag="svFort"/>
+    </thing>
+  <thing id="zPULiar" name="Liar" description="Psicrystal Personalities helper" compset="Simple">
+    <usesource source="pPsiUn"/>
+    <tag group="Psicrystal" tag="Personalty" name="Psicrystal Personalty Selector"/>
+    <tag group="PsicryType" tag="Skill" name="Skill Benefit"/>
+    <tag group="PsicrysBon" tag="3"/>
+    <tag group="PsicrystID" tag="skBluff"/>
+    </thing>
+  <thing id="zPUMeticul" name="Meticulous" description="Psicrystal Personalities helper" compset="Simple">
+    <usesource source="pPsiUn"/>
+    <tag group="Psicrystal" tag="Personalty" name="Psicrystal Personalty Selector"/>
+    <tag group="PsicryType" tag="Skill" name="Skill Benefit"/>
+    <tag group="PsicrysBon" tag="3"/>
+    <tag group="PsicrystID" tag="skPercep"/>
+    </thing>
+  <thing id="zPUNimble" name="Nimble" description="Psicrystal Personalities helper" compset="Simple">
+    <usesource source="pPsiUn"/>
+    <tag group="Psicrystal" tag="Personalty" name="Psicrystal Personalty Selector"/>
+    <tag group="PsicryType" tag="Other" name="Other Benefit"/>
+    <tag group="PsicrysBon" tag="2"/>
+    <tag group="PsicrystID" tag="Initiative"/>
+    </thing>
+  <thing id="zPUPoised" name="Poised" description="Psicrystal Personalities helper" compset="Simple">
+    <usesource source="pPsiUn"/>
+    <tag group="Psicrystal" tag="Personalty" name="Psicrystal Personalty Selector"/>
+    <tag group="PsicryType" tag="Skill" name="Skill Benefit"/>
+    <tag group="PsicrysBon" tag="3"/>
+    <tag group="PsicrystID" tag="skAcrobat"/>
+    </thing>
+  <thing id="zPUResolve" name="Resolved" description="Psicrystal Personalities helper" compset="Simple">
+    <usesource source="pPsiUn"/>
+    <tag group="Psicrystal" tag="Personalty" name="Psicrystal Personalty Selector"/>
+    <tag group="PsicryType" tag="Save" name="Save Benefit"/>
+    <tag group="PsicrysBon" tag="2"/>
+    <tag group="PsicrystID" tag="svWill"/>
+    </thing>
+  <thing id="zPUSage" name="Sage" description="Psicrystal Personalities helper" compset="Simple">
+    <usesource source="pPsiUn"/>
+    <tag group="Psicrystal" tag="Personalty" name="Psicrystal Personalty Selector"/>
+    <tag group="PsicryType" tag="Other" name="Skill Benefit"/>
+    <tag group="PsicrysBon" tag="3"/>
+    <tag group="PsicrystID" tag="Knowledge"/>
+    </thing>
+  <thing id="zPUSingleM" name="Single-minded" description="Psicrystal Personalities helper" compset="Simple">
+    <usesource source="pPsiUn"/>
+    <tag group="Psicrystal" tag="Personalty" name="Psicrystal Personalty Selector"/>
+    <tag group="PsicryType" tag="Other" name="Other Benefit"/>
+    <tag group="PsicrysBon" tag="3"/>
+    <tag group="PsicrystID" tag="Concentr"/>
+    </thing>
+  <thing id="zPUSneaky" name="Sneaky" description="Psicrystal Personalities helper" compset="Simple">
+    <usesource source="pPsiUn"/>
+    <tag group="Psicrystal" tag="Personalty" name="Psicrystal Personalty Selector"/>
+    <tag group="PsicryType" tag="Skill" name="Skill Benefit"/>
+    <tag group="PsicrysBon" tag="3"/>
+    <tag group="PsicrystID" tag="skStealth"/>
+    </thing>
+  <thing id="zPUSympath" name="Sympathetic" description="Psicrystal Personalities helper" compset="Simple">
+    <usesource source="pPsiUn"/>
+    <tag group="Psicrystal" tag="Personalty" name="Psicrystal Personalty Selector"/>
+    <tag group="PsicryType" tag="Skill" name="Skill Benefit"/>
+    <tag group="PsicrysBon" tag="3"/>
+    <tag group="PsicrystID" tag="skSenseMot"/>
+    </thing>
+
+  </document>

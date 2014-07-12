@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document signature="Hero Lab Structure">
+<!--
+v2.0 January 30, 2014 - Tim Shadow
+-Upgraded to version 2.0 with the new official Psionic support.
+
+v1.5 September 22, 2012 TCArknight
+- Revised to make all Psionics Unleashed under one Source
+- Broke Source into 3 for seperate data files
+
+v1.0 January 8, 2012 Tim Shadow
+-Created New.
+
+-->
+
+  <source
+    id="pPsiUn"
+    name="Ultimate Psionics v2.5"
+    selectable="yes"
+    parent="pDscar"
+    sortorder="0"
+    description="Psionics rules for Pathfinder inputted by the HL Community.">
+    </source>
+
+  </document>

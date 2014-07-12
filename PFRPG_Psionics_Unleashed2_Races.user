@@ -1,0 +1,1004 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document signature="Hero Lab Data">
+  <fileinfo>
+    <info_history>09-XX-12 TCArknight
+Initial Release</info_history>
+    <info_todo>Blue - Prodigy needs to add the Unlocked Talent feat
+
+Race - Noral 
+    
+All Races - 
+Favored Class Options
+* Half-Giant
+* Maenad
+* Noral
+* Ophiduan
+* Xeph
+
+* Dwarf
+* Elf
+* Gnome
+* Half-Elf
+* Half-Orc
+* Halfling
+* Human
+
+Racial Archetypes
+
+Double-check all</info_todo>
+    </fileinfo>
+  <thing id="raPUGCamo" name="Goblinoid Camouflage" description="Some blues have learned to make subtle, but long-lasting, psionic changes to their body structure - the most notable being the change of skin color from their eponymous blue to a more common goblin color, typically green. They also get into the habit of eating regularly so as to avoid suspicion. By spending 1 power point as a swift action, a blue with this trait gains a +10 bonus on Disguise checks to appear as a normal goblin rather than a blue; this bonus lasts for 24 hours and is dismissable as a free action. This trait replaces the Repletion trait." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raBlueRepl"/>
+    <tag group="AbilType" tag="Super"/>
+    <tag group="AllowRCust" tag="rBlue"/>
+    </thing>
+  <thing id="raPUKinSla" name="Kinslayer" description="Outcast blues must fight their own kind to survive. Blues with this trait gain a +1 racial bonus on attack rolls against goblinoids. This replaces the Repletion racial trait." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raBlueRepl"/>
+    <tag group="AllowRCust" tag="rBlue"/>
+    <eval phase="Final" priority="1000"><![CDATA[#situational[hero.child[Attack],"+1 vs. Goblinoids and Orcs",field[name].text]]]></eval>
+    </thing>
+  <thing id="raPULeader" name="Leadership" description="Some blues naturally take on leadership roles, either directly controlling a tribe, or as an important advisor to a leader. A blue with this trait gains a +2 racial bonus to Diplomacy checks. This trait replaces the Keen Senses trait." compset="AltRaceTrt" summary="+2 Racial Bonus on Diplomacy checks." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raKeenSens"/>
+    <tag group="AllowRCust" tag="rBlue"/>
+    <eval phase="PostLevel" priority="1000">#skillbonus[skDiplo] += 2</eval>
+    </thing>
+  <thing id="raPUMndBnd" name="Mindbender" description="The rare blue is able to tap into the minds of others to impose its will. Blues with this trait gain a +1 racial bonus to the saving throw DCs of compulsion powers they manifest. This trait replaces the Stealthy trait." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raBStealth"/>
+    <tag group="AllowRCust" tag="rBlue"/>
+    </thing>
+  <thing id="raPUPsiPro" name="Psionic Prodigy" description="It is not uncommon for blues to natively have the ability to manifest powers. Blues with this trait gain the Unlocked Talent* feat as a bonus feat. This trait replaces the Repletion and Stealthy traits." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raBlueRepl"/>
+    <tag group="RaReplace" tag="raBStealth"/>
+    <tag group="AllowRCust" tag="rBlue"/>
+    </thing>
+  <thing id="raPUSelRel" name="Self Reliant" description="Blues outcast from their kin learn to survive on their own, but often lack in social graces. A blue with this trait gains a +3 racial bonus to Survival checks, but suffers a -1 penalty to all Diplomacy checks. This trait replaces the Pariah trait." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raPariah"/>
+    <tag group="AllowRCust" tag="rBlue"/>
+    <eval phase="PostLevel" priority="1000">#skillbonus[skSurvival] += 3
+#skillbonus[skDiplo] -= 1</eval>
+    </thing>
+  <thing id="raPUAtaLnk" name="Atavistic Link" description="Some dromites still have traces of their ancestral hive-mind link, making them more receptive to telepathic communication. Although a dromite with this trait cannot directly initiate telepathic contact via this trait (it still may normally via any other telepathic powers or abilities), it is easier for another to telepathically communicate with the dromite. Any use of a mind-affecting power by someone else which targets only the dromite costs 1 power point less for the manifester (to a minimum of 0). This reduction in cost applies even to hostile mind-affecting powers targeting the dromite. The dromite may also be added to a Collective without counting against the Collective&#146;s membership limit. This trait replaces the Dromite Psionics trait." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rDromite"/>
+    <tag group="RaReplace" tag="raDromPsi"/>
+    <tag group="AbilType" tag="Super"/>
+    <tag group="SpecType" tag="Language"/>
+    </thing>
+  <thing id="raPUDroCra" name="Crafter" description="Natural excavators, some dromites excel at turning the raw materials they remove from the earth into finished goods. Dromites with this trait gain a +2 racial bonus on any one Craft skill. This bonus improves to +4 if the dromite has at least 10 ranks in the Craft skill. This trait replaces the Dromite Psionics trait." compset="AltRaceTrt" uniqueness="unique">
+    <fieldval field="usrCandid1" value="thingid.skCraf?"/>
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raDromPsi"/>
+    <tag group="SpecType" tag="Skill"/>
+    <tag group="ChooseSrc1" tag="Hero"/>
+    <tag group="AllowRCust" tag="rDromite"/>
+    <eval phase="PreLevel" priority="5000"><![CDATA[      ~set our focus to the selected pick
+      call fTargetFoc
+      doneif (state.isfocus = 0)
+
+      ~ Add 3 to our chosen skill
+      focus.field[Bonus].value += 2
+
+      ~and another 2 once we're at 10 ranks
+      if (focus.field[skUser].value + focus.field[skInnate].value >= 10) then
+        focus.field[Bonus].value += 2
+        endif]]></eval>
+    </thing>
+  <thing id="raPUDroExc" name="Excavator" description="As a caste-based society, some dromites are bred to remove the rubble and debris as tunnels are dug. Dromites with this trait treat their Strength as 4 higher for the purposes of carrying capacity and gain the Slow and Steady speed (as the dwarf racial ability). This trait replaces the Dromite Psionics trait." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raDromPsi"/>
+    <tag group="AllowRCust" tag="rDromite"/>
+    <eval phase="PreLevel" priority="10000"><![CDATA[
+      ~if we've been replaced, get out now
+      doneif (tagis[Helper.SpcReplace] <> 0)
+
+      perform hero.assign[Hero.Sturdy]
+      herofield[tEncumSTR].value += 4]]></eval>
+    </thing>
+  <thing id="raPUDroGen" name="Gendered" description="Some dromites have a gender, allowing them to become a Hive Queen or Consort. Dromites with this racial trait gain a +3 bonus to Diplomacy checks on dromites. This trait replaces the Dromite Psionics trait." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raDromPsi"/>
+    <tag group="AllowRCust" tag="rDromite"/>
+    <eval phase="Final" priority="1000"><![CDATA[
+#situational[hero.childfound[skDiplo],"+3 with Dromites",field[name].text]]]></eval>
+    </thing>
+  <thing id="raPUDroHiv" name="Hive Mind" description="Dromite hive living can result in a mental link among the members. A dromite with this trait gains mindlink as a psi-like ability usable at will. This trait replaces the Dromite Psionics and Scent traits." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raDromPsi"/>
+    <tag group="AbilType" tag="PsiLike"/>
+    <tag group="AllowRCust" tag="rDromite"/>
+    <tag group="RaReplace" tag="xScent"/>
+    <bootstrap thing="puMindlnk1">
+      <autotag group="Helper" tag="PsiLike"/>
+      <autotag group="Usage" tag="AtWill"/>
+      <assignval field="trkMax" value="1"/>
+      </bootstrap>
+    </thing>
+  <thing id="raPUHivSol" name="Hive Soldier" description="There are many predators within the bowels of the earth. A dromite with this trait has chitin with sharpened edges instead of being hardened, granting two claw attacks. These are primary natural attacks that deal 1d3 points points of slashing damage. This trait replaces the Chitin trait." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raChitin"/>
+    <tag group="AllowRCust" tag="rDromite"/>
+    <bootstrap thing="wClaw">
+      <autotag group="wMain" tag="1d3_3"/>
+      <autotag group="Value" tag="2"/>
+      </bootstrap>
+    </thing>
+  <thing id="raPUDueAVo" name="Ancestral Voice" description="Duergars have a connection to their ancestors through the crystals they harvest deep beneath the earth. In some, their ancestors are able to speak to them directly. A duergar with this trait gains a +4 racial bonus to Intimidate and a +2 bonus to a Knowledge skill. This trait replaces the Stability trait." compset="AltRaceTrt" uniqueness="unique">
+    <fieldval field="usrCandid1" value="Helper.skCatKnow"/>
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rPUDuergar"/>
+    <tag group="RaReplace" tag="raStabil"/>
+    <eval phase="PreLevel" priority="5000">#skillbonus[skIntim] += 4
+
+~set our focus to the selected pick
+call fTargetFoc
+doneif (state.isfocus = 0)
+
+~ Add 2 to our chosen skill
+focus.field[Bonus].value += 2</eval>
+    </thing>
+  <thing id="raPUDueEch" name="Echoes of the Abyss" description="Some duergar are more deeply touched by their experiences underground than their fellows. A duergar with this trait is treated as an aberration rather than a humanoid whenever it would be beneficial (for example, harmful spells which target only humanoids such as Charm Person or Hold Person will automatically fail unless the duergar specifically chooses otherwise; rangers will not be able to use Favored Enemy against him unless they have both humanoids (dwarves) and aberrations as favored enemies, in which case the duergar suffers the lesser bonus of the two). This trait replaces the Hardy trait." compset="AltRaceTrt" summary="Treated as more beneficial between humanoid or aberration." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raDuerHard"/>
+    <tag group="AllowRCust" tag="rPUDuergar"/>
+    </thing>
+  <thing id="raPUDueMet" name="Method to the Madness" description="While you might appear to be mad, there is a mental order to your actions. You gain a +2 racial bonus to Will saves and gain call to mind as a psi-like ability usable once per day with a manifester level equal to your character level. This trait replaces the Hardy trait." compset="AltRaceTrt" summary="Treated as more beneficial between humanoid or aberration." uniqueness="unique">
+    <fieldval field="trkMax" value="1"/>
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rPUDuergar"/>
+    <tag group="SpInfo" tag="spCallMnd1"/>
+    <tag group="User" tag="Tracker"/>
+    <tag group="RaReplace" tag="raDuerHard"/>
+    <tag group="Usage" tag="Day"/>
+    <eval phase="PreLevel" priority="5000">hero.child[svWill].field[Bonus].value += 2</eval>
+    </thing>
+  <thing id="raPUDueReb" name="Reborn Ancestor" description="While most duergar are influenced by the spirits of their ancestors, some are the spirits of their ancestors reborn. The insights and experience of their previous life allows a duergar with this trait to reroll any d20 roll made once per day. This trait replaces the Hardy trait." compset="AltRaceTrt" summary="Reroll d20 roll 1x/day" uniqueness="unique">
+    <fieldval field="trkMax" value="1"/>
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rPUDuergar"/>
+    <tag group="RaReplace" tag="raDuerHard"/>
+    <tag group="Usage" tag="Day"/>
+    <tag group="User" tag="Tracker"/>
+    </thing>
+  <thing id="raPUDueWD" name="Waking Dreamer" description="You have adapted to always humming to keep That Which Sleeps Beneath from waking. You do not need to sleep at all and can meditate, fully awake and aware, for 4 hours to gain all the benefits of sleep, including regaining power points. This trait replaces the Duergar Psionics trait." compset="AltRaceTrt" summary="Gain all the benefits of sleep in 4 hours." uniqueness="unique">
+    <fieldval field="trkMax" value="1"/>
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rPUDuergar"/>
+    <tag group="Usage" tag="Day"/>
+    <tag group="User" tag="Tracker"/>
+    <tag group="RaReplace" tag="raDuerPsi"/>
+    </thing>
+  <thing id="raPUDueWI" name="Whispers of Insanity" description="Some duergar hum insane\nlullabies mentally, rather than vocally, in a subconscious\nattempt to keep That Which Sleeps Beneath asleep, while\nthey themselves suffer from insomnia. Duergar with this\ntrait gain a +2 bonus on Perception and Stealth checks,\nand the DC to make Perception checks while sleeping is\nonly +5 (rather than +10). This trait replaces the Duergar\nPsionics trait." compset="AltRaceTrt" summary="Gain all the benefits of sleep in 4 hours." uniqueness="unique">
+    <fieldval field="trkMax" value="1"/>
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rPUDuergar"/>
+    <tag group="Usage" tag="Day"/>
+    <tag group="User" tag="Tracker"/>
+    <tag group="RaReplace" tag="raDuerPsi"/>
+    </thing>
+  <thing id="raPUFTBlue" name="Failed Transformation (Blue)" description="It is incredibly rare, but sometimes, the transformation into an elan does not complete as expected. Elans with this trait gain the following benefit based upon their original race and lose the Repletion, Resilience, and Resistance traits.\n\n{i}Blue:{/i} The elan gains the Darkvision and Small traits of the blue, but retains the Normal speed of the elan.\n\nIn addition, the elan suffers a -2 penalty to Charisma-based\nskills and checks against elans." compset="AltRaceTrt" summary="The elan gains the Darkvision and Small traits of the blue, but retains the Normal speed of the elan." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <bootstrap thing="raDarkVis"></bootstrap>
+    <eval phase="First">~Make Elan hero Small size
+      ~hero.child[aSTR].field[Penalty].value -= 2
+      ~hero.child[aDEX].field[Bonus].value += 2
+
+      ~we want to decrease our size by -1
+      var sizemod as number
+      sizemod = -1
+      call SizeChange</eval>
+    </thing>
+  <thing id="raPUFTDrom" name="Failed Transformation (Dromite)" description="It is incredibly rare, but sometimes, the transformation into an elan does not complete as expected. Elans with this trait gain the following benefit based upon their original race and lose the Repletion, Resilience, and Resistance traits.\n\n{i}Dromite:{/i} The elan gains the Chitin trait of the dromite.\n\nIn addition, the elan suffers a -2 penalty to Charisma-based\nskills and checks against elans." compset="AltRaceTrt" summary="The elan gains the Chitin trait of the dromite." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <bootstrap thing="raChitin"></bootstrap>
+    </thing>
+  <thing id="raPUFTDuer" name="Failed Transformation (Duergar)" description="It is incredibly rare, but sometimes, the transformation into an elan does not complete as expected. Elans with this trait gain the following benefit based upon their original race and lose the Repletion, Resilience, and Resistance traits.\n\n{i}Duergar:{/i} The elan gains the Darkvision and Slow and Steady traits of the duergar.\n\nIn addition, the elan suffers a -2 penalty to Charisma-based\nskills and checks against elans." compset="AltRaceTrt" summary="The elan gains the Darkvision and Slow and" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <bootstrap thing="raDarkVis"></bootstrap>
+    <bootstrap thing="raSturdy"></bootstrap>
+    </thing>
+  <thing id="raPUFTDwar" name="Failed Transformation (Dwarf)" description="It is incredibly rare, but sometimes, the transformation into an elan does not complete as expected. Elans with this trait gain the following benefit based upon their original race and lose the Repletion, Resilience, and Resistance traits.\n\n{i}Dwarf:{/i} The elan gains the Darkvision and Slow and Steady traits of the dwarf.\n\nIn addition, the elan suffers a -2 penalty to Charisma-based\nskills and checks against elans." compset="AltRaceTrt" summary="The elan gains the Darkvision and Slow and Steady traits of the dwarf" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <bootstrap thing="raDarkVis"></bootstrap>
+    <bootstrap thing="raSturdy"></bootstrap>
+    </thing>
+  <thing id="raPUFTElf" name="Failed Transformation (Elf)" description="It is incredibly rare, but sometimes, the transformation into an elan does not complete as expected. Elans with this trait gain the following benefit based upon their original race and lose the Repletion, Resilience, and Resistance traits.\n\n{i}Elf:{/i} The elan gains the Low-Light Vision and Elven Immunities traits of the elf.\n\nIn addition, the elan suffers a -2 penalty to Charisma-based\nskills and checks against elans." compset="AltRaceTrt" summary="The elan gains the Darkvision and Slow and Steady traits of the dwarf" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <bootstrap thing="raLowLight"></bootstrap>
+    <bootstrap thing="raElImmune"></bootstrap>
+    </thing>
+  <thing id="raPUFTGnom" name="Failed Transformation (Gnome)" description="It is incredibly rare, but sometimes, the transformation into an elan does not complete as expected. Elans with this trait gain the following benefit based upon their original race and lose the Repletion, Resilience, and Resistance traits.\n\n{i}Gnome:{/i} The elan gains the Low-Light vision and Keen Senses traits of the gnome.\n\nIn addition, the elan suffers a -2 penalty to Charisma-based\nskills and checks against elans." compset="AltRaceTrt" summary="The elan gains the Darkvision and Low-Light vision and Keen Senses traits of the elf" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <bootstrap thing="raLowLight"></bootstrap>
+    <bootstrap thing="raKeenSens"></bootstrap>
+    </thing>
+  <thing id="raPUFTHaEl" name="Failed Transformation (Half-Elf)" description="It is incredibly rare, but sometimes, the transformation into an elan does not complete as expected. Elans with this trait gain the following benefit based upon their original race and lose the Repletion, Resilience, and Resistance traits.\n\n{i}Half-Elf:{/i} The elan gains the Adaptability and Low-Light Vision traits of the half-elf.\n\nIn addition, the elan suffers a -2 penalty to Charisma-based\nskills and checks against elans." compset="AltRaceTrt" summary="The elan gains the Adaptability and Low-Light Vision traits of the half-elf." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <bootstrap thing="raLowLight"></bootstrap>
+    <bootstrap thing="raHEAdapt"></bootstrap>
+    </thing>
+  <thing id="raPUFTHaGi" name="Failed Transformation (Half-Giant)" description="It is incredibly rare, but sometimes, the transformation into an elan does not complete as expected. Elans with this trait gain the following benefit based upon their original race and lose the Repletion, Resilience, and Resistance traits.\n\n{i}Half-Giant:{/i} The elan gains the Fire Acclimated and Low-Light Vision traits of the half-giant.\n\nIn addition, the elan suffers a -2 penalty to Charisma-based\nskills and checks against elans." compset="AltRaceTrt" summary="The elan gains the Fire Acclimated and Low-Light Vision traits of the half-giant." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <bootstrap thing="raLowLight"></bootstrap>
+    <bootstrap thing="raFireAccl"></bootstrap>
+    </thing>
+  <thing id="raPUFTHaOr" name="Failed Transformation (Half-Orc)" description="It is incredibly rare, but sometimes, the transformation into an elan does not complete as expected. Elans with this trait gain the following benefit based upon their original race and lose the Repletion, Resilience, and Resistance traits.\n\n{i}Half-Orc:{/i} The elan gains the Darkvision and Ferocity traits of the half-orc.\n\nIn addition, the elan suffers a -2 penalty to Charisma-based\nskills and checks against elans." compset="AltRaceTrt" summary="The elan gains the Darkvision and Ferocity traits of the half-orc." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <bootstrap thing="raDarkVis"></bootstrap>
+    <bootstrap thing="raFerocity"></bootstrap>
+    </thing>
+  <thing id="raPUFTHalf" name="Failed Transformation (Halfling)" description="It is incredibly rare, but sometimes, the transformation into an elan does not complete as expected. Elans with this trait gain the following benefit based upon their original race and lose the Repletion, Resilience, and Resistance traits.\n\n{i}Halfling:{/i} The elan gains the Halfling Luck and Keen Senses traits of the halfling.\n\nIn addition, the elan suffers a -2 penalty to Charisma-based\nskills and checks against elans." compset="AltRaceTrt" summary="The elan gains the Halfling Luck and Keen Senses traits of the halfling." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <bootstrap thing="raHlLuck"></bootstrap>
+    <bootstrap thing="raKeenSens"></bootstrap>
+    </thing>
+  <thing id="raPUFTHuma" name="Failed Transformation (Human)" description="It is incredibly rare, but sometimes, the transformation into an elan does not complete as expected. Elans with this trait gain the following benefit based upon their original race and lose the Repletion, Resilience, and Resistance traits.\n\n{i}Human:{/i} The elan gains the Skilled trait of the human.\n\nIn addition, the elan suffers a -2 penalty to Charisma-based\nskills and checks against elans." compset="AltRaceTrt" summary="The elan gains the Skilled trait of the human." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <bootstrap thing="raHuSkill"></bootstrap>
+    </thing>
+  <thing id="raPUFTMaen" name="Failed Transformation (Maenad)" description="It is incredibly rare, but sometimes, the transformation into an elan does not complete as expected. Elans with this trait gain the following benefit based upon their original race and lose the Repletion, Resilience, and Resistance traits.\n\n{i}Maenad:{/i} The elan gains the Sonic Affinity and Outburst traits of the maenad\n\nIn addition, the elan suffers a -2 penalty to Charisma-based\nskills and checks against elans.." compset="AltRaceTrt" summary="The elan gains the Sonic Affinity and Outburst traits of the maenad." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <bootstrap thing="raSonicAff"></bootstrap>
+    <bootstrap thing="raOutburst"></bootstrap>
+    </thing>
+  <thing id="raPUFTOphi" name="Failed Transformation (Ophiduan)" description="It is incredibly rare, but sometimes, the transformation into an elan does not complete as expected. Elans with this trait gain the following benefit based upon their original race and lose the Repletion, Resilience, and Resistance traits.\n\n{i}Ophiduan:{/i} The elan gains the Scaled Hide and Poison Resistant traits of the ophiduan.\n\nIn addition, the elan suffers a -2 penalty to Charisma-based\nskills and checks against elans." compset="AltRaceTrt" summary="The elan gains the Scaled Hide and Poison Resistant traits of the ophiduan." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <bootstrap thing="raScaled"></bootstrap>
+    <bootstrap thing="raPoisonRe"></bootstrap>
+    </thing>
+  <thing id="raPUFTXeph" name="Failed Transformation (Xeph)" description="It is incredibly rare, but sometimes, the transformation into an elan does not complete as expected. Elans with this trait gain the following benefit based upon their original race and lose the Repletion, Resilience, and Resistance traits.\n\n{i}Xeph:{/i} The elan gains the Darkvision and Burst traits of the xeph, but may only use Burst once per day.\n\nIn addition, the elan suffers a -2 penalty to Charisma-based\nskills and checks against elans." compset="AltRaceTrt" summary="The elan gains the Scaled Hide and Poison Resistant traits of the ophiduan." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <bootstrap thing="raDarkVis"></bootstrap>
+    <bootstrap thing="raXeBurst"></bootstrap>
+    </thing>
+  <thing id="raPUElHaug" name="Haughty" description="As psionically-endowed beings, some elans consider themselves better than non-elans. This arrogance grants them a toughened will. An elan with this trait gains a +2 racial bonus to saves against mind-affecting effects, but suffers a -2 penalty to Charisma-based skill checks when dealing with non-elans. This trait replaces the Aberrant Nature and Resistance traits." compset="AltRaceTrt" summary="An elan with this trait gains a +2 racial bonus to saves against mind-affecting effects, but suffers a -2 penalty to Charisma-based skill checks when dealing with non-elans." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raAberrNat"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPURecons" name="Reconstruction" description="Some elans are more adept at psionically rebuilding bodies than preserving them. These elans may spend 1 or more pp as a swift action to gain Fast Healing 2 for a number of rounds equal to the number of pp spent; this can be used even when unconscious. The elan also gains a +1 bonus to its manifester level when manifesting powers of the Healing subdiscipline. \n\nThis replaces Resistance and Resilience." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AbilType" tag="Super"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="RaReplace" tag="raElanRes"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raSmoothTa" name="Smooth Talker" description="Elans seek to hide their nature from others. Some may have been created for the purpose of hiding their nature and achieving positions of power or trust. Elans with this trait gain a +2 racial bonus to Charisma-based skill checks against non-mindless creatures. This trait replaces the Aberrant Nature and Repletion traits." compset="AltRaceTrt" summary="An elan with this trait gains a +2 racial bonus to Charisma-based skill checks against non-mindless creatures." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raAberrNat"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    <tag group="RaReplace" tag="raElanRepl"/>
+    </thing>
+  <thing id="raPUSBBlue" name="Strong Blooded (Blue)" description="Some elans have a small portion of their original racial characteristics survive the transformation process. Elans with this racial trait gain the following benefit based upon their original race and lose the Resilience trait.\n\n{i}Blue:{/i} The elan can spend one power point as a swift action to gain a +2 bonus on Stealth checks for one round." compset="AltRaceTrt" summary="The elan can spend one power point as a swift action to gain a +2 bonus on Stealth checks for one round." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPUSBDrom" name="Strong Blooded (Dromite)" description="Some elans have a small portion of their original racial characteristics survive the transformation process. Elans with this racial trait gain the following benefit based upon their original race and lose the Resilience trait.\n\n{i}Dromite:{/i} The elan can spend one power point as a swift action to gain energy resistance 5 against his active energy type for one round." compset="AltRaceTrt" summary="The elan can spend one power point as a swift action to gain energy resistance 5 against his active energy type for one round." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPUSBDuer" name="Strong Blooded (Duergar)" description="Some elans have a small portion of their original racial characteristics survive the transformation process. Elans with this racial trait gain the following benefit based upon their original race and lose the Resilience trait.\n\n{i}Duergar:{/i} The elan can spend one power point as a swift action to gain a +2 bonus to his CMD when resisting a bull rush or trip attempt while standing on the ground." compset="AltRaceTrt" summary="The elan can spend one power point as a swift action to gain a +2 bonus to his CMD when resisting a bull rush or trip attempt while standing on the ground." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPRDBDwar" name="Strong Blooded (Dwarf)" description="Some elans have a small portion of their original racial characteristics survive the transformation process. Elans with this racial trait gain the following benefit based upon their original race and lose the Resilience trait.\n\n{i}Dwarf:{/i} The elan can spend one power point as a swift action to gain the Stonecunning trait for one minute." compset="AltRaceTrt" summary="The elan can spend one power point as a swift action to gain the Stonecunning trait for one minute." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPUSBElf" name="Strong Blooded (Elf)" description="Some elans have a small portion of their original racial characteristics survive the transformation process. Elans with this racial trait gain the following benefit based upon their original race and lose the Resilience trait.\n\n{i}Elf:{/i} The elan can spend one power point as a swift action to gain low-light vision for one minute." compset="AltRaceTrt" summary="The elan can spend one power point as a swift action to gain low-light vision for one minute." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPUSBGnom" name="Strong Blooded (Gnome)" description="Some elans have a small portion of their original racial characteristics survive the transformation process. Elans with this racial trait gain the following benefit based upon their original race and lose the Resilience trait.\n\n{i}Gnome:{/i} The elan can spend one power point as a swift action to a +2 bonus against illusions for one minute." compset="AltRaceTrt" summary="The elan can spend one power point as a swift action to a +2 bonus against illusions for one minute." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPUSBHaEl" name="Strong Blooded (Half-Elf)" description="Some elans have a small portion of their original racial characteristics survive the transformation process. Elans with this racial trait gain the following benefit based upon their original race and lose the Resilience trait.\n\n{i}Half-Elf:{/i} The elan can spend one power point as a swift action to gain a +2 bonus on Perception checks for one round." compset="AltRaceTrt" summary="The elan can spend one power point as a swift action to gain a +2 bonus on Perception checks for one round." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPUSBHaGi" name="Strong Blooded (Half-Giant)" description="Some elans have a small portion of their original racial characteristics survive the transformation process. Elans with this racial trait gain the following benefit based upon their original race and lose the Resilience trait.\n\n{i}Half-Giant:{/i} The elan can spend one power point as a swift action to be treated as having the Powerful Build trait for one round." compset="AltRaceTrt" summary="The elan can spend one power point as a swift action to be treated as having the Powerful Build trait for one round." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPUSBHaOr" name="Strong Blooded (Half-Orc)" description="Some elans have a small portion of their original racial characteristics survive the transformation process. Elans with this racial trait gain the following benefit based upon their original race and lose the Resilience trait.\n\n{i}Half-Orc:{/i} The elan can spend one power point as a swift action to gain a +2 racial bonus to Intimidate checks made in the same round." compset="AltRaceTrt" summary="The elan can spend one power point as a swift action to gain a +2 racial bonus to Intimidate checks made in the same round." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPUSBHalf" name="Strong Blooded (Halfling)" description="Some elans have a small portion of their original racial characteristics survive the transformation process. Elans with this racial trait gain the following benefit based upon their original race and lose the Resilience trait.\n\n{i}Halfling:{/i} The elan can spend one power point as a swift action to gain a +2 racial bonus on Acrobatics checks made for one round." compset="AltRaceTrt" summary="The elan can spend one power point as a swift action to gain a +2 racial bonus on Acrobatics checks made for one round." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPUSBHuma" name="Strong Blooded (Human)" description="Some elans have a small portion of their original racial characteristics survive the transformation process. Elans with this racial trait gain the following benefit based upon their original race and lose the Resilience trait.\n\n{i}Human:{/i} The elan can spend one power point as a swift action to gain a +1 bonus on any one skill check made in the same round." compset="AltRaceTrt" summary="The elan can spend one power point as a swift action to gain a +1 bonus on any one skill check made in the same round." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPUSBMaen" name="Strong Blooded (Maenad)" description="Some elans have a small portion of their original racial characteristics survive the transformation process. Elans with this racial trait gain the following benefit based upon their original race and lose the Resilience trait.\n\n{i}Maenad:{/i} The elan can spend one power point as a swift action to gain a +2 bonus to Strength and suffering a -2 penalty to Intelligence and Wisdom for one round." compset="AltRaceTrt" summary="The elan can spend one power point as a swift action to gain a +2 bonus to Strength and suffering a -2 penalty to Intelligence and Wisdom for one round." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPUSBOphi" name="Strong Blooded (Ophiduan)" description="Some elans have a small portion of their original racial characteristics survive the transformation process. Elans with this racial trait gain the following benefit based upon their original race and lose the Resilience trait.\n\n{i}Ophiduan:{/i} The elan can spend one power point as a swift action to gain a +1 natural armor bonus to his armor class for one round." compset="AltRaceTrt" summary="The elan can spend one power point as a swift action to gain a +1 natural armor bonus to his armor class for one round." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPUSBXeph" name="Strong Blooded (Xeph)" description="Some elans have a small portion of their original racial characteristics survive the transformation process. Elans with this racial trait gain the following benefit based upon their original race and lose the Resilience trait.\n\n{i}Xeph:{/i} The elan can spend one power point as a swift action to increase his base speed by 10 feet for one round." compset="AltRaceTrt" summary="The elan can spend one power point as a swift action to increase his base speed by 10 feet for one round." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raElanResi"/>
+    <tag group="AllowRCust" tag="rElan"/>
+    </thing>
+  <thing id="raPUHGCold" name="Cold Acclimated" description="Although most half-giants reside in desert regions, some have grown toughened against colder extremes. Half-giants with this trait receive a +2 racial bonus on saving throws against all cold spells, powers and effects. This replaces the fire acclimated trait." compset="AltRaceTrt" summary="+2 racial bonus on saving throws against all cold spells, powers and effects." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rHalfGiant"/>
+    <tag group="RaReplace" tag="raFireAccl"/>
+    </thing>
+  <thing id="raPUHGFFre" name="Flame of Freedom" description="Half-giants have an affinity for heat and fire. Half-giants with this trait gain a +1 racial bonus to their manifester level on powers with the Fire descriptor. This trait replaces the Half-Giant Psionics trait." compset="AltRaceTrt" summary="+1 racial bonus to their manifester level on powers with the Fire descriptor." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rHalfGiant"/>
+    <tag group="RaReplace" tag="raHGiaPsi"/>
+    </thing>
+  <thing id="raPUHGJugg" name="Juggernaut" description="Physically imposing, some half-giants are especially gifted at manhandling opponents in combat. Half-giants with this trait gain a +1 racial bonus to their CMB on Bull Rush, Overrun, and Trip attempts. This trait replaces the Half-Giant Psionics and Survivor traits." compset="AltRaceTrt" summary="+1 racial bonus to their CMB on Bull Rush, Overrun, and Trip attempts." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rHalfGiant"/>
+    <tag group="RaReplace" tag="raHGiaPsi"/>
+    <tag group="RaReplace" tag="raSurvivor"/>
+    </thing>
+  <thing id="raPUHGLib" name="Liberty or Death" description="The history of the half-giants speaks of them once being an enslaved race. Some half-giants have a built-in defense against being subjugated against their will. Half-giants with this bonus gain a +2 racial bonus on saving throws against mind-affecting effects. This trait replaces the Fire Acclimated trait." compset="AltRaceTrt" summary="+2 racial bonus on saving throws against mind-affecting effects." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rHalfGiant"/>
+    <tag group="RaReplace" tag="raFireAccl"/>
+    </thing>
+  <thing id="raPUHGPsiR" name="Psionic Resonance" description="Although considered by the uninformed to be violent and primitive as a race, many half-giants have a natural affinity to handling psionic items. Half-giants with this trait gain a +2 racial bonus to Use Magic Device checks to activate an item or to use a power stone. This trait replaces the Survivor trait." compset="AltRaceTrt" summary="+2 racial bonus to Use Magic Device checks to activate an item or to use a power stone." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rHalfGiant"/>
+    <tag group="RaReplace" tag="raSurvivor"/>
+    </thing>
+  <thing id="raPUMaeBtL" name="Born to Lead" description="As a seafaring race, some maenads seem to be bred to be a captain or admiral. Maenads with this trait gain a +2 racial bonus to Diplomacy and Knowledge (Nobility) checks. In addition, he gains proficiency with the rapier and whip, weapons used by the leaders of the maenad fleets. This trait replaces the Natural Sailor, Sonic Affinity, and Weapon Familiarity traits." compset="AltRaceTrt" summary="+2 racial bonus to Diplomacy and Knowledge (Nobility) checks. In addition, he gains proficiency with the rapier and whip." uniqueness="unique">
+    <tag group="AllowRCust" tag="rPUMaenad"/>
+    <tag group="RaReplace" tag="raNatSail"/>
+    <tag group="RaReplace" tag="raSonicAff"/>
+    <tag group="RaReplace" tag="raMaWeps"/>
+    <eval phase="PreLevel" priority="4000">#skillbonus[skDiplo] += 2
+#skillbonus[skKnowNobl] += 2
+
+perform hero.assign[WepProf.wRapier]
+perform hero.assign[WepProf.wWhip]</eval>
+    </thing>
+  <thing id="raPUMaeCRe" name="Crystal Resonance" description="Some maenads are able to arrange the crystals embedded in their skin to form resonating frameworks for their psionic circuits. A maenad with this trait gains a +1 racial bonus to the effective manifester level of any psionic tattoo he activates. He may also apply the bonus from Sonic Affinity to any psionic tattoo he uses which has the Sonic descriptor. This trait replaces the Maenad Psionics trait." compset="AltRaceTrt" summary="+1 racial bonus to the effective manifester level of any psionic tattoo he activates." uniqueness="unique">
+    <tag group="AllowRCust" tag="rPUMaenad"/>
+    <tag group="RaReplace" tag="raPUMaePsi"/>
+    </thing>
+  <thing id="raPUMaeCrS" name="Crystallized Skin" description="There are the rare maenads who have skin where the crystalline flecks are more advanced than others of their race. A maenad with this trait gains a +1 natural armor bonus to his Armor Class. This trait replaces the Outburst trait." compset="AltRaceTrt" summary="+1 natural armor bonus to Armor Class." uniqueness="unique">
+    <tag group="AllowRCust" tag="rPUMaenad"/>
+    <tag group="RaReplace" tag="raOutburst"/>
+    <eval phase="PreLevel" priority="10000">~ Add to our armor class
+hero.child[ArmorClass].field[tACNatural].value += 1</eval>
+    </thing>
+  <thing id="raPUMaeSBn" name="Shore-Bound" description="While most maenads are natural sailors, some maenads are more at ease on solid ground. Maenads with this trait gain a +2 bonus to Acrobatics checks as long as he is standing on the ground. This ability replaces Natural Sailor." compset="AltRaceTrt" summary="+2 bonus to Acrobatics checks as long as he is standing on the ground." uniqueness="unique">
+    <tag group="AllowRCust" tag="rPUMaenad"/>
+    <tag group="RaReplace" tag="raNatSail"/>
+    </thing>
+  <thing id="raPUMaeTem" name="Tempestous Temper" description="Some maenads are less disciplined than their brethren, constantly losing control of their emotions and suffering frequent mood swings. Whenever a maenad with this trait maintains psionic focus (including via such means as Psicrystal Containment), he is treated as Lawful for the purposes of any spells, magic items, etc. that he may be using or that may affect him; whenever he does not have psionic focus, he is treated as Chaotic for such purposes. In addition, the maenad may expend psionic focus as a swift action to gain a +2 bonus to Strength, but suffer a -2 penalty to Intelligence and Wisdom, until the end of his turn. This replaces Outburst and Inner Rage." compset="AltRaceTrt" summary="+2 bonus to Acrobatics checks as long as he is standing on the ground." uniqueness="unique">
+    <tag group="AllowRCust" tag="rPUMaenad"/>
+    <tag group="RaReplace" tag="raInRage"/>
+    <tag group="RaReplace" tag="raOutburst"/>
+    </thing>
+  <thing id="raPUOphDef" name="Deformed" description="Part of the ophiduan history involved experimenting on their physical form to create a superior caste. Unfortunate bloodlines of ophiduans are instead twisted versions of the race, when the improvement caused an unexpected side-effect. Ophiduans with this trait have the Slow and Steady speed (as the dwarf racial ability) and gain a +2 natural armor bonus to AC, but suffer a -2 penalty on all Diplomacy checks. This racial trait replaces the Normal Speed and Scaled Hide traits." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rOphiduan"/>
+    <tag group="RaReplace" tag="raScaled"/>
+    <bootstrap thing="raSturdy"></bootstrap>
+    <eval phase="PreLevel" priority="10000">~ Add to our armor class
+hero.child[ArmorClass].field[tACNatural].value += 1</eval>
+    <eval phase="First" priority="1000" index="2">~ Reduce speed
+hero.child[Speed].field[tSpeed].value -= 10</eval>
+    </thing>
+  <thing id="raPUOphMet" name="Metabolist" description="Ophiduans are ever seeking to improve their form. Ophiduans with this racial trait are treated as one level higher when manifesting powers of the psychometabolism discipline with a range of personal. This racial trait replaces the serpent&#146;s bite and poison resistant racial traits." compset="AltRaceTrt" summary="Manifest personal range Psychometabolism powers as if +1 level." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rOphiduan"/>
+    <tag group="RaReplace" tag="raPoResist"/>
+    <tag group="RaReplace" tag="raSerpBite"/>
+    </thing>
+  <thing id="raPUOphPFl" name="Poisonous Flesh" description="While most ophiduans are resistant to poison, some are capable of excreting a poison from their skin. Ophiduans with this racial trait can use prevenom or prevenom weapon as a psi-like ability once per day with a manifester level equal to character level. This trait replaces the serpent&#146;s bite racial trait." compset="AltRaceTrt" summary="Use prevenom or prevenom weapon as a psi-like ability once per day with a manifester level equal to character level." uniqueness="unique">
+    <fieldval field="trkMax" value="1"/>
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raSerpBite"/>
+    <tag group="User" tag="Tracker"/>
+    <tag group="AllowRCust" tag="rOphiduan"/>
+    <tag group="Usage" tag="Day"/>
+    </thing>
+  <thing id="raPUOphSch" name="Scholar" description="All ophiduans seek to better themselves; some choose to do so by studying. Ophiduans with this racial trait gain a +2 bonus on any one Knowledge skill and this Knowledge skill is always considered a class skill. This racial trait replaces the serpent&#146;s bite racial trait." compset="AltRaceTrt" summary="+2 bonus on any one Knowledge skill and this Knowledge skill is always considered a class skill." uniqueness="unique">
+    <fieldval field="trkMax" value="1"/>
+    <fieldval field="usrCandid1" value="Helper.SkCatKnow"/>
+    <usesource source="pPsiUn"/>
+    <tag group="User" tag="Tracker"/>
+    <tag group="AllowRCust" tag="rOphiduan"/>
+    <tag group="Usage" tag="Day"/>
+    <tag group="RaReplace" tag="raSerpBite"/>
+    <eval phase="PostLevel" priority="10000">field[usrChosen1].chosen.field[Bonus].value += 2
+perform field[usrChosen1].chosen.assign[Helper.ClassSkill]</eval>
+    </thing>
+  <thing id="raPUOphSlH" name="Slippery Hide" description="Some ophiduans have more flexible scales than their brethren. Ophiduans with this racial trait gain a +2 racial bonus his CMD to against grapple attempts, to Escape Artist checks, and to escape a grapple. This racial trait replaces the scaly hide racial trait." compset="AltRaceTrt" summary="+2 racial bonus his CMD to against grapple attempts, to Escape Artist checks, and to escape a grapple." uniqueness="unique">
+    <fieldval field="trkMax" value="1"/>
+    <fieldval field="usrCandid1" value="Helper.SkCatKnow"/>
+    <usesource source="pPsiUn"/>
+    <tag group="User" tag="Tracker"/>
+    <tag group="AllowRCust" tag="rOphiduan"/>
+    <tag group="Usage" tag="Day"/>
+    <tag group="RaReplace" tag="raScaled"/>
+    </thing>
+  <thing id="raPUXeBlad" name="Bladeborn" description="Although most xephs are quick on their feet, some are lightning fast with their hands. A xeph with this racial trait gains the Quick Draw and Weapon Proficiency (Xephyr Knife) feats as bonus feats. This trait replaces the Burst trait." compset="AltRaceTrt" summary="Gain the Quick Draw and Weapon Proficiency (Xephyr Knife) feats as bonus feats." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raXeBurst"/>
+    <tag group="AllowRCust" tag="rXeph"/>
+    <bootstrap thing="fQuickDraw"></bootstrap>
+    <bootstrap thing="fExoticWep">
+      <autotag group="Target" tag="wPUXephKni"/>
+      </bootstrap>
+    </thing>
+  <thing id="raPUXeCal1" name="Call Blade" description="Xephs are perhaps the race that most commonly chooses the path of the soulknife. Some xephs have an innate tie to summoning a weapon from thin air. A xeph with this racial trait gains the ability to use call weaponry as a psi-like ability once per day with a manifester level equal to the xeph&#146;s character level. This trait replaces one daily use of the Burst trait and can be taken multiple times. Each time, it replaces one daily use of the Burst trait and increases the daily uses of the call weaponry psi-like ability by one." compset="AltRaceTrt" summary="Use Call Weaponry 1/day." uniqueness="useronce">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rXeph"/>
+    <tag group="Usage" tag="Day"/>
+    <bootstrap thing="puPUCalWe1">
+      <autotag group="Helper" tag="PsiLike"/>
+      <autotag group="Usage" tag="Day"/>
+      </bootstrap>
+    <eval phase="First" priority="1001">field[abValue].value += 1
+
+~Add uses for Call Weaponry
+hero.child[puPUCalWe1].field[trkMax].value += field[abValue].value
+field[trkMax].value += field[abValue].value</eval>
+    <eval phase="Level" priority="1001" index="2"><![CDATA[field[abValue].value += 1
+
+~Subtract uses from trkMax for Burst
+hero.child[raXeBurst].field[trkMax].value -= field[abValue].value
+
+if (hero.child[raXeBurst].field[trkMax].value <= 0) then
+  perform hero.assign[AbReplace.raXeBurst]
+  perform hero.child[raXeBurst].assign[AbModify.raXeBurst]
+  perform hero.child[raXeBurst].assign[AbReplace.raXeBurst]
+  perform hero.child[raXeBurst].assign[RaReplace.raXeBurst]
+  perform hero.child[raXeBurst].assign[Helper.Exhausted]
+  perform hero.child[raXeBurst].assign[Helper.SpcDisable]
+  perform hero.child[raXeBurst].assign[Helper.SpcReplace]
+  endif]]></eval>
+    <exprreq message="This alternate racial ability affects one or more racial abilities that have already been replaced by another ability.">tagcount[AbReplace.raXeBurst] = 0</exprreq>
+    <exprreq message="May only choose 1 of the Call Blade ARTs.">tagcount[Ability.raPUXeCal2] + tagcount[Ability.raPUXeCal3] = 0</exprreq>
+    </thing>
+  <thing id="raPUXeCal2" name="Call Blade (2x/day)" description="Xephs are perhaps the race that most commonly chooses the path of the soulknife. Some xephs have an innate tie to summoning a weapon from thin air. A xeph with this racial trait gains the ability to use call weaponry as a psi-like ability once per day with a manifester level equal to the xeph&#146;s character level. This trait replaces one daily use of the Burst trait and can be taken multiple times. Each time, it replaces one daily use of the Burst trait and increases the daily uses of the call weaponry psi-like ability by one." compset="AltRaceTrt" summary="Use Call Weaponry 2/day." uniqueness="useronce">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rXeph"/>
+    <tag group="Usage" tag="Day"/>
+    <bootstrap thing="puPUCalWe1">
+      <autotag group="Helper" tag="PsiLike"/>
+      <autotag group="Usage" tag="Day"/>
+      </bootstrap>
+    <eval phase="First" priority="1001">field[abValue].value += 2
+
+~Add uses for Call Weaponry
+hero.child[puPUCalWe1].field[trkMax].value += field[abValue].value
+field[trkMax].value += field[abValue].value</eval>
+    <eval phase="Level" priority="1001" index="2"><![CDATA[~Subtract uses from trkMax for Burst
+hero.child[raXeBurst].field[trkMax].value -= field[abValue].value
+
+if (hero.child[raXeBurst].field[trkMax].value <= 0) then
+  perform hero.assign[AbReplace.raXeBurst]
+  perform hero.child[raXeBurst].assign[AbModify.raXeBurst]
+  perform hero.child[raXeBurst].assign[AbReplace.raXeBurst]
+  perform hero.child[raXeBurst].assign[RaReplace.raXeBurst]
+  perform hero.child[raXeBurst].assign[Helper.Exhausted]
+  perform hero.child[raXeBurst].assign[Helper.SpcDisable]
+  perform hero.child[raXeBurst].assign[Helper.SpcReplace]
+  endif]]></eval>
+    <exprreq message="This alternate racial ability affects one or more racial abilities that have already been replaced by another ability.">tagcount[AbReplace.raXeBurst] = 0</exprreq>
+    <exprreq message="May only choose 1 of the Call Blade ARTs.">tagcount[Ability.raPUXeCal1] + tagcount[Ability.raPUXeCal3] = 0</exprreq>
+    </thing>
+  <thing id="raPUXeCal3" name="Call Blade (3x/day)" description="Xephs are perhaps the race that most commonly chooses the path of the soulknife. Some xephs have an innate tie to summoning a weapon from thin air. A xeph with this racial trait gains the ability to use call weaponry as a psi-like ability once per day with a manifester level equal to the xeph&#146;s character level. This trait replaces one daily use of the Burst trait and can be taken multiple times. Each time, it replaces one daily use of the Burst trait and increases the daily uses of the call weaponry psi-like ability by one." compset="AltRaceTrt" summary="Use Call Weaponry 3/day." uniqueness="useronce">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rXeph"/>
+    <tag group="Usage" tag="Day"/>
+    <tag group="RaReplace" tag="raXeBurst"/>
+    <bootstrap thing="puPUCalWe1">
+      <autotag group="Helper" tag="PsiLike"/>
+      <autotag group="Usage" tag="Day"/>
+      </bootstrap>
+    <eval phase="First" priority="1001"><![CDATA[field[livename].text = "Call Blade"
+field[abValue].value += 3
+
+~Add uses for Call Weaponry
+hero.child[puPUCalWe1].field[trkMax].value += field[abValue].value
+field[trkMax].value += field[abValue].value
+
+~Subtract uses from trkMax for Burst
+hero.child[raXeBurst].field[trkMax].value -= field[abValue].value]]></eval>
+    <exprreq message="May only choose 1 of the Call Blade ARTs.">tagcount[Ability.raPUXeCal1] + tagcount[Ability.raPUXeCal2] = 0</exprreq>
+    </thing>
+  <thing id="raPUXeExp" name="Explorer" description="Many xephs prefer to travel the world rather than to settle down. Xephs with this racial trait receive a +2 bonus on Knowledge (geography) and Survival checks. When manifesting psychoportation powers that only effect willing creatures or have a range of personal, xephs treat their manifester level as +1 higher than normal. This racial trait replaces one daily use of the Burst trait and the Innate Resistance racial traits." compset="AltRaceTrt" summary="+2 bonus on Knowledge (geography) and Survival checks. SeeText." uniqueness="useronce">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rXeph"/>
+    <tag group="Usage" tag="Day"/>
+    <tag group="RaReplace" tag="raInResist"/>
+    <eval phase="Level" priority="1001"><![CDATA[field[abValue].value += 1
+
+~Subtract uses from trkMax for Burst
+hero.child[raXeBurst].field[trkMax].value -= field[abValue].value
+
+if (hero.child[raXeBurst].field[trkMax].value <= 0) then
+  perform hero.assign[AbReplace.raXeBurst]
+  perform hero.child[raXeBurst].assign[AbModify.raXeBurst]
+  perform hero.child[raXeBurst].assign[AbReplace.raXeBurst]
+  perform hero.child[raXeBurst].assign[RaReplace.raXeBurst]
+  perform hero.child[raXeBurst].assign[Helper.Exhausted]
+  perform hero.child[raXeBurst].assign[Helper.SpcDisable]
+  perform hero.child[raXeBurst].assign[Helper.SpcReplace]
+  endif]]></eval>
+    <eval phase="PreLevel" priority="4000" index="2">#skillbonus[skSurvival] += 2
+#skillbonus[skKnowGeog] += 2</eval>
+    <exprreq message="This alternate racial ability affects one or more racial abilities that have already been replaced by another ability." iserror="no" ispanelhighlight="no">tagcount[AbReplace.raXeBurst] = 0</exprreq>
+    </thing>
+  <thing id="raPUXeQCr" name="Quick Craftsman" description="Some xephs are swifter with their hands than their feet. A xeph with this trait reduces the time required for all item creation (whether via skill or feat) by half. This trait replaces two daily uses of the Burst trait." compset="AltRaceTrt" summary="reduces the time required for all item creation (whether via skill or feat) by half." uniqueness="useronce">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rXeph"/>
+    <tag group="Usage" tag="Day"/>
+    <tag group="AbilType" tag="Extra"/>
+    <eval phase="Level" priority="1001" index="2"><![CDATA[~Subtract uses from trkMax for Burst
+hero.child[raXeBurst].field[trkMax].value -= field[abValue].value
+
+if (hero.child[raXeBurst].field[trkMax].value <= 0) then
+  perform hero.assign[AbReplace.raXeBurst]
+  perform hero.child[raXeBurst].assign[AbModify.raXeBurst]
+  perform hero.child[raXeBurst].assign[AbReplace.raXeBurst]
+  perform hero.child[raXeBurst].assign[RaReplace.raXeBurst]
+  perform hero.child[raXeBurst].assign[Helper.Exhausted]
+  perform hero.child[raXeBurst].assign[Helper.SpcDisable]
+  perform hero.child[raXeBurst].assign[Helper.SpcReplace]
+  endif]]></eval>
+    <eval phase="First" priority="1001">field[abValue].value += 2</eval>
+    <exprreq message="This alternate racial ability affects one or more racial abilities that have already been replaced by another ability.">tagcount[AbReplace.raXeBurst] = 0</exprreq>
+    </thing>
+  <thing id="raPUXeTrou" name="Troubadour" description="Most xephs are charismatic and natural entertainers. Xephs with this racial trait gain a +1 racial bonus on Diplomacy and Perform checks and, if they fail a Diplomacy check to change a creature&#146;s attitude by less than 5, they can try to influence the creature a second time even if 24 hours have not passed. This trait replaces the Innate Resistance trait." compset="AltRaceTrt" uniqueness="useronce">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rXeph"/>
+    <tag group="Usage" tag="Day"/>
+    <tag group="RaReplace" tag="raInResist"/>
+    <eval phase="PreLevel" priority="4000"><![CDATA[#skillbonus[skDiplo] += 1
+
+foreach pick in hero from BaseSkill where "Helper.SkCatPerf"
+        eachpick.field[Bonus].value += 1
+        nexteach]]></eval>
+    </thing>
+  <thing id="raPUXeWin" name="Windweaver" description="Fleet of foot and nimble, some xephs are more adept at avoiding physical dangers rather than psionic ones. A xeph with this racial trait gains a +1 dodge bonus to his armor class. This trait replaces the Innate Resistance trait." compset="AltRaceTrt" summary="+1 dodge bonus to armor class." uniqueness="useronce">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rXeph"/>
+    <tag group="Usage" tag="Day"/>
+    <tag group="RaReplace" tag="raInResist"/>
+    <eval phase="First" priority="10000">hero.child[ArmorClass].field[tACDodge].value += 1</eval>
+    </thing>
+  <thing id="rcMnuADodg" name="Dodge" description="The astral construct gains the Dodge feat even if it does not meet the prerequisites." compset="RaceCustom" uniqueness="useronce">
+    <fieldval field="abValue" value="5"/>
+    <usesource source="pPsiUn"/>
+    <tag group="CustomCost" tag="1" name="1" abbrev="1"/>
+    <tag group="AbilType" tag="Extra" name="Extraordinary Ability" abbrev=" (Ex)"/>
+    <tag group="AllowRCust" tag="MenuA" name="Menu A" abbrev="Menu A"/>
+    <bootstrap thing="fDodge">
+      <autotag group="thing" tag="skipprereq"/>
+      </bootstrap>
+    </thing>
+  <thing id="rcMnuAPsiA" name="Psionic Attacks" description="The astral construct&#146;s attacks are treated as psionic for the purposes of overcoming damage reduction." compset="RaceCustom" uniqueness="useronce">
+    <fieldval field="abValue" value="5"/>
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="MenuA" name="Menu A" abbrev="Menu A"/>
+    <tag group="CustomCost" tag="1" name="1" abbrev="1"/>
+    <tag group="AbilType" tag="Super"/>
+    </thing>
+  <thing id="rcMnuAMigh" name="Might" description="The astral construct&#146;s melee attacks deal an additional +1 point of damage." compset="RaceCustom" uniqueness="useronce">
+    <fieldval field="abValue" value="5"/>
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="MenuA" name="Menu A" abbrev="Menu A"/>
+    <tag group="CustomCost" tag="1" name="1" abbrev="1"/>
+    <tag group="AbilType" tag="Extra"/>
+    </thing>
+  <thing id="rcMnuATalo" name="Talons" description="The astral construct replaces its slam attacks with claw attacks that deal either slashing or piercing damage, chosen at time of manifestation." compset="RaceCustom" uniqueness="useronce">
+    <fieldval field="abValue" value="5"/>
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="MenuA" name="Menu A" abbrev="Menu A"/>
+    <tag group="CustomCost" tag="1" name="1" abbrev="1"/>
+    <tag group="AbilType" tag="Extra"/>
+    </thing>
+  <thing id="rcMnuAUtil" name="Utility" description="Your construct can perform tasks for you. This can include such tasks as cleaning, cooking, or setting up camp, or any other activity that requires a DC 10 or lower skill check. An astral construct with this option does not need to stay close to the manifester and will continue following any given order until given other instructions. You can select this menu option multiple times. Each time, the DC of skill checks the construct can attempt increases by 2. An astral construct with this option that is not used in combat has a duration of 1 hour / level. If it later enters combat, its duration resets to 1 round / level, but suffers a -2 penalty to its attack rolls." compset="RaceCustom" uniqueness="useronce">
+    <fieldval field="abValue" value="5"/>
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="MenuA" name="Menu A" abbrev="Menu A"/>
+    <tag group="CustomCost" tag="1" name="1" abbrev="1"/>
+    <tag group="AbilType" tag="Extra"/>
+    </thing>
+  <thing id="rcMnuBClea" name="Great Cleave" description="The astral construct gains the Great Cleave feat even if it does not meet the prerequisites." compset="RaceCustom" uniqueness="useronce">
+    <fieldval field="abValue" value="5"/>
+    <usesource source="pPsiUn"/>
+    <tag group="CustomCost" tag="2"/>
+    <tag group="AbilType" tag="Extra" name="Extraordinary Ability" abbrev=" (Ex)"/>
+    <tag group="AllowRCust" tag="MenuB"/>
+    <bootstrap thing="fGreatClv">
+      <autotag group="thing" tag="skipprereq"/>
+      </bootstrap>
+    </thing>
+  <thing id="rcMnuBIMig" name="Improved Might" description="The astral construct&#146;s melee attacks deal an additional +3 points of damage. This does not stack with the Might menu option." compset="RaceCustom" uniqueness="useronce">
+    <fieldval field="abValue" value="5"/>
+    <usesource source="pPsiUn"/>
+    <tag group="CustomCost" tag="2"/>
+    <tag group="AbilType" tag="Extra" name="Extraordinary Ability" abbrev=" (Ex)"/>
+    <tag group="AllowRCust" tag="MenuB"/>
+    </thing>
+  <thing id="rcMnuBReac" name="Improved Might" description="The astral construct&#146;s reach increases by 5 feet." compset="RaceCustom" uniqueness="useronce">
+    <fieldval field="abValue" value="5"/>
+    <usesource source="pPsiUn"/>
+    <tag group="CustomCost" tag="2"/>
+    <tag group="AbilType" tag="Extra" name="Extraordinary Ability" abbrev=" (Ex)"/>
+    <tag group="AllowRCust" tag="MenuB"/>
+    </thing>
+  <thing id="rcMnuBStuF" name="Stunning Fist" description="The astral construct gains the Stunning Fist feat even if it does not meet the [rerequisites. The construct can use Stunning Fist with its slam attack." compset="RaceCustom" uniqueness="useronce">
+    <fieldval field="abValue" value="5"/>
+    <usesource source="pPsiUn"/>
+    <tag group="CustomCost" tag="2"/>
+    <tag group="AbilType" tag="Extra" name="Extraordinary Ability" abbrev=" (Ex)"/>
+    <tag group="AllowRCust" tag="MenuB"/>
+    <bootstrap thing="fStunFist">
+      <autotag group="thing" tag="skipprereq"/>
+      </bootstrap>
+    </thing>
+  <thing id="rcMnuCGMig" name="Greater Might" description="The astral construct&#146;s melee attacks deal an additional +5 points of damage. This does not stack with the Improved Might or Might menu option." compset="RaceCustom" uniqueness="useronce">
+    <fieldval field="abValue" value="5"/>
+    <usesource source="pPsiUn"/>
+    <tag group="CustomCost" tag="4"/>
+    <tag group="AbilType" tag="Extra" name="Extraordinary Ability" abbrev=" (Ex)"/>
+    <tag group="AllowRCust" tag="MenuC"/>
+    </thing>
+  <thing id="rcMnuCTaiS" name="Tail Slap" description="The astral construct gains a tail, giving it a tail slap secondary attack. A tail slap deals 2d8 points of damage." compset="RaceCustom" uniqueness="useronce">
+    <fieldval field="abValue" value="5"/>
+    <usesource source="pPsiUn"/>
+    <tag group="CustomCost" tag="4"/>
+    <tag group="AbilType" tag="Extra" name="Extraordinary Ability" abbrev=" (Ex)"/>
+    <tag group="AllowRCust" tag="MenuC"/>
+    </thing>
+  <thing id="rPUForgeB" name="Forgeborn" description="Believed to have been created centuries ago during a great war between psionic nations, the race of creatures referred to as the forgeborn were left to their own devices within the barren wasteland the war left behind.{br}{br}A hybridization of flesh and minerals, the forgeborn are varied in appearance and form, but were all created by merging psionically-empowered materials with the body of a humanoid to fashion a new creature.{br}{br}The race seeks out humanoids to transform in order to increase their numbers and some say resume the conflict for which they were created. Although little is known about the creation process by non-forgeborn, rumors say that they take those critically wounded in combat and repair their bodies, wiping the new forgeborn&apos;s memories and giving new life to the otherwise-fallen.{br}{br}Some darker rumors say that the race has learned not only how to alter the living, but potentially the recentlydeceased, but there has been little proof of this.{br}{br}Although they may appear as some sort of bizarre construct, the forgeborn are intelligent and capable of thought, emotion, and reasoning. While much of their time is spent working out combat strategies and ways to harness the psionic energy that powers their forms, they are avid students of history.{br}{br}Forgeborn benefit from longer lifespans than the human bodies that most of them were made from, but their inclination for combat means many never actually reach middle age. Among the forgeborn, such a fate is not mourned, for the fallen can sometimes be reclaimed and rebuilt into a new member of the race, resulting in a theology very similar to reincarnation." compset="Race">
+    <fieldval field="rINT" value="2"/>
+    <fieldval field="rAgeMin" value="14"/>
+    <fieldval field="rHeightMnF" value="53"/>
+    <fieldval field="rWeightMnF" value="110"/>
+    <fieldval field="rHeightMnM" value="58"/>
+    <fieldval field="rWeightMnM" value="150"/>
+    <fieldval field="rSTR" value="2"/>
+    <fieldval field="rCHA" value="-4"/>
+    <fieldval field="rSpeed" value="20"/>
+    <usesource source="pPsiUn" parent="pDscar" name="Ultimate Psionics"/>
+    <tag group="SpecSource" tag="stBlue" name="Blue" abbrev="Blue"/>
+    <tag group="WeightMult" tag="7"/>
+    <tag group="AgeC1Dice" tag="1" name="1" abbrev="1"/>
+    <tag group="AgeC1Size" tag="4" name="d4" abbrev="d4"/>
+    <tag group="AgeC2Dice" tag="1" name="1" abbrev="1"/>
+    <tag group="AgeC2Size" tag="6" name="d6" abbrev="d6"/>
+    <tag group="AgeC3Dice" tag="2" name="2" abbrev="2"/>
+    <tag group="AgeC3Size" tag="6" name="d6" abbrev="d6"/>
+    <tag group="HasType" tag="tpHumanoid" name="Humanoid" abbrev="Humanoid"/>
+    <tag group="HeightDice" tag="2" name="2" abbrev="2"/>
+    <tag group="HeightSize" tag="12"/>
+    <tag group="YngC1Dice" tag="1"/>
+    <tag group="YngC1Size" tag="6"/>
+    <tag group="YngC2Dice" tag="2"/>
+    <tag group="YngC2Size" tag="3"/>
+    <tag group="RaceType" tag="Feature"/>
+    <tag group="Language" tag="lCommonND" name="Common" abbrev="Common"/>
+    <tag group="Language" tag="lElven"/>
+    <tag group="Language" tag="lMaenad"/>
+    <tag group="Language" tag="lOphid"/>
+    <tag group="Language" tag="lXeph"/>
+    <tag group="Language" tag="lPUForgeB"/>
+    <tag group="Language" tag="lDwarven" name="Dwarven" abbrev="Dwarven"/>
+    <tag group="RaceSize" tag="Medium0"/>
+    <bootstrap thing="stPUHalfCo"></bootstrap>
+    <bootstrap thing="raPsiApt"></bootstrap>
+    <bootstrap thing="fcPUPwrPnt"></bootstrap>
+    <bootstrap thing="lPUForgeB"></bootstrap>
+    <bootstrap thing="raPUForFea"></bootstrap>
+    <bootstrap thing="lCommonND"></bootstrap>
+    <bootstrap thing="raSturdy"></bootstrap>
+    <bootstrap thing="raNatPsion"></bootstrap>
+    <bootstrap thing="raPUNatArm"></bootstrap>
+    <bootstrap thing="raPUSouCry"></bootstrap>
+    </thing>
+  <thing id="stPUHalfCo" name="Half-construct" description="A half-construct race is a group of creatures that are artificially enhanced or have parts replaced by constructed mechanisms, be they magical or mechanical. A half-construct race has the following features.\n\n&#149; Half-constructs gain a +2 racial bonus on saving throws against disease, mind-affecting effects, poison, and effects that cause either exhaustion or fatigue.\n&#149; Half-constructs cannot be raised or resurrected.\n&#149; Half-constructs do not breathe, eat, or sleep, unless they want to gain some beneficial effect from one of these activities. This means that a half-construct can drink potions and can sleep in order to regain spells, but neither is required to survive or stay in good health." compset="Subtype" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <bootstrap thing="raPUConRes"></bootstrap>
+    <exprreq message="Construct/Undead type forbidden">#hastype[tpUndead] + #hastype[tpConst] = 0</exprreq>
+    </thing>
+  <thing id="lPUForgeB" name="Forgeborn" compset="Language" uniqueness="useronce">
+    <usesource source="pPsiUn" parent="pDscar" name="Ultimate Psionics"/>
+    </thing>
+  <thing id="raPUForFea" name="Fearless" description="+2 racial bonus vs Fear saves." compset="RaceSpec">
+    <fieldval field="abValue" value="2"/>
+    <usesource source="pPsiUn"/>
+    <tag group="Helper" tag="ShowSpec" name="Show Spec" abbrev="Show Spec"/>
+    <tag group="StatblHide" tag="SQ" name="SQ" abbrev="SQ"/>
+    <eval phase="Render" priority="10000"><![CDATA[
+      ~if we've been replaced, get out now
+      doneif (tagis[Helper.SpcDisable] <> 0)
+
+      #situational[hero.child[svAll],signed(field[abValue].value) & " vs. fear",field[thingname].text]]]></eval>
+    </thing>
+  <thing id="raPUForCry" name="Crystal Skin" description="Some forgeborn are made from shining crystal, which protects them against rays, but isn&apos;t as sturdy as other minerals. A forgeborn with this trait gains a +2 bonus to its AC against ray attacks. In addition, once per day it can deflect one ray as an immediate action. This replaces natural armor." compset="AltRaceTrt" uniqueness="unique">
+    <fieldval field="trkMax" value="1"/>
+    <usesource source="pPsiUn"/>
+    <tag group="User" tag="Tracker"/>
+    <tag group="Usage" tag="Day"/>
+    <tag group="AllowRCust" tag="rPUForgeB"/>
+    <tag group="RaReplace" tag="raPUNatArm"/>
+    <eval phase="PreLevel" priority="10000"><![CDATA[~Add Situational AC
+#situational[hero.child[ArmorClass],"+2 AC vs. Ray attacks.",field[thingname].text]]]></eval>
+    </thing>
+  <thing id="raPUNatArm" name="Natural Armor" description="Forgeborn are sturdier than other races and gain a +1 natural armor bonus to their AC." compset="RaceSpec">
+    <usesource source="pPsiUn"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <eval phase="PreLevel" priority="10000">~ Add to our armor class
+hero.child[ArmorClass].field[tACNatural].value += 1</eval>
+    </thing>
+  <thing id="raPUForMem" name="Memory Matrix" description="There are some forgeborn who are created with an intuitive knack for knowledge or industry. A forgeborn with this trait picks a single Craft, Knowledge, or Profession skill. The forgeborn gains a +2 bonus to this skill and it is always a class skill. This ability replaces fearless." compset="AltRaceTrt" uniqueness="unique">
+    <fieldval field="abValue" value="2"/>
+    <fieldval field="usrCandid1" value="component.BaseSkill &amp; (Helper.SkCatCraft | Helper.SkCatProf |Helper.SkCatKnow)"/>
+    <tag group="RaReplace" tag="raPUForFea"/>
+    <tag group="AllowRCust" tag="rPUForgeB"/>
+    <eval phase="First">doneif (field[usrChosen1].ischosen = 0)
+
+#applybonus[BonTrait,field[usrChosen1].chosen,field[abValue].value]
+perform field[usrChosen1].chosen.assign[Helper.ClassSkill]</eval>
+    </thing>
+  <thing id="raPUSouCry" name="Source Crystal" description="Unlike most half-constructs, forgeborn can be raised and resurrected." compset="RaceSpec">
+    <fieldval field="abValue" value="2"/>
+    <usesource source="pPsiUn"/>
+    <tag group="Helper" tag="ShowSpec" name="Show Spec" abbrev="Show Spec"/>
+    <tag group="StatblHide" tag="SQ" name="SQ" abbrev="SQ"/>
+    </thing>
+  <thing id="raPUForOre" name="Oreheart" description="A forgeborn with this trait can be raised and resurrected, but can also be healed by repair effects such as {i}reconstruction{/i} as if it were a construct. The forgeborn heals only half as much from healing effects (other than effects which work on constructs, such as fast healing and repair effects) and takes only half damage from negative energy effects. This ability replaces source crystal." compset="AltRaceTrt" uniqueness="unique">
+    <fieldval field="abValue" value="2"/>
+    <tag group="AllowRCust" tag="rPUForgeB"/>
+    <tag group="RaReplace" tag="raPUSouCry"/>
+    </thing>
+  <thing id="raPUForQui" name="Quickened Steps" description="Although most forgeborn are steady in their gait, some are designed for speed. Forgeborn with this trait have a speed of 30 ft. This replaces slow and steady and fearless." compset="AltRaceTrt" uniqueness="unique">
+    <fieldval field="abValue" value="2"/>
+    <tag group="AllowRCust" tag="rPUForgeB"/>
+    <tag group="RaReplace" tag="raPUForFea"/>
+    <tag group="RaReplace" tag="raSturdy"/>
+    <eval phase="Final">~ add to our base speed.
+hero.child[Speed].field[tSpeed].value += 10</eval>
+    </thing>
+  <thing id="raPUForSec" name="Second Skin" description="Not all forgeborn have a naturally tough exterior, but instead are extremely comfortable in armor. A forgeborn with this trait reduces any armor check penalty from armor worn by 1 (to a minimum of 0) and can sleep in medium or heavy metal armor without suffering ill effects from sleeping in armor. This replaces natural armor." compset="AltRaceTrt" uniqueness="unique">
+    <fieldval field="abValue" value="2"/>
+    <tag group="AllowRCust" tag="rPUForgeB"/>
+    <tag group="RaReplace" tag="raPUNatArm"/>
+    <eval phase="PostLevel" priority="3000"><![CDATA[foreach pick in hero from BaseArmor where "EquipType.Armor"
+   eachpick.field[arArmorChk].value += 1
+   nexteach]]></eval>
+    </thing>
+  <thing id="raPUForStr" name="Strange Mind" description="The process of death and rebirth as a forgeborn can sometimes warp the mind of the new forgeborn. A forgeborn with this trait gains a +2 bonus to Will-saves and an additional +2 bonus against illusion spells or effects. This replaces natural armor." compset="AltRaceTrt" uniqueness="unique">
+    <fieldval field="trkMax" value="1"/>
+    <usesource source="pPsiUn"/>
+    <tag group="User" tag="Tracker"/>
+    <tag group="Usage" tag="Day"/>
+    <tag group="AllowRCust" tag="rPUForgeB"/>
+    <tag group="RaReplace" tag="raPUNatArm"/>
+    <eval phase="PreLevel" priority="5000"><![CDATA[~Add Situational to all saves
+#situational[hero.child[svAll],"+2 vs. illusion spells or effects.",field[thingname].text]
+
+~+2 to Will Saves
+hero.child[svWill].field[Bonus].value += field[abValue].value]]></eval>
+    </thing>
+  <thing id="rPUNorals" name="Noral" description="The norals are a race of humanoids with a symbiotic bond with the erliss, a small psionic creature also referred to as a dreamscar. Norals that have bonded with an erliss no longer dream, giving the creature its nickname, as well as giving the bonded norals the nickname of the dreamscarred. The symbiotic joining process has left the noral race open to the benefit of other creatures on their society, making them more likely to seek out information on other cultures and talented at social interactions.{br}{br}Known for being physically clumsier than most, some surmise that norals lack agility because the bonding process has impacted their natural reflexes. Others argue it is because the race has a naturally stocky frame that simply does not lend itself well to precise movements. Despite this, the natural resiliency of their mental and physical forms has helped them overcome what is otherwise a liability for surviving the harsh lands near their settlements. However, their ability to block such assaults, combined with their natural ability to assault the minds of others, has given some a fear of the race as a potential subjugator of free will, a notion the norals find ludicrous for their views on free will as something to be nurtured and never to be threatened.{br}{br}While some norals choose not to bond with an erliss, this is the exception, rather than the rule. The bonding process itself is done as a ceremony once a noral has reached adulthood and is considered an important step in the maturation of their younger generations. This ceremony is typically done in private, usually with only the noral&apos;s parents in attendance. Upon completion, the newly-dreamscarred noral is considered an adult and afforded all privileges as such." compset="Race">
+    <fieldval field="rCON" value="2"/>
+    <fieldval field="rWIS" value="2"/>
+    <fieldval field="rDEX" value="-2"/>
+    <usesource source="pPsiUn"/>
+    <tag group="HasType" tag="tpHumanoid"/>
+    <tag group="RaceType" tag="Feature"/>
+    <tag group="RaceSize" tag="Medium0"/>
+    <tag group="Language" tag="Any"/>
+    <bootstrap thing="puMindThr1">
+      <containerreq phase="First" priority="2500">count:AbReplace.raPUNorPsi = 0</containerreq>
+      <autotag group="Usage" tag="Day"/>
+      <autotag group="Helper" tag="PsiLike"/>
+      <assignval field="trkMax" value="1"/>
+      </bootstrap>
+    <bootstrap thing="raLowLight"></bootstrap>
+    <bootstrap thing="raNatPsion"></bootstrap>
+    <bootstrap thing="raPsiApt"></bootstrap>
+    <bootstrap thing="fcPUPwrPnt"></bootstrap>
+    <bootstrap thing="lCommon"></bootstrap>
+    <bootstrap thing="lPUNoral"></bootstrap>
+    <bootstrap thing="stPUNoral"></bootstrap>
+    <bootstrap thing="raPUNorPsi"></bootstrap>
+    <bootstrap thing="raPUNoSyRe"></bootstrap>
+    <bootstrap thing="raPUNoSySu"></bootstrap>
+    </thing>
+  <thing id="stPUNoral" name="Noral" compset="Subtype" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    </thing>
+  <thing id="lPUNoral" name="Noral" compset="Language" uniqueness="useronce">
+    <usesource source="pPsiUn" parent="pDscar" name="Ultimate Psionics"/>
+    </thing>
+  <thing id="raPUNorPsi" name="Noral Psionics" description="Norals gain the following psi-like ability: 1/day - {i}mind thrust{/i}. The manifester level for this effect is equal to 1/2 the noral&apos;s level (minimum 1st). The DC for this power is equal to 10 + the power&apos;s level + the noral&apos;s Charisma modifier." compset="RaceSpec">
+    <fieldval field="trkMax" value="1"/>
+    <usesource source="pPsiUn" parent="pDscar" name="Ultimate Psionics"/>
+    <tag group="Usage" tag="Day" name="/day" abbrev="/day"/>
+    <tag group="AbilType" tag="PsiLike" name="Psi-Like Ability" abbrev=" (Ps)"/>
+    <tag group="SpecType" tag="SpellLike" name="Spell-Like Ability" abbrev="Spell-Like Ability"/>
+    </thing>
+  <thing id="raPUNoSyRe" name="Symbiotic Resistance" description="The symbiotic bond between the noral and the erliss grants all bonded norals a +2 racial bonus on saving throws against disease and mind-affecting effects." compset="RaceSpec">
+    <fieldval field="abValue" value="2"/>
+    <fieldval field="abValue2" value="2"/>
+    <usesource source="pPsiUn"/>
+    <tag group="Helper" tag="ShowSpec" name="Show Spec" abbrev="Show Spec"/>
+    <eval phase="Render" priority="10000"><![CDATA[
+      ~ If we're disabled, do nothing
+      doneif (tagis[Helper.SpcDisable] <> 0)
+
+      #situational[hero.childfound[svAll],signed(field[abValue].value) & " bonus vs. disease.",field[thingname].text]
+      #situational[hero.childfound[svAll],signed(field[abValue2].value) & " bonus vs. mind-affecting effects.",field[thingname].text]]]></eval>
+    </thing>
+  <thing id="raPUNoSySu" name="Symbiotic Surge" description="A noral is able to tap into the power of the symbiote to gain a temporary boost. Once per day, a noral can exhaust the symbiote to add 1d6 to a single d20 roll. This decision must be made prior to the result of the roll is determined." compset="RaceSpec">
+    <fieldval field="trkMax" value="1"/>
+    <usesource source="pPsiUn"/>
+    <tag group="Helper" tag="ShowSpec" name="Show Spec" abbrev="Show Spec"/>
+    <tag group="Usage" tag="Day"/>
+    <tag group="User" tag="Tracker"/>
+    </thing>
+  <thing id="raPUNorUnb" name="Unbonded" description="Most every noral bonds with an erliss, gaining all the benefits of the symbiotic link in what is known as the dreamscar. A rare few, however, choose to live a life without ever bonding with an erliss.\n\nThese norals who live without the bond lose the following racial traits: {b}Symbiotic resistance, Symbiotic surge{/b}" compset="AltRaceTrt" summary="You are one of the rare few who have no bonded erliss." uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="RaReplace" tag="raPUNoSyRe"/>
+    <tag group="RaReplace" tag="raPUNoSySu"/>
+    <tag group="AllowRCust" tag="stPUNoral"/>
+    </thing>
+  <thing id="raPUNorEmP" name="Empathic Persuasion" description="Some norals are skilled at subtle psychic manipulation, despite their fellow norals&#146; dislike of such. Once per day, the noral may manifest {i}empathic connection{/i} as a psi-like ability (manifester level equal to 1/2 the noral&#146;s Hit Dice, minimum 1). This replaces noral psionics." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rPUNorals"/>
+    <tag group="RaReplace" tag="raPUNorPsi"/>
+    <bootstrap thing="puEmpConn1">
+      <autotag group="Helper" tag="PsiLike"/>
+      <autotag group="Usage" tag="Day"/>
+      <assignval field="trkMax" value="1"/>
+      </bootstrap>
+    </thing>
+  <thing id="raPUConRes" name="Construct Resistance" description="You gain a +2 racial bonus on saving throws against disease, mind-affecting effects, poison, and effects that cause either exhaustion or fatigue." compset="RaceSpec">
+    <fieldval field="abValue" value="2"/>
+    <tag group="SpecType" tag="Resist"/>
+    <tag group="ProductId" tag="PUProdID"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <eval phase="Final" priority="50000" index="2"><![CDATA[
+~if we've been replaced, get out now
+doneif (tagis[Helper.SpcReplace] <> 0)
+~if we've been replaced, get out now
+doneif (tagis[Helper.SpcDisable] <> 0)
+
+#situational[hero.childfound[svAll],signed(field[abValue].value) & " bonus vs. disease, mind-affecting effects, poison, and effects that cause either exhaustion or fatigue.",field[thingname].text]]]></eval>
+    </thing>
+  <thing id="rcMnuAArSp" name="Armor Spikes" description="The construct&#146;s body is covered in spikes, allowing the construct to deal an extra 1d6 points of piercing damage with a successful trample, constrict, bull rush, or grapple attack. The construct also can make a regular melee attack with the spikes, dealing 1d6 points of damage." compset="RaceCustom" uniqueness="useronce">
+    <fieldval field="abValue" value="5"/>
+    <usesource source="pPsiUn"/>
+    <tag group="CustomCost" tag="1" name="1" abbrev="1"/>
+    <tag group="AbilType" tag="Extra" name="Extraordinary Ability" abbrev=" (Ex)"/>
+    <tag group="AllowRCust" tag="MenuA" name="Menu A" abbrev="Menu A"/>
+    </thing>
+  <thing id="raPUNorFeE" name="Feral Erliss" description="While a noral bonding with an erliss typically results in improved mental abilities, sometimes it results in the noral taking on more feral aspects. A noral with this trait gains two claw attacks that deal 1d4 points of damage and gains a +2 racial bonus on Survival checks. This replaces gift of tongues and symbiotic resistance." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rPUNorals"/>
+    <tag group="RaReplace" tag="raGifTongu"/>
+    <tag group="RaReplace" tag="raPUNoSyRe"/>
+    <bootstrap thing="wClaw">
+      <autotag group="wMain" tag="1d4_4"/>
+      <autotag group="Value" tag="2"/>
+      </bootstrap>
+    <eval phase="PreLevel" priority="4000">#skillbonus[skSurvival] += 2</eval>
+    </thing>
+  <thing id="raPUNorMaD" name="Master of Deception" description="All norals are skilled at interacting with other races, but some are unusually skilled in subterfuge. A noral with this trait gains a +4 racial bonus on Bluff checks to convince an opponent that what they are saying is true when they tell a lie. In addition, once per day, the noral can roll twice when making a Bluff or Diplomacy check and take the better roll. This replaces noral psionics." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rPUNorals"/>
+    <tag group="RaReplace" tag="raPUNorPsi"/>
+    </thing>
+  <thing id="raPUNorReS" name="Resilient Symbiote" description="The bonding process with an erliss can sometimes unlock a psionic ability to protect instead of attack. A noral with this trait gains the ability to use {i}vigor{/i} as a psi-like ability once per day (manifester level equal to noral&apos;s character level.) This replaces noral psionics." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rPUNorals"/>
+    <tag group="RaReplace" tag="raPUNorPsi"/>
+    <bootstrap thing="puPVigor1">
+      <autotag group="Helper" tag="PsiLike"/>
+      <autotag group="Usage" tag="Day"/>
+      <assignval field="trkMax" value="1"/>
+      </bootstrap>
+    </thing>
+  <thing id="raPUNorSSe" name="Symbiote Sensitivity" description="Some norals have an erliss that can grant the ability to detect nearby psionic activity. A noral with this trait gains {i}detect psionics{/i} as a psi-like ability usable at will (manifester level is equal to the noral&apos;s character level). This replaces noral psionics." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rPUNorals"/>
+    <tag group="RaReplace" tag="raPUNorPsi"/>
+    <bootstrap thing="puDetPsio1">
+      <autotag group="Helper" tag="PsiLike"/>
+      <autotag group="Usage" tag="AtWill"/>
+      </bootstrap>
+    </thing>
+  <thing id="raPUNorSyS" name="Symbiotic Sentry" description="Some erliss take a more passive role in protecting the noral, warning their host when subject to psychic attack. When the noral fails a Save against a mind-affecting effect, he may immediately roll a second Save; if the second Save is successful, he is still affected by the effect, but he is at least aware of a psychic attack and his failure to block it, even if he does not know the exact attack or its consequences (thus, he may take defensive precautions, such as manifesting dispel psionics on himself or casting protection from evil, if possible). Once per day, if the second Save is successful the noral may choose to use that result in place of the first roll. This replaces symbiotic resistance and symbiotic surge." compset="AltRaceTrt" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="AllowRCust" tag="rPUNorals"/>
+    <tag group="RaReplace" tag="raPUNoSyRe"/>
+    <tag group="RaReplace" tag="raPUNoSySu"/>
+    </thing>
+  </document>

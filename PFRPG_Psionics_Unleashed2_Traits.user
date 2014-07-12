@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document signature="Hero Lab Data">
+  <thing id="trPUClairT" name="Clairsentient Talent" description="If you have psionic focus, you can be treated as having detect psionics active, but only effective in the space you occupy. This is a psi-like ability, and you must concentrate on it for a round to glean any more meaningful information than a &#145;hunch&#146;. This talent grants no benefit if you do not have the ability to gain psionic focus." compset="Trait">
+    <comment>** Need Mechanics **</comment>
+    <usesource source="pPsiUn"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="trCategory" tag="Psionic" name="Psionic"/>
+    </thing>
+  <thing id="trPUMentDi" name="Mental Discipline" description="You have had some basic training in mental control. Autohypnosis is always considered a class skill for you, and you get a +1 trait bonus to Autohypnosis checks." compset="Trait" summary="+1 to Autohypnosis checks, Autohypnosis as class skill">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Psionic" name="Psionic"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <eval phase="PreLevel" priority="5000">#applybonus[BonTrait,hero.childfound[skPUAhypno],1]
+#makeclassskill[skPUAhypno]</eval>
+    </thing>
+  <thing id="trPUMetaCr" name="Metacreative Talent" description="While you maintain psionic focus you can manifest shards of crystal as a swift action that last for one round. These blades can be used as thrown weapons if you use them immediately (you are proficient in their use; 1d2 slashing damage, 20/x2 crit, range increment 10 feet). This talent grants no benefit if you do not have the ability to gain psionic focus." compset="Trait">
+    <comment>** Need Mechanics **</comment>
+    <usesource source="pPsiUn"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="trCategory" tag="Psionic" name="Psionic"/>
+    </thing>
+  <thing id="trPUPercep" name="Perceptive Talent" description="While maintaining psionic focus you are more aware on a subliminal level of the thoughts and intentions of those around you. You gain a +1 trait bonus on initiative and on Sense Motive checks while you are psionically focused. This talent grants no benefit if you do not have the ability to gain psionic focus." compset="Trait">
+    <comment>** Need Mechanics **</comment>
+    <usesource source="pPsiUn"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="trCategory" tag="Psionic" name="Psionic"/>
+    </thing>
+  <thing id="trPUPsigif" name="Psigifted" description="You have an affinity for one particular power chosen from ones that you know, and your effective manifester level for that psionic power increases by 1. Once this power is selected it cannot be changed." compset="Trait">
+    <fieldval field="usrCandid1" value="component.BasePower"/>
+    <usesource source="pPsiUn"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="trCategory" tag="Psionic" name="Psionic"/>
+    <tag group="ChooseSrc1" tag="Hero"/>
+    <eval phase="PreLevel" priority="10000"><![CDATA[      ~if nothing's been chosen, there's nothing we can do
+      doneif (field[usrChosen1].ischosen = 0)
+
+      var searchexpr as string
+      searchexpr = field[usrChosen1].chosen.tagids[thingid.?]
+
+      foreach pick in hero from BasePower where searchexpr
+        eachpick.field[sCL].value += 1
+        nexteach]]></eval>
+    </thing>
+  <thing id="trPUPsiItm" name="Psionic Item Familiarity" description="You are very familiar with psionic and magic items. Use Magic Device is now a class skill for you, and you gain a +1 trait bonus to Use Magic Device checks. This trait may not be stacked with the Dangerously Curious trait." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Psionic" name="Psionic"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    </thing>
+  <thing id="trPUPsiKna" name="Psionic Knack" description="You are naturally psionically gifted, even if you dabble in other studies. Pick a class with a manifester level when you gain this trait&#151;your manifester level in that class gains a +2 trait bonus as long as this bonus doesn&#146;t raise your manifester level above your current Hit Dice. You must have a level in the class chosen to gain this benefit." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Psionic" name="Psionic"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    </thing>
+  <thing id="trPUPsiMon" name="Psionic Monster Familiarity" description="You&#146;ve either seen or read about a great number of psionic creatures. You gain a +2 trait bonus to Knowledge (Psionics) checks to identify psionic creatures and their abilities." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Psionic" name="Psionic"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    </thing>
+  <thing id="trPUPsiPwr" name="Psionic Power Focus" description="Pick a first level power you know with an ability you can use while psionically focused. You are always treated as being psionically focused for this purpose, even if you are not." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Psionic" name="Psionic"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    </thing>
+  <thing id="trPUPsiThe" name="Psionic Theory" description="You have studied psionics deeply, gaining a +2 trait bonus to Spellcraft checks when analyzing psionic powers or items." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Psionic" name="Psionic"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    </thing>
+  <thing id="trPUPsykin" name="Psychokinetic Talent" description="You can expend your psionic focus as a swift action to manifest far hand as a psi-like ability. It has a duration of one round, a range of ten feet, and allows you to move a maximum weight of 1 lb. If you have psionic power points, you may expend one to extend the duration of this psi-like ability by one round. This talent grants no benefit if you do not have the ability to gain psionic focus." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Psionic" name="Psionic"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    </thing>
+  <thing id="trPUPsypor" name="Psychoportive Talent" description="You can expend your psionic focus as an immediate action to make a five-foot step. You may do this even if you have already moved in the round in question, although not if you have already taken a five-foot step, and doing so does not prevent further movement in this round. This talent grants no benefit if you do not have the ability to gain psionic focus." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Psionic" name="Psionic"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    </thing>
+  <thing id="trPUTelepa" name="Telepathic Talent" description="You can expend your psionic focus to gain a +2 trait bonus to your saves against mind-affecting powers and psi-like abilities. This talent grants no benefit if you do not have the ability to gain psionic focus." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Psionic" name="Psionic"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    </thing>
+  <thing id="trPUHdPsio" name="Psionic" compset="Trait" isshowonly="yes">
+    <tag group="trCategory" tag="Psionic"/>
+    </thing>
+  <thing id="trPUHdDrea" name="Dream" compset="Trait" isshowonly="yes">
+    <tag group="trCategory" tag="Dream" name="Dream"/>
+    </thing>
+  <thing id="trPUDreSea" name="Dream Seared" description="Some powerful psychic phenomenon has damaged your dream circle, and although it has since recovered, it has taken on a slightly warped and toughened form. You gain a +1 trait bonus on all saves against effects that affect your sleeping mind (any spell, power, or ability that requires you to be sleeping)." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="trCategory" tag="Dream"/>
+    </thing>
+  <thing id="trPUDreaSl" name="Dreamless Sleep" description="You rarely seem to dream at all, and your dreams have little effect on your waking life. You gain a +1 trait bonus on saves against dream-related effects whether awake or asleep. However, any effects of this nature you use take a -1 to their DC to resist." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="trCategory" tag="Dream"/>
+    </thing>
+  <thing id="trPULucidD" name="Lucid Dreaming" description="You have the ability to recall dreams vividly, and can always recall things you may have done in your sleep. In addition, you are aware of when you are dreaming and have access to your power point pool and powers known while in the dream. When you awaken, any power points spent while dreaming are depleted from your power point reserve." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="trCategory" tag="Dream"/>
+    </thing>
+  <thing id="trPUBluPD" name="Playing Dumb" description="You have learned to hide your true worth to protect yourself. You gain a +2 trait bonus on Bluff checks to play down your value or threat and to appear as less then you are." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Race" tag="rBlue"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    </thing>
+  <thing id="trPUBluPsL" name="Psionic Lineage" description="Pick one power when you pick this trait. Metapsionic feats applied to that power cost 1 pp less." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Race" tag="rBlue"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    </thing>
+  <thing id="trPUDroPsT" name="Psychoenergetic Talent" description="Your natural ability to create rays of energy is heightened, allowing you to fire a weakened version of energy ray as a standard action as long as you maintain psionic focus. This energy ray instead deals 1d3 points of damage of the energy type of your caste. Your manifester level for this ability is always 1." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="Race" tag="rDromite"/>
+    </thing>
+  <thing id="trPUDroSeN" name="Sensitive Nose" description="You gain a +1 trait bonus on your Perception or Survival checks related to smell. However, you also take a -1 penalty on saves that involve resisting smells, such as stench." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="Race" tag="rDromite"/>
+    </thing>
+  <thing id="trPUDuePsB" name="Psychic Buffer" description="Years of living near creatures that attack your mind has sharpened your defenses; you are skilled at repelling mental assaults, and gain a +1 trait bonus to Will saves against Telepathy powers." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="Race" tag="rPUDuergar"/>
+    </thing>
+  <thing id="trPUDueSeD" name="Sense Dissonance" description="Your psionic abilities help you tell if a person is under the psychic control of another, by sensing psionic dissonance around them. You gain a +2 trait bonus to Sense Motive for the &#147;sense enchantment&#148; and &#147;hunch&#148; functions." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="Race" tag="rPUDuergar"/>
+    </thing>
+  <thing id="trPUElaFTP" name="Fight Through the Pain" description="You can tap into the psionic energy that permeates your body to keep going despite certain injuries. You gain a +2 bonus to Autohypnosis checks in order to resist caltrop wounds, stabilize yourself, or resist the secondary effect of poisons." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="Race" tag="rElan"/>
+    </thing>
+  <thing id="trPUElaMem" name="Memories" description="You have fleeting memories of your past life before becoming what you now are. Your Charisma-based penalty does not apply against individuals you knew prior to becoming an elan." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="Race" tag="rElan"/>
+    </thing>
+  <thing id="trPUHaGImP" name="Impressive Physique" description="Your size and stature are imposing. Your natural physique gives you a +2 trait bonus to Intimidate checks due to your size." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="Race" tag="rHalfGiant"/>
+    </thing>
+  <thing id="trPUHaGHot" name="Impressive Physique" description="Your Fire-based powers give your enemies a &#147;hot-foot&#148;. Any creature that takes damage from a  fire-based power you manifest takes 1 point of fire damage on their next turn." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="Race" tag="rHalfGiant"/>
+    </thing>
+  <thing id="trPUMaeInn" name="Inner Peace" description="You have studied philosophy and theology as a way to handle the mental turmoil of your race. Knowledge (Religion) and Knowledge (Psionics) are both class skills for you. If either or both are already class skills, you gain a +1 trait bonus to them." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="Race" tag="rPUMaenad"/>
+    </thing>
+  <thing id="trPUMaeSur" name="Surge Protection" description="You are more skilled at resisting psychic enervation, and take 1 less HP or PP damage whenever you enervate (to a minimum of 1)." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="Race" tag="rPUMaenad"/>
+    </thing>
+  <thing id="trPUOphBeN" name="Beguiling Nature" description="Your telepathic abilities are even more entrancing than normal. You gain a +1 trait bonus to all Charisma-based checks against creatures affected by one of your Telepathy powers." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="Race" tag="rOphiduan"/>
+    <eval phase="Final" priority="20000"><![CDATA[~construct the situational text here for consistencey
+var sittext as string
+
+sittext = "+1 trait bonus to all Charisma-based checks against creatures affected by one of your Telepathy powers"
+
+~now all the situational bonuses
+var nChaSkill as number
+foreach pick in hero from BaseSkill
+   ~ set Cha based skill flag to FALSE
+   nChaSkill = 0
+
+   ~ If skill override tag to Cha is found then set flag to TRUE
+   if (eachpick.tagis[SkillOver.aCHA] <> 0) then
+      nChaSkill = 1
+
+   ~..else check the linkage to see if Cha skill then set flag to TRUE
+   elseif (eachpick.linkage[skillattr].tagis[thingid.aCHA] <> 0) then
+      nChaSkill = 1
+   endif
+
+   ~ If we found a valid Cha based skill set the situational text
+   If (nChaSkill <> 0) Then
+      #situational[eachpick,sittext,field[pSource].text]
+   Endif
+nexteach]]></eval>
+    </thing>
+  <thing id="trPUOphInf" name="Infiltrator" description="You have had extensive dealings with other humanoid races, and have learned to mimic their mannerisms and body language to ease their fears of your kind. You gain a +1 trait bonus to Bluff and Diplomacy checks against non-ophiduan humanoids, and Sense Motive is always a class skill for you." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="Race" tag="rOphiduan"/>
+    </thing>
+  <thing id="trPUXepFaF" name="Fancy Footwork" description="In any round in which you employ your burst ability, you gain a +1 dodge bonus to your AC." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="Race" tag="rXeph"/>
+    </thing>
+  <thing id="trPUXepReD" name="Resist Dampening" description="Your powers and other psychic abilities are not easily dampened. You gain a +1 trait bonus to manifester level checks to bypass power resistance. If you can create a mind blade, you gain a +2 trait bonus to create it while inside a null psionics field." compset="Trait">
+    <usesource source="pPsiUn"/>
+    <tag group="trCategory" tag="Racial"/>
+    <tag group="Helper" tag="ShowSpec"/>
+    <tag group="Race" tag="rXeph"/>
+    </thing>
+  </document>

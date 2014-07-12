@@ -1,0 +1,15 @@
+# Ingore HL files
+*.pkg
+*.bmp
+*.htm
+*.png
+*.cfg
+*.hlz
+*.dtd
+*.hl
+*.xml
+*.stock
+*.db
+!*.user
+GREP Backup/
+Version Archives/

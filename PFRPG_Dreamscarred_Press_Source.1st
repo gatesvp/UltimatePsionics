@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document signature="Hero Lab Structure">
+<!-- 
+March 2, 2014 Tim Shadow
+-Broke this out to its own .1st file so that Psioncis and Paths of War play nice together.
+
+v1.5 October 9, 2012 Tim Shadow
+-Added Data Set version number to the source name.
+
+v1.0 September 22, 2012 TCArknight
+-Created New.
+
+-->
+
+  <source
+    id="pDscar"
+    name="Dreamscarred Press"
+    selectable="no"
+    parent="UserParent"
+    sortorder="0"
+    description="Dreamscarred Press Pathfinder Compatible Books">
+    </source>
+
+  </document>
