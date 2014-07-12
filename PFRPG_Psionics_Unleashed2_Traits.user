@@ -47,9 +47,17 @@
     <tag group="Helper" tag="ShowSpec"/>
     </thing>
   <thing id="trPUPsiKna" name="Psionic Knack" description="You are naturally psionically gifted, even if you dabble in other studies. Pick a class with a manifester level when you gain this trait&#151;your manifester level in that class gains a +2 trait bonus as long as this bonus doesn&#146;t raise your manifester level above your current Hit Dice. You must have a level in the class chosen to gain this benefit." compset="Trait">
+    <fieldval field="usrCandid1" value="component.Class &amp; Helper.Manifester"/>
     <usesource source="pPsiUn"/>
-    <tag group="trCategory" tag="Psionic" name="Psionic"/>
     <tag group="Helper" tag="ShowSpec"/>
+    <tag group="trCategory" tag="Psionic" name="Psionic"/>
+    <tag group="ChooseSrc1" tag="Hero"/>
+    <eval phase="Level" priority="11005"><![CDATA[      doneif (tagis[Helper.FtDisable] <> 0)
+
+      if (field[usrChosen1].ischosen <> 0) then
+        ~our caster level for the chosen class is at +2, to a maximum of the number of Hit Dice we have
+        field[usrChosen1].chosen.field[cCasterLev].value = minimum(field[usrChosen1].chosen.field[cCasterLev].value + 2, hero.tagcount[Hero.HitDice])
+        endif]]></eval>
     </thing>
   <thing id="trPUPsiMon" name="Psionic Monster Familiarity" description="You&#146;ve either seen or read about a great number of psionic creatures. You gain a +2 trait bonus to Knowledge (Psionics) checks to identify psionic creatures and their abilities." compset="Trait">
     <usesource source="pPsiUn"/>

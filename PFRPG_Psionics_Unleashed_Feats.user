@@ -202,7 +202,7 @@ validif (state.isfocus <> 0)]]></validate>
     <tag group="fCategory" tag="Psionic"/>
     <exprreq message="Psionic character required."><![CDATA[hero.tagis[Hero.Psionic] <> 0]]></exprreq>
     </thing>
-  <thing id="fPUFellSh" name="Fell Shot" description="You can strike your foe with a ranged weapon as if making a touch attack.{br}{br}{b}Prerequisite:{/b} Dex 13, Point Blank Shot, Psionic Shot, base attack bonus +6.{br}{br}{b}Benefit:{/b} To use this feat, you must expend your psionic focus as part of a ranged attack. You can resolve that ranged attack as a ranged touch attack.{br}{br}You must decide whether or not to use this feat prior to making an attack. If your attack misses, you still expend your psionic focus. Abilities that do not work on touch attacks similarly do not work with this feat." compset="Feat" summary="Expend your psionic focus to resolve a ranged attack as a ranged touch attack." uniqueness="useronce">
+  <thing id="fPUFellSh" name="Fell Shot" description="{b}Prerequisites{/b}: Dex 13, Point Blank Shot, Psionic Shot, base attack bonus +6.\n\n{b}Benefit{/b}: While you maintain psionic focus, your attacks with a ranged weapon deal an extra 1 point of damage.  Additionally, if you expend your psionic focus as a part of an attack with a ranged weapon, that attack instead deals an extra 2d6 points of damage.  You must decide whether or not to use this feat prior to making an attack.  If your attack misses, you still expend your psionic focus." compset="Feat" summary="You can strike your foe with a ranged weapon as if making a touch attack." uniqueness="useronce">
     <usesource source="pPsiUn"/>
     <tag group="fCategory" tag="Combat" name="Combat" abbrev="Combat"/>
     <tag group="Helper" tag="ShowSpec"/>
@@ -556,7 +556,7 @@ perform hero.assign[User.PsionTal]]]></eval>
     <usesource source="pPsiUn"/>
     <tag group="Helper" tag="ShowSpec" name="ShowSpec" abbrev="ShowSpec"/>
     <tag group="fCategory" tag="Psionic"/>
-    <exprreq message="Speed of Thought required."><![CDATA[#hasfeat[fPUOverch] <> 0]]></exprreq>
+    <exprreq message="Overchannel feat required."><![CDATA[#hasfeat[fPUOverch] <> 0]]></exprreq>
     <exprreq message="Psionic character required."><![CDATA[hero.tagis[Hero.Psionic] <> 0]]></exprreq>
     </thing>
   <thing id="fPUTwinPwr" name="Twin Power" description="{b}Benefit{\b}: To use this feat, you must expend your psionic focus. You can twin a power. Manifesting a power altered by this feat causes the power to take effect twice on the area or target, as if you were simultaneously manifesting the same power two times on the same location or target. Any variables in the power (such as duration, number of targets, and so on) are the same for both of the resulting powers. The target experiences all the effects of both powers individually and receives a saving throw (if applicable) for each. In some cases, such as a twinned {i}psionic charm{/i}, failing both saving throws results in redundant effects (although, in this example, any ally of the target would have to succeed on two dispel attempts to free the target from the charm effect).  \nUsing this feat increases the power point cost of the power by 6. The power&apos;s total cost cannot exceed your manifester level." compset="Feat" summary="You can manifest a power simultaneously with another power just like it." uniqueness="useronce">

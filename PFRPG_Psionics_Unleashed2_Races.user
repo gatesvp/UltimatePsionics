@@ -903,7 +903,6 @@ hero.child[svWill].field[Bonus].value += field[abValue].value]]></eval>
     <usesource source="pPsiUn" parent="pDscar" name="Ultimate Psionics"/>
     <tag group="Usage" tag="Day" name="/day" abbrev="/day"/>
     <tag group="AbilType" tag="PsiLike" name="Psi-Like Ability" abbrev=" (Ps)"/>
-    <tag group="SpecType" tag="SpellLike" name="Spell-Like Ability" abbrev="Spell-Like Ability"/>
     </thing>
   <thing id="raPUNoSyRe" name="Symbiotic Resistance" description="The symbiotic bond between the noral and the erliss grants all bonded norals a +2 racial bonus on saving throws against disease and mind-affecting effects." compset="RaceSpec">
     <fieldval field="abValue" value="2"/>
