@@ -4,14 +4,14 @@
     <info_history><![CDATA[
 April 24, 2014 - Tim Shadow
 -Changed "Combat Style (Finesse)" to not require the APG for the "Disrupting Shot" bonus feat.]]></info_history>
-    <info_todo>Aegis - Suits and Customization (Mechanic Effects)
-Cryptic - Insights (Mechanic effects)
+    <info_todo>Cryptic - Insights (Mechanic effects)
                 Supreme Insights (Mechanic effects)
 
 Favored Class Options
 Class archetypes
 
-Aegis (Ectopic Artisan) - Astral Warrior implementation</info_todo>
+Aegis (Ectopic Artisan) - Astral Warrior implementation
+Cryptic (Lost Mind) - Void Insights</info_todo>
     </fileinfo>
   <thing id="cPUSurPPri" name="Survivor&apos;s Path" description="You have sworn an oath to your order, and in exchange you have been trained in mystic techniques that allow you to summon a weapon from beyond time and space, while protecting yourself with the power of your mind.\n\n{b}Bonus Class Skill{/b}: Heal\n\n{b}Powers{/b}:  {i}catfall, vigor{/i}\n\n{b}Skills{/b}: Autohypnosis, Heal, Perception" compset="CustomSpec" summary="You are a follower of the Survivor&apos;s Path" uniqueness="unique">
     <arrayval field="usrArray" index="1" value="Secondary"/>
@@ -7394,5 +7394,78 @@ field[abSumm].text = "Gain total concealment (50% miss chance) for " & #attrmod[
     </thing>
   <thing id="cPUGunKata" name="Gun Katas" description="Starting at 10th level, the grammatons learns how to channel her disrupt pattern into vicious melee attacks through her guns. She can use her guns to perform melee attacks that deal 1d6 points of bludgeoning damage plus the base disrupt pattern damage, with a critical multiplier of 20/x2. The damage from enhanced disruption is not included in these attacks. This use of disrupt pattern is not limited to once per round.{br}{br}For each successful melee attack made with a handgun, if that gun is loaded, the grammatons can make a free ranged attack with that handgun against the creature struck. These ranged touch attacks do not provoke attacks of opportunity. This ability replaces Hide in Plain Sight." compset="ClSpecial">
     <usesource source="pPsiUn"/>
+    </thing>
+  <thing id="arPUCryLst" name="Lost Mind" description="You have seen the patterns inherent in the void, the meaning that hides inside the emptiness of every pattern.{br}{br}Your gaze has lingered upon the twisting tunnels of nothingness that permeates the space between the stars, and you have gazed upon a terrible beauty. In your mind stands a forest of dark trees, endless, their glass-leaves glittering with untold secrets, their bark the wishful thinking of the mad. You are lost in a maze of wonders, their inconceivable, unbelievable notions made real. You tug at the patterns that hold the world together and laugh as it all unravels in a beautiful dance of destruction.\n\n{b}Powers Known:{/b} The lost mind gains {i}know direction and location{/i} as a talent at 1st level." compset="ClassVary" uniqueness="unique">
+    <fieldval field="cvSpec5thS" value="Deed"/>
+    <arrayval field="cvCust5Tot" index="5" value="1"/>
+    <arrayval field="cvCustTot" index="11" value="-1"/>
+    <arrayval field="cvCustTot" index="13" value="-1"/>
+    <arrayval field="cvCustTot" index="15" value="-1"/>
+    <arrayval field="cvCustTot" index="17" value="-1"/>
+    <arrayval field="cvCustTot" index="19" value="-1"/>
+    <usesource source="pPsiUn"/>
+    <tag group="AbReplace" tag="cRogTrapfn"/>
+    <tag group="AbReplace" tag="cPUTrapmak"/>
+    <tag group="AbReplace" tag="cPUCrHideP"/>
+    <tag group="ClVaryName" tag="AppParen"/>
+    <bootstrap thing="cPUDecSec">
+      <autotag group="ClSpecWhen" tag="1"/>
+      </bootstrap>
+    <bootstrap thing="cPUSymVoid">
+      <autotag group="ClSpecWhen" tag="12"/>
+      </bootstrap>
+    <bootstrap thing="cPUInsMad">
+      <autotag group="ClSpecWhen" tag="1"/>
+      </bootstrap>
+    <bootstrap thing="cPUProInsa">
+      <autotag group="ClSpecWhen" tag="10"/>
+      </bootstrap>
+    <bootstrap thing="puKnowDL1">
+      <autotag group="SpellSort" tag="cHelpPU1"/>
+      <autotag group="SpellType" tag="cHelpPU1"/>
+      </bootstrap>
+    <link linkage="varies" thing="cHelpPU1"/>
+    <eval phase="PreLevel" priority="10000">~ Increase number of known powers by 1
+hero.childfound[cHelpPU1].field[cPsiPowMax].value += 1
+
+~ Reduce Talents known by 1
+hero.childfound[cHelpPU1].field[cPsiSPowMa].value -= 1</eval>
+    </thing>
+  <thing id="cPUInsMad" name="Insight of the Madman" description="The lost mind&apos;s thoughts grant him unusual intuitive ability. He gains a bonus to Perception and Sense Motive equal to 1/2 his class level (minimum +1). \n\nThis ability replaces trapfinding." compset="ClSpecial" summary="+ CL/2 (Minimum 1) bonus to Perception and Sense Motive.">
+    <usesource source="pPsiUn"/>
+    <eval phase="PreLevel" priority="5000"><![CDATA[var MyBonus as number
+
+field[abValue].value += maximum(round(#levelcount[Cryptic]/2,0,1),1)
+
+MyBonus += field[abValue].value
+#applybonus[Bonus,hero.childfound[skPercep],MyBonus]
+#applybonus[Bonus,hero.childfound[skSenseMot],MyBonus]
+
+field[abSumm].text = signed(MyBonus) & " bonus to Perception and Sense Motive."]]></eval>
+    </thing>
+  <thing id="cPUDecSec" name="Decipher Secrets" description="The lost mind&apos;s glimpse into the void has allowed him to see the patterns in all writing, granting him a bonus on Linguistics checks to decipher a writing equal to his class level. \n\nThis ability replaces trapmaker." compset="ClSpecial" summary="+ level bonus to Linguistics checks when deciphering writings.">
+    <usesource source="pPsiUn"/>
+    <eval phase="PreLevel" priority="5000"><![CDATA[var MyBonus as number
+
+field[abValue].value += #levelcount[Cryptic]
+
+MyBonus += field[abValue].value
+ 
+#situational[hero.childfound[skLinguist],signed(MyBonus) & " bonus to decipher writings.",field[thingname].text]
+
+field[abSumm].text = signed(MyBonus) & " bonus for Linguistics to decipher writings."]]></eval>
+    </thing>
+  <thing id="cPUProInsa" name="Protection of Insanity" description="At 10th level, the lost mind&apos;s glimpse into the insanity of the void grants him a protection against effects that would otherwise alter his mind. The lost mind gains a bonus equal to his Intelligence modifier on any saving throw to avoid being confused or on the Intelligence check to escape a {i}maze{/i} or similar effect. This effectively means the lost mind adds his Intelligence modifier twice on the Intelligence check for {i}maze{/i} (once for a standard Intelligence check, once from protection from insanity). \n\nThis ability replaces hide in plain sight." compset="ClSpecial" summary="+ INT modifer to escape a {i}maze{/i} or similar effect.">
+    <usesource source="pPsiUn"/>
+    </thing>
+  <thing id="cPUSymVoid" name="Symbols of the Void" description="At 12th level, lost mind gains the ability to manifest the following spells as powers of the same level, even if he would not normally be able to manifest powers of that level. The lost mind&apos;s manifester level must be at least double the power level to manifest the spell (for example, to manifest {i}symbol of persuasion{/i}, the lost mind must have a cryptic manifester level of at least 12).\n\n5th - {i}Symbol of Sleep, Symbol of Pain{/i} \n6th - {i}Symbol of Persuasion{/i} \n7th - {i}Symbol of Stunning{/i} \n8th - {i}Symbol of Insanity, Symbol of Death{/i} \n\nThis ability replaces the insight and power known normally gained at 12th level." compset="ClSpecial" summary="Manifest certain Symbol spells as powers.">
+    <usesource source="pPsiUn"/>
+    <eval phase="PreLevel" priority="10000"><![CDATA[~ If we're not shown, just get out now
+doneif (tagis[Helper.ShowSpec] <> 1)
+~ if we've been disabled, get out now
+doneif (tagis[Helper.SpcDisable] <> 0)
+
+~ Decrease number of known powers by 1
+hero.childfound[cHelpPU1].field[cPsiPowMax].value -= 1]]></eval>
     </thing>
   </document>
