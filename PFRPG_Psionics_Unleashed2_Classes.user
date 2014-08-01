@@ -10,7 +10,8 @@ April 24, 2014 - Tim Shadow
 Favored Class Options
 Class archetypes
 
-Aegis (Ectopic Artisan) - Astral Warrior implementation</info_todo>
+Aegis (Ectopic Artisan) - Astral Warrior implementation
+Crytic (Lost Mind) - Symbols of the Void inplementation</info_todo>
     </fileinfo>
   <thing id="cPUSurPPri" name="Survivor&apos;s Path" description="You have sworn an oath to your order, and in exchange you have been trained in mystic techniques that allow you to summon a weapon from beyond time and space, while protecting yourself with the power of your mind.\n\n{b}Bonus Class Skill{/b}: Heal\n\n{b}Powers{/b}:  {i}catfall, vigor{/i}\n\n{b}Skills{/b}: Autohypnosis, Heal, Perception" compset="CustomSpec" summary="You are a follower of the Survivor&apos;s Path" uniqueness="unique">
     <arrayval field="usrArray" index="1" value="Secondary"/>
@@ -4526,20 +4527,21 @@ ClsAllowPs - This tag group is used to setup the Powers that this Path grants. Y
       Call PsyWarPath</eval>
     </thing>
   <thing id="arPUTraceu" name="Traceur" description="You are a mobile fighter and you use techniques that allow you to make the most out of your momentum and your speed. Where many psychic warriors rely on their physical power or agility, you have learned that motion is just as powerful a tool at your disposal." compset="ClassVary" uniqueness="unique">
-    <arrayval field="cvBonFtMod" index="1" value="-1"/>
+    <fieldval field="srcPageNum" value="277"/>
     <arrayval field="cvBonFtMod" index="7" value="-1"/>
+    <arrayval field="cvBonFtMod" index="1" value="-1"/>
     <usesource source="pPsiUn"/>
-    <tag group="fDisable" tag="fArmMedium"/>
     <tag group="AbReplace" tag="cPWaPathSk"/>
     <tag group="fDisable" tag="fArmLight"/>
     <tag group="fDisable" tag="fArmHeavy"/>
     <tag group="ProductId" tag="PUProdID"/>
     <tag group="ClVaryName" tag="AppParen"/>
-    <bootstrap thing="cPUQuickSt">
-      <autotag group="ClSpecWhen" tag="1"/>
-      </bootstrap>
+    <tag group="fDisable" tag="fArmMedium"/>
     <bootstrap thing="cPUChargeT">
       <autotag group="ClSpecWhen" tag="2"/>
+      </bootstrap>
+    <bootstrap thing="cPUQuickSt">
+      <autotag group="ClSpecWhen" tag="1"/>
       </bootstrap>
     <link linkage="varies" thing="cHelpPWa"/>
     </thing>
@@ -5543,20 +5545,21 @@ field[abValue].value += field[xCount].value
 field[CustDesc].text = "Transfer Wounds (" & field[abValue].value & "d6)"]]></eval>
     </thing>
   <thing id="arPUEnlMnk" name="Enlightened Monk" description="A monk&apos;s ki and psionic power have long thought to be linked. Enlightened monks learn how to use their ki to fuel their psionic abilities and ways to harness their psionic power.{br}{br}{b}Class Skills:{/b} The enlightened monk adds Autohypnosis (Wis) as a class skill." compset="ClassVary" uniqueness="unique">
-    <arrayval field="cvBonFtMod" index="0" value="-1"/>
+    <fieldval field="srcPageNum" value="292"/>
     <arrayval field="cvBonFtMod" index="6" value="-1"/>
+    <arrayval field="cvBonFtMod" index="0" value="-1"/>
     <usesource source="pPsiUn"/>
-    <tag group="AbReplace" tag="cMnkSlow"/>
     <tag group="ClassSkill" tag="skPUAhypno"/>
     <tag group="ClVaryName" tag="AppParen"/>
-    <bootstrap thing="cPUPsiTra">
-      <autotag group="ClSpecWhen" tag="1"/>
-      </bootstrap>
+    <tag group="AbReplace" tag="cMnkSlow"/>
     <bootstrap thing="cPUAugStFi">
       <autotag group="ClSpecWhen" tag="6"/>
       </bootstrap>
     <bootstrap thing="cPUKiPsion">
       <autotag group="ClSpecWhen" tag="4"/>
+      </bootstrap>
+    <bootstrap thing="cPUPsiTra">
+      <autotag group="ClSpecWhen" tag="1"/>
       </bootstrap>
     <link linkage="varies" thing="cHelpMnk"/>
     <eval phase="PreLevel" priority="10000"><![CDATA[~ Append additional text onto the Monk's Stunning Fist
@@ -5585,16 +5588,14 @@ field[CustDesc].text = "Transfer Wounds (" & field[abValue].value & "d6)"]]></ev
     <usesource source="pPsiUn"/>
     </thing>
   <thing id="arPUCerInf" name="Cerebral Infiltrator" description="Tapping into psionic power can give rogues insight into the behavior of others as well as the ability to assault the sensory input of their opponents. Cerebral infiltrators focus more on dealing with people and less on dealing with traps and mechanical devices.\n\n{b}Class Skills:{/b} The cerebral infiltrator adds Autohypnosis (Wis) as a class skill.\n\n{b}Recommended Talents:{/b} Major psionics*, minor psionics*, psionic feat* \n\n{b}Recommended Advanced Talents:{/b} Slippery mind, vanish*" compset="ClassVary" uniqueness="unique">
-    <arrayval field="cvBonFtMod" index="0" value="-1"/>
+    <fieldval field="srcPageNum" value="291"/>
     <arrayval field="cvBonFtMod" index="6" value="-1"/>
+    <arrayval field="cvBonFtMod" index="0" value="-1"/>
     <usesource source="pPsiUn"/>
-    <tag group="ClassSkill" tag="skPUAhypno"/>
     <tag group="AbReplace" tag="cRogTrapfn"/>
     <tag group="AbReplace" tag="cTrapSense"/>
     <tag group="ClVaryName" tag="AppParen"/>
-    <bootstrap thing="cPUEnSeRog">
-      <autotag group="ClSpecWhen" tag="1"/>
-      </bootstrap>
+    <tag group="ClassSkill" tag="skPUAhypno"/>
     <bootstrap thing="cPUCripSen">
       <autotag group="ClSpecWhen" tag="3"/>
       </bootstrap>
@@ -5607,9 +5608,10 @@ field[CustDesc].text = "Transfer Wounds (" & field[abValue].value & "d6)"]]></ev
     <bootstrap thing="cPUCripSen">
       <autotag group="ClSpecWhen" tag="18"/>
       </bootstrap>
+    <bootstrap thing="cPUEnSeRog">
+      <autotag group="ClSpecWhen" tag="1"/>
+      </bootstrap>
     <link linkage="varies" thing="cHelpRog"/>
-    <eval phase="PreLevel" priority="10000"><![CDATA[~ Append additional text onto the Monk's Stunning Fist
-#appenddesc[fStunFist,"{b}Enlightened Monk:{/b} When an enlightened monk uses his Stunning Fist ability, he can choose to expend his psionic focus to gain a +1 bonus to the save DC of that Stunning Fist attack. If the enlightened monk expends his psionic focus for the Psionic Fist feat as part of a stunning fist attack, he gains this bonus in addition to the bonus damage from Psionic Fist."]]]></eval>
     </thing>
   <thing id="cPUEnSeRog" name="Enhanced Senses" description="A cerebral infiltrator unlocks his psionic talent and gains additional insight into interactions with others. The cerebral infiltrator gains the Wild Talent feat as a bonus feat and gains a bonus on Sense Motive checks equal to half his class level (minimum +1). This ability replaces trap finding." compset="ClSpecial">
     <usesource source="pPsiUn"/>
@@ -5749,17 +5751,15 @@ hero.childfound[cfgPUPsFtR].field[cfgMaxF1].value += 1</eval>
       </prereq>
     </thing>
   <thing id="arPUGaean" name="Gaean" description="Tapping into psionic power can give rogues insight into the behavior of others as well as the ability to assault the sensory input of their opponents. Cerebral infiltrators focus more on dealing with people and less on dealing with traps and mechanical devices.\n\n{b}Class Skills:{/b} The cerebral infiltrator adds Autohypnosis (Wis) as a class skill.\n\n{b}Recommended Talents:{/b} Major psionics*, minor psionics*, psionic feat* \n\n{b}Recommended Advanced Talents:{/b} Slippery mind, vanish*" compset="ClassVary" uniqueness="unique">
-    <arrayval field="cvBonFtMod" index="0" value="-1"/>
+    <fieldval field="srcPageNum" value="292"/>
     <arrayval field="cvBonFtMod" index="6" value="-1"/>
+    <arrayval field="cvBonFtMod" index="0" value="-1"/>
     <usesource source="pPsiUn"/>
-    <tag group="ClassSkill" tag="skPUAhypno"/>
     <tag group="ClVaryName" tag="AppParen"/>
     <tag group="AbReplace" tag="cDrdThous"/>
     <tag group="AbReplace" tag="cDrdResNat"/>
     <tag group="AbReplace" tag="cWildEmp"/>
-    <bootstrap thing="cPUGaeComm">
-      <autotag group="ClSpecWhen" tag="1"/>
-      </bootstrap>
+    <tag group="ClassSkill" tag="skPUAhypno"/>
     <bootstrap thing="cPUGaeaRev">
       <autotag group="ClSpecWhen" tag="13"/>
       </bootstrap>
@@ -5769,9 +5769,10 @@ hero.childfound[cfgPUPsFtR].field[cfgMaxF1].value += 1</eval>
     <bootstrap thing="cPUDrWildT">
       <autotag group="ClSpecWhen" tag="1"/>
       </bootstrap>
+    <bootstrap thing="cPUGaeComm">
+      <autotag group="ClSpecWhen" tag="1"/>
+      </bootstrap>
     <link linkage="varies" thing="cHelpDrd"/>
-    <eval phase="PreLevel" priority="10000"><![CDATA[~ Append additional text onto the Monk's Stunning Fist
-#appenddesc[fStunFist,"{b}Enlightened Monk:{/b} When an enlightened monk uses his Stunning Fist ability, he can choose to expend his psionic focus to gain a +1 bonus to the save DC of that Stunning Fist attack. If the enlightened monk expends his psionic focus for the Psionic Fist feat as part of a stunning fist attack, he gains this bonus in addition to the bonus damage from Psionic Fist."]]]></eval>
     </thing>
   <thing id="cPUDrWildT" name="Wild Talent" description="The gaean gains the Wild Talent feat as a bonus feat at 1st." compset="ClSpecial">
     <usesource source="pPsiUn"/>
@@ -5836,15 +5837,13 @@ armorbonus += (1 + #levelcount[Aegis]/5)
 hero.child[ArmorClass].field[tACNatural].value += round(armorbonus,0,-1)</eval>
     </thing>
   <thing id="arPUAberra" name="Aberrant" description="Using ectoplasm is the way a typical aegis protects and enhances the physical body. Others have discovered that by directly altering the body, they can achieve similar results, although they might have a more grisly appearance. These aberrants often have misshapen or twisted forms, yet they are equally deadly." compset="ClassVary" uniqueness="unique">
+    <fieldval field="srcPageNum" value="261"/>
     <usesource source="pPsiUn"/>
-    <tag group="AbReplace" tag="cPUAstrRep"/>
     <tag group="AbReplace" tag="cPUCraftsm"/>
     <tag group="AbReplace" tag="cPUMastCr"/>
     <tag group="ClVaryName" tag="AppParen"/>
     <tag group="AbReplace" tag="cPUAstSuit"/>
-    <bootstrap thing="cPUPsiForm">
-      <autotag group="ClSpecWhen" tag="5"/>
-      </bootstrap>
+    <tag group="AbReplace" tag="cPUAstrRep"/>
     <bootstrap thing="cPUVim">
       <autotag group="ClSpecWhen" tag="1"/>
       </bootstrap>
@@ -5853,6 +5852,9 @@ hero.child[ArmorClass].field[tACNatural].value += round(armorbonus,0,-1)</eval>
       </bootstrap>
     <bootstrap thing="cPUIntim">
       <autotag group="ClSpecWhen" tag="2"/>
+      </bootstrap>
+    <bootstrap thing="cPUPsiForm">
+      <autotag group="ClSpecWhen" tag="5"/>
       </bootstrap>
     <link linkage="varies" thing="cHelpPU0"/>
     </thing>
@@ -6623,14 +6625,12 @@ else
       </prereq>
     </thing>
   <thing id="arPUCryWar" name="Crystal Warrior" description="Some aegii have learned to form a psicrystal and shape their astral suit around the small creature, creating a sentient suit of armor that grants them many benefits at the cost of some flexibility." compset="ClassVary" uniqueness="unique">
+    <fieldval field="srcPageNum" value="262"/>
     <usesource source="pPsiUn"/>
-    <tag group="ClVaryName" tag="AppParen"/>
     <tag group="AbReplace" tag="cPUAstrRep"/>
     <tag group="AbReplace" tag="cPUInvigSu"/>
     <tag group="AbReplace" tag="cPUCanniSu"/>
-    <bootstrap thing="cPUPsiAff">
-      <autotag group="ClSpecWhen" tag="1"/>
-      </bootstrap>
+    <tag group="ClVaryName" tag="AppParen"/>
     <bootstrap thing="cPUMissive">
       <autotag group="ClSpecWhen" tag="1"/>
       </bootstrap>
@@ -6658,13 +6658,16 @@ else
     <bootstrap thing="cPUTacSuit">
       <autotag group="ClSpecWhen" tag="20"/>
       </bootstrap>
+    <bootstrap thing="cPUPsiAff">
+      <autotag group="ClSpecWhen" tag="1"/>
+      </bootstrap>
     <link linkage="varies" thing="cHelpPU0"/>
-    <eval phase="PreLevel" priority="100000" index="2"><![CDATA[~ Disable the 7th level Reconfigure only
-perform hero.findchild[BaseClSpec,"thingid.cPUReconfi & SpecSource.cHelpPU0 & ClSpecWhen.7"].assign[Helper.SpcDisable]
-perform hero.findchild[BaseClSpec,"thingid.cPUReconfi & SpecSource.cHelpPU0 & ClSpecWhen.7"].assign[Helper.SpcReplace]]]></eval>
     <eval phase="Final" priority="9999"><![CDATA[#appenddesc[cPUAstSuit,"{b}Modification from Crystal Warrior{/b}: To gain the benefits of some of the additional class features detailed below, the aegis's psicrystal must be physically touching the aegis when the aegis forms his astral suit, and the psicrystal is consumed by the astral suit while the astral suit is active.{br}{br}When the psicrystal is consumed in this fashion, it still grants all the normal benefits for being within 5 ft. of the aegis (Alertness, etc), but the aegis does not gain any of the psicrystal's special abilities (natural armor, hardness, etc.) The aegis may still form his astral suit normally, but he loses those abilities detailed below that rely upon the psicrystal being consumed by the astral suit.{br}{br}In addition, the aegis gains the ranged attack customization as a bonus customization."]
 
 hero.childfound[cPUPerfMer].field[CustDesc].text = "An aegis of 20th level has learned to become one with his suit. His suit cannot be dispelled or removed against his will by any means, although his astral suit ability still does not function within areas where psionics do not work, such as a null psionics field.{br}{br}In addition, the aegis can spend two daily uses of his reconfigure ability, to alter all of the customizations on his astral suit."]]></eval>
+    <eval phase="PreLevel" priority="100000" index="2"><![CDATA[~ Disable the 7th level Reconfigure only
+perform hero.findchild[BaseClSpec,"thingid.cPUReconfi & SpecSource.cHelpPU0 & ClSpecWhen.7"].assign[Helper.SpcDisable]
+perform hero.findchild[BaseClSpec,"thingid.cPUReconfi & SpecSource.cHelpPU0 & ClSpecWhen.7"].assign[Helper.SpcReplace]]]></eval>
     </thing>
   <thing id="cPUPsiAff" name="Psicrystal Affinity" description="The aegis gains the Psicrystal Affinity feat as a bonus feat at 1st level. For the purposes of his psicrystal&apos;s abilities and the feat&apos;s prerequisites, the aegis&apos;s class level counts as his manifester level. This ability replaces one of the customization points gained at 1st level." compset="ClSpecial">
     <fieldval field="actName" value="Psicrystal Subsumed"/>
@@ -6815,17 +6818,15 @@ field[trkMax].value = field[abValue].value
 field[livename].text = "Tactical Suit (ML: " & myLvl & ")(" & field[abValue].value & "/day)"]]></eval>
     </thing>
   <thing id="arPUEctArt" name="Ectopic Artisan" description="A shaper and an aegis both use ectoplasm to achieve their desired goals. The rare aegis has learned to blend the tools of the shaper into his own skills, but by doing so he reduces the power of his astral suit. These ectopic artisans gain allies formed of ectoplasm to aid them in battle.{br}{br}{b}Class Skills:{/b} The ectopic adept gains Disable Device as a class skill." compset="ClassVary" uniqueness="unique">
+    <fieldval field="srcPageNum" value="263"/>
     <usesource source="pPsiUn"/>
-    <tag group="ClVaryName" tag="AppParen"/>
     <tag group="AbReplace" tag="cPUAstrRep"/>
     <tag group="AbReplace" tag="cPUAegDR"/>
     <tag group="AbReplace" tag="cPUReconfi"/>
     <tag group="AbReplace" tag="cPUCanniSu"/>
     <tag group="AbReplace" tag="cPUMastCr"/>
     <tag group="ClassSkill" tag="skDisable"/>
-    <bootstrap thing="cPEctopCre">
-      <autotag group="ClSpecWhen" tag="2"/>
-      </bootstrap>
+    <tag group="ClVaryName" tag="AppParen"/>
     <bootstrap thing="cPUAstrMan">
       <autotag group="ClSpecWhen" tag="1"/>
       </bootstrap>
@@ -6849,6 +6850,9 @@ field[livename].text = "Tactical Suit (ML: " & myLvl & ")(" & field[abValue].val
       </bootstrap>
     <bootstrap thing="cPUAstSwar">
       <autotag group="ClSpecWhen" tag="20"/>
+      </bootstrap>
+    <bootstrap thing="cPEctopCre">
+      <autotag group="ClSpecWhen" tag="2"/>
       </bootstrap>
     <link linkage="varies" thing="cHelpPU0"/>
     <eval phase="Final" priority="9999"><![CDATA[hero.childfound[cPUPerfMer].field[CustDesc].text = "An aegis of 20th level has learned to become one with his suit. His suit cannot be dispelled or removed against his will by any means, although his astral suit ability still does not function within areas where psionics do not work, such as a null psionics field.{br}{br}In addition, the aegis can spend two daily uses of his reconfigure ability, to alter all of the customizations on his astral suit."]]></eval>
@@ -6943,17 +6947,15 @@ field[trkMax].value = field[abValue].value
 field[livename].text = "Astral Swarm (" & field[abValue].value & "/day)"]]></eval>
     </thing>
   <thing id="arPUTrailb" name="Trailblazer" description="The trailblazer develops skills to aid him in tracking prey and avoiding obstacles, rather than in the learning how to manipulate and craft psionic items. He uses his astral suit to improve his ability to move and handle varied environments, in addition to its use as a form of protection. Where other hunters might find armor to be a hindrance, the trailblazer&apos;s astral suit is an asset, helping him to blend in with his surroundings.{br}{br}{b}Class Skills:{/b} A trailblazer adds Survival as a class skill, but does not count Use Magic Device as a class skill." compset="ClassVary" uniqueness="unique">
+    <fieldval field="srcPageNum" value="264"/>
     <usesource source="pPsiUn"/>
-    <tag group="ClVaryName" tag="AppParen"/>
     <tag group="ClassSkill" tag="skSurvival"/>
     <tag group="NotClassSk" tag="skUseMagic"/>
     <tag group="AbReplace" tag="cPUCraftsm"/>
     <tag group="AbReplace" tag="cPUReconfi"/>
     <tag group="AbReplace" tag="cPUAugSuit"/>
     <tag group="AbReplace" tag="cPUMastCr"/>
-    <bootstrap thing="cPUAegTrk">
-      <autotag group="ClSpecWhen" tag="2"/>
-      </bootstrap>
+    <tag group="ClVaryName" tag="AppParen"/>
     <bootstrap thing="cPURapAdj">
       <autotag group="ClSpecWhen" tag="3"/>
       </bootstrap>
@@ -6962,6 +6964,9 @@ field[livename].text = "Astral Swarm (" & field[abValue].value & "/day)"]]></eva
       </bootstrap>
     <bootstrap thing="cPUAegTrap">
       <autotag group="ClSpecWhen" tag="5"/>
+      </bootstrap>
+    <bootstrap thing="cPUAegTrk">
+      <autotag group="ClSpecWhen" tag="2"/>
       </bootstrap>
     <link linkage="varies" thing="cHelpPU0"/>
     </thing>
@@ -7103,21 +7108,22 @@ perform hero.child[xFly].assign[Maneuver.Perfect]]]></eval>
       </prereq>
     </thing>
   <thing id="arPUBruDis" name="Brutal Disruptor" description="Brutal disruptors do not simply see patterns, they focus their skills on destroying them. These cryptics tend to be imposing in demeanor and understand the patterns of their opponents to strike fear into their foes.\n\n{b}Skills:{/b} The brutal disruptor adds Intimidate (Cha) as a class skill and loses Disable Device." compset="ClassVary" uniqueness="unique">
+    <fieldval field="srcPageNum" value="264"/>
     <usesource source="pPsiUn"/>
-    <tag group="ClVaryName" tag="AppParen"/>
     <tag group="ClassSkill" tag="skIntim"/>
     <tag group="NotClassSk" tag="skDisable"/>
     <tag group="AbReplace" tag="cRogTrapfn"/>
     <tag group="AbReplace" tag="cPUTrapmak"/>
     <tag group="AbReplace" tag="cPUSwiftTr"/>
-    <bootstrap thing="cPUChanDis">
-      <autotag group="ClSpecWhen" tag="1"/>
-      </bootstrap>
+    <tag group="ClVaryName" tag="AppParen"/>
     <bootstrap thing="cPUIntPatt">
       <autotag group="ClSpecWhen" tag="1"/>
       </bootstrap>
     <bootstrap thing="cPUUnnerDi">
       <autotag group="ClSpecWhen" tag="6"/>
+      </bootstrap>
+    <bootstrap thing="cPUChanDis">
+      <autotag group="ClSpecWhen" tag="1"/>
       </bootstrap>
     <link linkage="varies" thing="cHelpPU1"/>
     </thing>
@@ -7140,7 +7146,7 @@ field[abValue].value += round(field[xTotalLev].value/2,0,-1)]]></eval>
     <usesource source="pPsiUn"/>
     </thing>
   <thing id="arPUCryDis" name="Distorter" description="Distorters understand that altering perception can truly alter reality if done right. These cryptics change the nature of the patterns around them to alter how other creatures see and interact with the world, rather than relying on mental manipulation like a telepath." compset="ClassVary" uniqueness="unique">
-    <arrayval field="cvCustTot" index="3" value="-1"/>
+    <fieldval field="srcPageNum" value="264"/>
     <arrayval field="cvCustTot" index="5" value="-1"/>
     <arrayval field="cvCustTot" index="7" value="-1"/>
     <arrayval field="cvCustTot" index="9" value="-2"/>
@@ -7149,14 +7155,12 @@ field[abValue].value += round(field[xTotalLev].value/2,0,-1)]]></eval>
     <arrayval field="cvCustTot" index="15" value="-2"/>
     <arrayval field="cvCustTot" index="17" value="-2"/>
     <arrayval field="cvCustTot" index="19" value="-2"/>
+    <arrayval field="cvCustTot" index="3" value="-1"/>
     <usesource source="pPsiUn"/>
-    <tag group="AbReplace" tag="cPUScribTa"/>
     <tag group="NotClassSk" tag="skDisable"/>
     <tag group="ClVaryName" tag="AppParen"/>
     <tag group="ClassSkill" tag="skIntim"/>
-    <bootstrap thing="cPUAltApp">
-      <autotag group="ClSpecWhen" tag="1"/>
-      </bootstrap>
+    <tag group="AbReplace" tag="cPUScribTa"/>
     <bootstrap thing="cPUBlurPa">
       <autotag group="ClSpecWhen" tag="14"/>
       </bootstrap>
@@ -7165,6 +7169,9 @@ field[abValue].value += round(field[xTotalLev].value/2,0,-1)]]></eval>
       </bootstrap>
     <bootstrap thing="cPUWarPer">
       <autotag group="ClSpecWhen" tag="4"/>
+      </bootstrap>
+    <bootstrap thing="cPUAltApp">
+      <autotag group="ClSpecWhen" tag="1"/>
       </bootstrap>
     <link linkage="varies" thing="cHelpPU1"/>
     </thing>
@@ -7187,7 +7194,7 @@ field[abValue].value += round(field[xTotalLev].value/2,0,-1)]]></eval>
     </thing>
   <thing id="arPUCryGra" name="Grammaton" description="For some cryptics, the way bullets travel through the air is a special pattern that can be used and manipulated for deadly attacks and abilities. These grammatons use handguns to destroy patterns and enemies alike.\n\n{b}Weapon and Armor Proficiency:{/b} Grammatons are proficient with all simple weapons, firearms, plus the rapier and shortbow. Grammatons are proficient with light armor but not with shields." compset="ClassVary" uniqueness="unique">
     <fieldval field="cvSpec5thS" value="Deed"/>
-    <arrayval field="cvCustTot" index="3" value="-1"/>
+    <fieldval field="srcPageNum" value="265"/>
     <arrayval field="cvCustTot" index="5" value="-2"/>
     <arrayval field="cvCustTot" index="7" value="-2"/>
     <arrayval field="cvCustTot" index="9" value="-2"/>
@@ -7197,10 +7204,28 @@ field[abValue].value += round(field[xTotalLev].value/2,0,-1)]]></eval>
     <arrayval field="cvCustTot" index="17" value="-2"/>
     <arrayval field="cvCustTot" index="19" value="-2"/>
     <arrayval field="cvCust5Tot" index="5" value="1"/>
+    <arrayval field="cvPsiPowTo" index="6" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="7" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="8" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="9" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="10" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="11" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="12" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="13" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="14" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="15" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="16" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="17" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="18" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="19" value="-1"/>
+    <arrayval field="cvCustTot" index="3" value="-1"/>
     <usesource source="pPsiUn"/>
-    <tag group="AbReplace" tag="cPUScribTa"/>
     <tag group="ClVaryName" tag="AppParen"/>
     <tag group="AbReplace" tag="cPUCrHideP"/>
+    <tag group="AbReplace" tag="cPUScribTa"/>
+    <bootstrap thing="cPUGunKata">
+      <autotag group="ClSpecWhen" tag="10"/>
+      </bootstrap>
     <bootstrap thing="cPUAvoAtt">
       <autotag group="ClSpecWhen" tag="19"/>
       </bootstrap>
@@ -7233,9 +7258,6 @@ field[abValue].value += round(field[xTotalLev].value/2,0,-1)]]></eval>
       </bootstrap>
     <bootstrap thing="cPUAvoAtt">
       <autotag group="ClSpecWhen" tag="17"/>
-      </bootstrap>
-    <bootstrap thing="cPUGunKata">
-      <autotag group="ClSpecWhen" tag="10"/>
       </bootstrap>
     <link linkage="varies" thing="cHelpPU1"/>
     <eval phase="PreLevel" priority="10000"><![CDATA[#appenddesc[cPUDisPatt,"{b}Grammaton:{/b} The grammaton is only able to use the disrupt pattern ability when making ranged attacks with a handgun."]]]></eval>
@@ -7393,5 +7415,324 @@ field[abSumm].text = "Gain total concealment (50% miss chance) for " & #attrmod[
     </thing>
   <thing id="cPUGunKata" name="Gun Katas" description="Starting at 10th level, the grammatons learns how to channel her disrupt pattern into vicious melee attacks through her guns. She can use her guns to perform melee attacks that deal 1d6 points of bludgeoning damage plus the base disrupt pattern damage, with a critical multiplier of 20/x2. The damage from enhanced disruption is not included in these attacks. This use of disrupt pattern is not limited to once per round.{br}{br}For each successful melee attack made with a handgun, if that gun is loaded, the grammatons can make a free ranged attack with that handgun against the creature struck. These ranged touch attacks do not provoke attacks of opportunity. This ability replaces Hide in Plain Sight." compset="ClSpecial">
     <usesource source="pPsiUn"/>
+    </thing>
+  <thing id="arPULstMnd" name="Lost Mind" description="You have seen the patterns inherent in the void, the meaning that hides inside the emptiness of every pattern. Your gaze has lingered upon the twisting tunnels of nothingness that permeates the space between the stars, and you have gazed upon a terrible beauty. In your mind stands a forest of dark trees, endless, their glass-leaves glittering with untold secrets, their bark the wishful thinking of the mad. You are lost in a maze of wonders, their inconceivable, unbelievable notions made real. You tug at the patterns that hold the world together and laugh as it all unravels in a beautiful dance of destruction.\n\n{b}Powers Known:{/b} The lost mind gains {i}know direction and location{/i} as a talent at 1st level." compset="ClassVary" uniqueness="unique">
+    <fieldval field="srcPageNum" value="265"/>
+    <arrayval field="cvPsiPowTo" index="12" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="13" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="14" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="15" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="16" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="17" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="18" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="19" value="-1"/>
+    <arrayval field="cvCustTot" index="11" value="-1"/>
+    <arrayval field="cvCustTot" index="13" value="-1"/>
+    <arrayval field="cvCustTot" index="15" value="-1"/>
+    <arrayval field="cvCustTot" index="17" value="-1"/>
+    <arrayval field="cvCustTot" index="19" value="-1"/>
+    <arrayval field="cvPsiPowTo" index="11" value="-1"/>
+    <usesource source="pPsiUn"/>
+    <tag group="AbReplace" tag="cPUTrapmak"/>
+    <tag group="ClVaryName" tag="AppParen"/>
+    <tag group="AbReplace" tag="cRogTrapfn"/>
+    <tag group="AbReplace" tag="cPUCrHideP"/>
+    <bootstrap thing="cPUInsMadm">
+      <autotag group="ClSpecWhen" tag="1"/>
+      </bootstrap>
+    <bootstrap thing="cPUDecSec">
+      <autotag group="ClSpecWhen" tag="1"/>
+      </bootstrap>
+    <bootstrap thing="cPUProtIns">
+      <autotag group="ClSpecWhen" tag="10"/>
+      </bootstrap>
+    <bootstrap thing="cPUSymVoid">
+      <autotag group="ClSpecWhen" tag="12"/>
+      </bootstrap>
+    <bootstrap thing="puKnowDL1">
+      <autotag group="SpellType" tag="cHelpPU1"/>
+      </bootstrap>
+    <link linkage="varies" thing="cHelpPU1"/>
+    </thing>
+  <thing id="cPUInsMadm" name="Insight of the Madman" description="The lost mind&apos;s thoughts grant him unusual intuitive ability. He gains a bonus to Perception and Sense Motive equal to 1/2 his class level (minimum +1). This ability replaces trapfinding." compset="ClSpecial" summary="Gain a bonus to Perception or Sense Motive.">
+    <usesource source="pPsiUn"/>
+    <eval phase="PostLevel" priority="10000"><![CDATA[
+      ~ If we're not shown, just get out now
+      doneif (tagis[Helper.ShowSpec] = 0)
+
+      ~ If we're disabled, do nothing
+      doneif (tagis[Helper.SpcDisable] <> 0)
+
+      ~ Only do it for the first copy.
+      doneif (tagis[Helper.FirstCopy] = 0)
+
+      ~ our bonus is level /2, min 1
+      field[abValue].value += maximum(round(field[xAllLev].value / 2,0,-1),1)
+      field[livename].text = field[thingname].text & " " & signed(field[abValue].value)
+
+      #skillbonus[skPercep] += field[abValue].value
+      #skillbonus[skSenseMot] += field[abValue].value]]></eval>
+    </thing>
+  <thing id="cPUDecSec" name="Decipher Secrets" description="The lost mind&apos;s glimpse into the void has allowed him to see the patterns in all writing, granting him a bonus on Linguistics checks to decipher a writing equal to his class level. This ability replaces trapmaker." compset="ClSpecial" summary="Gain a bonus to decipher writings.">
+    <usesource source="pPsiUn"/>
+    <eval phase="PostLevel" priority="10000"><![CDATA[
+      ~ If we're not shown, just get out now
+      doneif (tagis[Helper.ShowSpec] = 0)
+
+      ~ If we're disabled, do nothing
+      doneif (tagis[Helper.SpcDisable] <> 0)
+
+      ~ Only do it for the first copy.
+      doneif (tagis[Helper.FirstCopy] = 0)
+
+      ~ our bonus is level
+      field[abValue].value += field[xAllLev].value
+
+      #situational[hero.child[skLinguist],signed(field[abValue].value) & " to decipher writings.",field[thingname].text]]]></eval>
+    </thing>
+  <thing id="cPUProtIns" name="Protection of Insanity" description="At 10th level, the lost mind&apos;s glimpse into the insanity of the void grants him a protection against effects that would otherwise alter his mind. The lost mind gains a bonus equal to his Intelligence modifier on any saving throw to avoid being confused or on the Intelligence check to escape a {i}maze{/i} or similar effect. This effectively means the lost mind adds his Intelligence modifier twice on the Intelligence check for {i}maze{/i} (once for a standard Intelligence check, once from protection from insanity). This ability replaces hide in plain sight." compset="ClSpecial" summary="+ INT bonus to avoid being confused or to escape a {i}maze{/i} or similar effect.">
+    <usesource source="pPsiUn"/>
+    <tag group="AbilType" tag="Super"/>
+    </thing>
+  <thing id="cPUSymVoid" name="Symbols of the Void" description="At 12th level, lost mind gains the ability to manifest the following spells as powers of the same level, even if he would not normally be able to manifest powers of that level. The lost mind&apos;s manifester level must be at least double the power level to manifest the spell (for example, to manifest {i}symbol of persuasion{/i}, the lost mind must have a cryptic manifester level of at least 12).{br}{br}\n5th - {i}Symbol of Sleep, Symbol of Pain{/i} \n6th - {i}Symbol of Persuasion{/i} \n7th - {i}Symbol of Stunning{/i} \n8th - {i}Symbol of Insanity, Symbol of Death{/i}\n \nThis ability replaces the insight and power known normally gained at 12th level." compset="ClSpecial">
+    <usesource source="pPsiUn"/>
+    <tag group="AbilType" tag="Super"/>
+    <bootstrap thing="psSymSle5">
+      <containerreq phase="First" priority="500"><![CDATA[count:Classes.Cryptic >= 10]]></containerreq>
+      <autotag group="SpellType" tag="cHelpPU1"/>
+      </bootstrap>
+    <bootstrap thing="psSymPai5">
+      <containerreq phase="First" priority="500"><![CDATA[count:Classes.Cryptic >= 10]]></containerreq>
+      <autotag group="SpellType" tag="cHelpPU1"/>
+      </bootstrap>
+    <bootstrap thing="psSymPer6">
+      <containerreq phase="First" priority="500"><![CDATA[count:Classes.Cryptic >= 12]]></containerreq>
+      <autotag group="SpellType" tag="cHelpPU1"/>
+      </bootstrap>
+    <bootstrap thing="psSymStu7">
+      <containerreq phase="First" priority="500"><![CDATA[count:Classes.Cryptic >= 14]]></containerreq>
+      <autotag group="SpellType" tag="cHelpPU1"/>
+      </bootstrap>
+    <bootstrap thing="psSymIns8">
+      <containerreq phase="First" priority="500"><![CDATA[count:Classes.Cryptic >= 16]]></containerreq>
+      <autotag group="SpellType" tag="cHelpPU1"/>
+      </bootstrap>
+    <bootstrap thing="psSymDea8">
+      <containerreq phase="First" priority="500"><![CDATA[count:Classes.Cryptic >= 16]]></containerreq>
+      <autotag group="SpellType" tag="cHelpPU1"/>
+      </bootstrap>
+    </thing>
+  <thing id="cPUInsDaD" name="Disrupt and Dismay" description="When the lost mind uses his disrupt pattern ability, the creature struck must make a successful Will save (DC 10 + 1/2 the cryptic&apos;s level + the cryptic&apos;s Intelligence modifier) or be shaken for a number of rounds equal to the lost mind&apos;s Intelligence modifier. This is a mind-affecting fear effect." compset="CustomSpec" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="SpecSource" tag="cHelpPU1"/>
+    <tag group="StandardDC" tag="aINT"/>
+    <tag group="abSave" tag="WillNeg"/>
+    <exprreq message="Lost Mind archetype required."><![CDATA[#hasarchetype[arPULstMnd] <> 0]]></exprreq>
+    </thing>
+  <thing id="cPUInsDDo" name="Disrupt and Disorient" description="When the lost mind uses his disrupt pattern ability, the creature struck must make a successful Will save (DC 10 + 1/2 the cryptic&apos;s level + the cryptic&apos;s Intelligence modifier) or be confused for a number of rounds equal to the lost mind&apos;s Intelligence modifier. Once targeted by this ability, a creature cannot be affected by it for 24 hours. This is a mind-affecting fear effect. The lost mind must be at least 8th level before selecting this insight." compset="CustomSpec" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="SpecSource" tag="cHelpPU1"/>
+    <tag group="StandardDC" tag="aINT"/>
+    <tag group="abSave" tag="WillNeg"/>
+    <exprreq message="Lost Mind archetype required."><![CDATA[#hasarchetype[arPULstMnd] <> 0]]></exprreq>
+    <prereq message="Cryptic level 8 or higher required.">
+      <validate><![CDATA[validif (#levelcount[Cryptic] >= 8)]]></validate>
+      </prereq>
+    </thing>
+  <thing id="cPUInsEntM" name="Enter My Mind" description="The lost mind gains {i}mindlink{/i} as a psi-like ability with a manifester level equal to the lost mind&apos;s manifester level usable a number of times per day equal to 3 + the lost mind&apos;s Intelligence modifier. If the target is unwilling and it fails the saving throw, it is shaken for a number of rounds equal to the lost mind&apos;s Intelligence modifier." compset="CustomSpec" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="SpecSource" tag="cHelpPU1"/>
+    <tag group="StandardDC" tag="aINT"/>
+    <tag group="abSave" tag="WillNeg"/>
+    <tag group="AbilType" tag="PsiLike"/>
+    <exprreq message="Lost Mind archetype required."><![CDATA[#hasarchetype[arPULstMnd] <> 0]]></exprreq>
+    </thing>
+  <thing id="cPUInsGazB" name="Gaze From Beyond" description="By expending his psionic focus, the lost mind reveals the true depth of his insanity, inviting all those that meet his gaze to screamingly follow his path. For 1 round, the lost mind&apos;s disrupt pattern becomes a gaze effect and allows a Will save (DC 10 + 1/2 the lost mind&apos;s level + the lost mind&apos;s Intelligence modifier). Those that make the save are shaken for one round, while those that fail the save take damage from the disrupt pattern effect and are confused for one round." compset="CustomSpec" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="SpecSource" tag="cHelpPU1"/>
+    <tag group="StandardDC" tag="aINT"/>
+    <tag group="abSave" tag="WillPart"/>
+    <exprreq message="Lost Mind archetype required."><![CDATA[#hasarchetype[arPULstMnd] <> 0]]></exprreq>
+    </thing>
+  <thing id="cPUInsNiFl" name="Nightmare Made Flesh" description="The lost mind adds {i}form of doom{/i} to his list of powers known. In addition, the lost mind can manifest {i}form of doom{/i} once per day without paying its power point cost, but when used in this fashion the power cannot be augmented. The lost mind must be at least 16th level to select this insight." compset="CustomSpec" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="SpecSource" tag="cHelpPU1"/>
+    <tag group="StandardDC" tag="aINT"/>
+    <tag group="abSave" tag="WillNeg"/>
+    <bootstrap thing="puForDoom6">
+      <containerreq phase="First" priority="500"><![CDATA[count:Classes.Cryptic >= 16]]></containerreq>
+      <autotag group="SpellType" tag="cHelpPU1"/>
+      </bootstrap>
+    <exprreq message="Lost Mind archetype required."><![CDATA[#hasarchetype[arPULstMnd] <> 0]]></exprreq>
+    <prereq message="Cryptic level 16 or higher required.">
+      <validate><![CDATA[validif (#levelcount[Cryptic] >= 16)]]></validate>
+      </prereq>
+    </thing>
+  <thing id="cPUInsOvDi" name="Overwhelming Disruption" description="When the lost mind uses his disrupt pattern ability, the creature struck must make a Fortitude save (DC 10 + 1/2 the cryptic&apos;s level + the cryptic&apos;s Intelligence modifier) or be paralyzed for a number of rounds equal to the cryptic&apos;s Intelligence modifier. Once targeted by this ability, a creature cannot be affected by it for 24 hours. The lost mind must be at least 12th level before selecting this insight." compset="CustomSpec" uniqueness="unique">
+    <usesource source="pPsiUn"/>
+    <tag group="SpecSource" tag="cHelpPU1"/>
+    <tag group="StandardDC" tag="aINT"/>
+    <tag group="abSave" tag="WillNeg"/>
+    <exprreq message="Lost Mind archetype required."><![CDATA[#hasarchetype[arPULstMnd] <> 0]]></exprreq>
+    <prereq message="Cryptic level 12 or higher required.">
+      <validate><![CDATA[validif (#levelcount[Cryptic] >= 12)]]></validate>
+      </prereq>
+    </thing>
+  <thing id="psSymPai5" name="Symbol of Pain" description="This power functions like {i}symbol of death{/i}, except that each creature within the radius of a symbol of pain instead suffers wracking pains that impose a -4 penalty on attack rolls, skill checks, and ability checks. These effects last for 1 hour after the creature moves farther than 60 feet from the symbol. Unlike {i}symbol of death{/i}, symbol of pain has no hit point limit; once triggered, a symbol of pain simply remains active for 10 minutes per caster level.\n\nNote: Magic traps such as symbol of pain are hard to detect and disable. A rogue (only) can use the Perception skill to find a symbol of pain and Disable Device to thwart it. The DC in each case is 25 + spell level, or 30 for symbol of pain." compset="PsiPower">
+    <fieldval field="sRange" value="0 ft.; see text"/>
+    <fieldval field="sEffect" value="One symbol"/>
+    <fieldval field="sDuration" value="See text"/>
+    <fieldval field="sSave" value="Fortitude negates"/>
+    <fieldval field="sResist" value="Yes"/>
+    <usesource source="pPsiUn"/>
+    <tag group="PsiEff" tag="NegSkill"/>
+    <tag group="DescInfo" tag="spSymbDea8"/>
+    <tag group="sLevel" tag="5"/>
+    <tag group="sCastTime" tag="Minute10"/>
+    <tag group="PsiEff" tag="MiscWrite"/>
+    <tag group="sDuration" tag="SeeText"/>
+    <tag group="sSave" tag="FortNeg"/>
+    <tag group="sDescript" tag="Evil"/>
+    <tag group="PsiEff" tag="NegAtk"/>
+    <tag group="sResist" tag="Yes"/>
+    </thing>
+  <thing id="psSymSle5" name="Symbol of Sleep" description="This spell functions like {i}symbol of death{/i}, except that all creatures of 10 HD or less within 60 feet of the symbol of sleep instead fall into a catatonic slumber for 3d6 x 10 minutes. Unlike with the sleep spell, sleeping creatures cannot be awakened by nonmagical means before this time expires. Unlike {i}symbol of death{/i}, symbol of sleep has no hit point limit; once triggered, a symbol of sleep simply remains active for 10 minutes per caster level.\n\nNote: Magic traps such as symbol of sleep are hard to detect and disable. A rogue (only) can use the Perception skill to find a symbol of sleep and Disable Device to thwart it. The DC in each case is 25 + spell level, or 30 for symbol of sleep." compset="PsiPower">
+    <fieldval field="sRange" value="0 ft.; see text"/>
+    <fieldval field="sEffect" value="One symbol"/>
+    <fieldval field="sDuration" value="See text"/>
+    <fieldval field="sSave" value="Will negates"/>
+    <fieldval field="sResist" value="Yes"/>
+    <usesource source="pPsiUn"/>
+    <tag group="PsiEff" tag="NegSkill"/>
+    <tag group="DescInfo" tag="spSymbDea8"/>
+    <tag group="sLevel" tag="5"/>
+    <tag group="sCastTime" tag="Minute10"/>
+    <tag group="PsiEff" tag="MiscWrite"/>
+    <tag group="sDuration" tag="SeeText"/>
+    <tag group="sDescript" tag="Evil"/>
+    <tag group="PsiEff" tag="NegAtk"/>
+    <tag group="sResist" tag="Yes"/>
+    <tag group="sSave" tag="WillNeg"/>
+    </thing>
+  <thing id="psSymPer6" name="Symbol of Persuasion" description="This spell functions like {i}symbol of death{/i}, except that all creatures within the radius of a symbol of persuasion instead become charmed by the caster (as the charm monster spell) for 1 hour per caster level. Unlike {i}symbol of death{/i}, symbol of persuasion has no hit point limit; once triggered, a symbol of persuasion simply remains active for 10 minutes per caster level.\n\nNote: Magic traps such as symbol of persuasion are hard to detect and disable. A rogue (only) can use the Perception skill to find a symbol of persuasion and Disable Device to thwart it. The DC in each case is 25 + spell level, or 31 for symbol of persuasion." compset="PsiPower">
+    <fieldval field="sRange" value="0 ft.; see text"/>
+    <fieldval field="sEffect" value="One symbol"/>
+    <fieldval field="sDuration" value="See text"/>
+    <fieldval field="sSave" value="Will negates"/>
+    <fieldval field="sResist" value="Yes"/>
+    <usesource source="pPsiUn"/>
+    <tag group="PsiEff" tag="NegSkill"/>
+    <tag group="DescInfo" tag="spSymbDea8"/>
+    <tag group="sLevel" tag="6"/>
+    <tag group="sCastTime" tag="Minute10"/>
+    <tag group="PsiEff" tag="MiscWrite"/>
+    <tag group="sDuration" tag="SeeText"/>
+    <tag group="sDescript" tag="Evil"/>
+    <tag group="PsiEff" tag="NegAtk"/>
+    <tag group="sResist" tag="Yes"/>
+    <tag group="sSave" tag="WillNeg"/>
+    </thing>
+  <thing id="psSymStu7" name="Symbol of Stunning" description="This spell functions like {i}symbol of death{/i}, except that all creatures within 60 feet of a symbol of stunning instead become stunned for 1d6 rounds.\n\nNote: Magic traps such as symbol of stunning are hard to detect and disable. A rogue (only) can use the Perception skill to find a symbol of stunning and Disable Device to thwart it. The DC in each case is 25 + spell level, or 32 for symbol of stunning." compset="PsiPower">
+    <fieldval field="sRange" value="0 ft.; see text"/>
+    <fieldval field="sEffect" value="One symbol"/>
+    <fieldval field="sDuration" value="See text"/>
+    <fieldval field="sSave" value="Will negates"/>
+    <fieldval field="sResist" value="Yes"/>
+    <usesource source="pPsiUn"/>
+    <tag group="PsiEff" tag="NegSkill"/>
+    <tag group="DescInfo" tag="spSymbDea8"/>
+    <tag group="sLevel" tag="7"/>
+    <tag group="sCastTime" tag="Minute10"/>
+    <tag group="PsiEff" tag="MiscWrite"/>
+    <tag group="sDuration" tag="SeeText"/>
+    <tag group="sDescript" tag="Evil"/>
+    <tag group="PsiEff" tag="NegAtk"/>
+    <tag group="sResist" tag="Yes"/>
+    <tag group="sSave" tag="WillNeg"/>
+    </thing>
+  <thing id="psSymIns8" name="Symbol of Insanity" description="This spell functions like {i}symbol of death{/i}, except that all creatures within the radius of the symbol of insanity instead become permanently insane (as the insanity spell). Unlike {i}symbol of death{/i}, symbol of insanity has no hit point limit; once triggered, a symbol of insanity simply remains active for 10 minutes per caster level.\n\nNote: Magic traps such as symbol of insanity are hard to detect and disable. A rogue (only) can use the Perception skill to find a symbol of insanity and Disable Device to thwart it. The DC in each case is 25 + spell level, or 33 for symbol of insanity." compset="PsiPower">
+    <fieldval field="sRange" value="0 ft.; see text"/>
+    <fieldval field="sEffect" value="One symbol"/>
+    <fieldval field="sDuration" value="See text"/>
+    <fieldval field="sSave" value="Will negates"/>
+    <fieldval field="sResist" value="Yes"/>
+    <usesource source="pPsiUn"/>
+    <tag group="PsiEff" tag="NegSkill"/>
+    <tag group="DescInfo" tag="spSymbDea8"/>
+    <tag group="sLevel" tag="8"/>
+    <tag group="sCastTime" tag="Minute10"/>
+    <tag group="PsiEff" tag="MiscWrite"/>
+    <tag group="sDuration" tag="SeeText"/>
+    <tag group="sDescript" tag="Evil"/>
+    <tag group="PsiEff" tag="NegAtk"/>
+    <tag group="sResist" tag="Yes"/>
+    <tag group="sSave" tag="WillNeg"/>
+    </thing>
+  <thing id="psSymDea8" name="Symbol of Death" description="This spell allows you to scribe a potent rune of power upon a surface. When triggered, a {i}symbol of death{/i} kills one or more creatures within 60 feet of the symbol (treat as a burst) whose combined total current hit points do not exceed 150. The {i}symbol of death{/i} affects the closest creatures first, skipping creatures with too many hit points to affect. Once triggered, the {i}symbol{/i} becomes active and glows, lasting for 10 minutes per caster level or until it has affected 150 hit points&apos; worth of creatures, whichever comes first. A creature that enters the area while the {i}symbol of death{/i} is active is subject to its effect, whether or not that creature was in the area when it was triggered. A creature need save against the {i}symbol{/i} only once as long as it remains within the area, though if it leaves the area and returns while the {i}symbol{/i} is still active, it must save again.\n\nUntil it is triggered, the {i}symbol of death{/i} is inactive (though visible and legible at a distance of 60 feet). To be effective, a {i}symbol of death{/i} must always be placed in plain sight and in a prominent location. Covering or hiding the rune renders the {i}symbol of death{/i} ineffective, unless a creature removes the covering, in which case the {i}symbol of death{/i} works normally.\n\nAs a default, a {i}symbol of death{/i} is triggered whenever a creature does one or more of the following, as you select: looks at the rune; reads the rune; touches the rune; passes over the rune; or passes through a portal bearing the rune. Regardless of the trigger method or methods chosen, a creature more than 60 feet from a {i}symbol of death{/i} can&apos;t trigger it (even if it meets one or more of the triggering conditions, such as reading the rune). Once the spell is cast, a {i}symbol of death{/i}&apos;s triggering conditions cannot be changed.\n\nIn this case, &quot;reading&quot; the rune means any attempt to study it, identify it, or fathom its meaning. Throwing a cover over a {i}symbol of death{/i} to render it inoperative triggers it if the symbol reacts to touch. You can&apos;t use a {i}symbol of death{/i} offensively; for instance, a touch-triggered {i}symbol of death{/i} remains untriggered if an item bearing the {i}symbol of death{/i} is used to touch a creature. Likewise, a {i}symbol of death{/i} cannot be placed on a weapon and set to activate when the weapon strikes a foe.\n\nYou can also set special triggering limitations of your own. These can be as simple or elaborate as you desire. Special conditions for triggering a {i}symbol of death{/i} can be based on a creature&apos;s name, identity, or alignment, but otherwise must be based on observable actions or qualities. Intangibles such as level, class, HD, and hit points don&apos;t qualify.\n\nWhen scribing a {i}symbol of death{/i}, you can specify a password or phrase that prevents a creature using it from triggering the symbol&apos;s effect. Anyone using the password remains immune to that particular rune&apos;s effects so long as the creature remains within 60 feet of the rune. If the creature leaves the radius and returns later, it must use the password again.\n\nYou also can attune any number of creatures to the {i}symbol of death{/i}, but doing this can extend the casting time. Attuning one or two creatures takes negligible time, and attuning a small group (as many as 10 creatures) extends the casting time to 1 hour. Attuning a large group (as many as 25 creatures) takes 24 hours. Attuning larger groups takes an additional 24 hours per 25 creatures. Any creature attuned to a {i}symbol of death{/i} cannot trigger it and is immune to its effects, even if within its radius when it is triggered. You are automatically considered attuned to your own {i}symbols of death{/i}, and thus always ignore the effects and cannot inadvertently trigger them.\n\n{i}Read magic{/i} allows you to identify a {i}symbol{/i} with a Spellcraft check (DC 10 + the {i}symbol&apos;s{/i} spell level). Of course, if the {i}symbol{/i} is set to be triggered by reading it, this will trigger the symbol.\n\nA {i}symbol of death{/i} can be removed by a successful {i}dispel magic{/i} targeted solely on the rune. An {i}erase{/i} spell has no effect on a {i}symbol of death{/i}. Destruction of the surface where a {i}symbol of death{/i} is inscribed destroys the {i}symbol{/i} but also triggers it.\n\n{i}Symbol of death{/i} can be made permanent with a {i}permanency{/i} spell. A permanent {i}symbol of death{/i} that is disabled or has affected its maximum number of hit points becomes inactive for 10 minutes, but then can be triggered again as normal.\n\n{i}Note{/i}: Magic traps such as {i}symbol of death{/i} are hard to detect and disable. A rogue (only) can use the Perception skill to find a {i}symbol of death{/i} and Disable Device to thwart it. The DC in each case is 25 + spell level, or 33 for {i}symbol of death{/i}." compset="PsiPower">
+    <fieldval field="sRange" value="0 ft.; see text"/>
+    <fieldval field="sEffect" value="One symbol"/>
+    <fieldval field="sDuration" value="See text"/>
+    <fieldval field="sSave" value="Will negates"/>
+    <fieldval field="sResist" value="Yes"/>
+    <usesource source="pPsiUn"/>
+    <tag group="PsiEff" tag="NegSkill"/>
+    <tag group="sLevel" tag="8"/>
+    <tag group="sCastTime" tag="Minute10"/>
+    <tag group="PsiEff" tag="MiscWrite"/>
+    <tag group="sDuration" tag="SeeText"/>
+    <tag group="sDescript" tag="Evil"/>
+    <tag group="PsiEff" tag="NegAtk"/>
+    <tag group="sResist" tag="Yes"/>
+    <tag group="sSave" tag="WillNeg"/>
+    </thing>
+  <thing id="arPUPattBr" name="Pattern Breaker" description="A pattern is only as strong as its weakest link, and pattern breakers have learned to find that link and exploit it. These cryptics excel at disabling patterns or destroying them entirely." compset="ClassVary" uniqueness="unique">
+    <fieldval field="srcPageNum" value="266"/>
+    <arrayval field="cvCustTot" index="1" value="-1"/>
+    <arrayval field="cvCustTot" index="3" value="-1"/>
+    <arrayval field="cvCustTot" index="5" value="-1"/>
+    <arrayval field="cvCustTot" index="7" value="-1"/>
+    <arrayval field="cvCustTot" index="9" value="-1"/>
+    <arrayval field="cvCustTot" index="11" value="-1"/>
+    <arrayval field="cvCustTot" index="13" value="-1"/>
+    <arrayval field="cvCustTot" index="15" value="-2"/>
+    <arrayval field="cvCustTot" index="17" value="-2"/>
+    <arrayval field="cvCustTot" index="19" value="-2"/>
+    <usesource source="pPsiUn"/>
+    <tag group="ClVaryName" tag="AppParen"/>
+    <tag group="AbReplace" tag="cPUHiddenP"/>
+    <tag group="AbReplace" tag="cPUSwiftTr"/>
+    <bootstrap thing="cPUDisLock">
+      <autotag group="ClSpecWhen" tag="2"/>
+      </bootstrap>
+    <bootstrap thing="cPUDisWA">
+      <autotag group="ClSpecWhen" tag="6"/>
+      </bootstrap>
+    <bootstrap thing="cPUSundPat">
+      <autotag group="ClSpecWhen" tag="2"/>
+      </bootstrap>
+    <bootstrap thing="cPUDisAura">
+      <autotag group="ClSpecWhen" tag="16"/>
+      </bootstrap>
+    <link linkage="varies" thing="cHelpPU1"/>
+    </thing>
+  <thing id="cPUDisLock" name="Disable Lock" description="A 2nd level pattern breaker gains the ability to disable a lock a number of times per day equal to 3 + her Intelligence modifier. Using this ability is a standard action with a range of 30 ft. The pattern breaker makes a manifester level check with a +10 bonus against the DC of the lock. If the check is successful, the pattern breaker successfully opens the lock. This replaces the insight normally gained at 2nd level, but counts as having the insight class feature for the purposes of prerequisites." compset="ClSpecial">
+    <fieldval field="abRange" value="30"/>
+    <usesource source="pPsiUn"/>
+    <tag group="ChargeAttr" tag="aINT"/>
+    <tag group="Usage" tag="Day"/>
+    <tag group="ChargeCalc" tag="AttrUses3"/>
+    <tag group="abRange" tag="Feet"/>
+    <tag group="AbilType" tag="Super"/>
+    </thing>
+  <thing id="cPUSundPat" name="Sunder Pattern" description="At 2nd level, the pattern breaker gains a bonus on sunder attempts equal to half her class level. This replaces hidden pattern." compset="ClSpecial">
+    <usesource source="pPsiUn"/>
+    </thing>
+  <thing id="cPUDisWA" name="Disable Weapon or Armor" description="Starting at 6th level, the pattern breaker has learned to temporarily suppress the magical qualities of a weapon or armor with a touch. As a melee touch attack that does not provoke attacks of opportunity, the pattern breaker can target one magical weapon or armor on a creature. If the attack is successful, the pattern breaker makes a manifester level check against a DC of 11 + the manifester level of the item. If the manifester level check is successful, all magical or psionic qualities of the item are suppressed for a number of rounds equal to the pattern breaker&apos;s Intelligence modifier. There is no limit to the number of items the pattern breaker can affect, although she can only affect one per use. This ability replaces swift trapper." compset="ClSpecial">
+    <usesource source="pPsiUn"/>
+    <tag group="AbilType" tag="Super"/>
+    </thing>
+  <thing id="cPUDisAura" name="Disabling Aura" description="Starting at 16th level, the pattern breaker can expend her psionic focus as full round action to suppress only harmful effects around her in a 5 ft. aura for a number of rounds equal to her Intelligence modifier. This functions similar to {i}null psionics field{/i}, but it only affects harmful effects. This includes suppressing magical or psionic weapons being used in attacks against the pattern breaker, although such items would still work against other targets. The pattern breaker does not need to be aware of the effect to be suppressed. This ability replaces the insight normally gained at 16th level." compset="ClSpecial">
+    <usesource source="pPsiUn"/>
+    <tag group="abAction" tag="FullRd"/>
     </thing>
   </document>
