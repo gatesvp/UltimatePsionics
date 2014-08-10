@@ -2,7 +2,7 @@
 <document signature="Hero Lab Data">
   <fileinfo>
     <info_author>TCArknight</info_author>
-  </fileinfo>
+    </fileinfo>
   <thing id="skPUAhypno" name="Autohypnosis" description="You have trained your mind to gain mastery over your body and the mind&apos;s own deepest capabilities.\n\n{b}Check:{/b} The DC and the effect of a successful check depend on the task you attempt.\n\n{b}Task                               DC{/b}\nIgnore caltrop wound   18\nMemorize                        15\nResist dying                    15\nResist fear                       Fear effect DC\nTolerate poison              Poison&apos;s DC\n{tr}Willpower                                20" compset="Skill" uniqueness="unique">
     <usesource source="pPsiUn"/>
     <tag group="Helper" tag="TrainOnly"/>
@@ -16,4 +16,4 @@
     <tag group="Helper" tag="SkCatKnow" name="Knowledge Skill" abbrev="Knowledge Skill"/>
     <link linkage="skillattr" thing="aINT"/>
     </thing>
-</document>
+  </document>

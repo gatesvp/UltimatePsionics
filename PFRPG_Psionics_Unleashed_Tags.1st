@@ -35,12 +35,17 @@ January 30, 2014 Tim Shadow
     <value id="PathSec"     name="Secondary Path"/>
   </group>
 
-  <!-- Psychic Warrior Path Class Skill tags -->
-  <group id="PathSkill" name="PsyWarrior PathSkill" inherit="ClassSkill">
+  <!-- Psychic Warrior Path Class Skill tags 
+  **** Important Note****
+  Any new skills added into the PFRPG_Psionics_Unleashed_Skills.user file must have its tag manually loaded here.
+  -->
+    <group id="PathSkill" name="PsyWarrior PathSkill" inherit="ClassSkill">
     <value id="Craft"       name="All Craft Skills"/>
     <value id="Knowledge"   name="All Knowledge Skills"/>
     <value id="Perform"     name="All Perform Skills"/>
     <value id="Profession"  name="All Profession Skills"/>
+    <value id="skPUAhypno"  name="Autohypnosis"/>
+    <value id="skPUKnwPsi"  name="Knowledge (Pisonics)"/>
   </group>
 
   <!-- Psicrystal tags -->
