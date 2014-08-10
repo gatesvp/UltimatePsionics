@@ -10,8 +10,7 @@ April 24, 2014 - Tim Shadow
 Favored Class Options
 Class archetypes
 
-Aegis (Ectopic Artisan) - Astral Warrior implementation
-Crytic (Lost Mind) - Symbols of the Void inplementation</info_todo>
+Aegis (Ectopic Artisan) - Astral Warrior implementatio</info_todo>
     </fileinfo>
   <thing id="cPUSurPPri" name="Survivor&apos;s Path" description="You have sworn an oath to your order, and in exchange you have been trained in mystic techniques that allow you to summon a weapon from beyond time and space, while protecting yourself with the power of your mind.\n\n{b}Bonus Class Skill{/b}: Heal\n\n{b}Powers{/b}:  {i}catfall, vigor{/i}\n\n{b}Skills{/b}: Autohypnosis, Heal, Perception" compset="CustomSpec" summary="You are a follower of the Survivor&apos;s Path" uniqueness="unique">
     <arrayval field="usrArray" index="1" value="Secondary"/>
@@ -1483,6 +1482,7 @@ field[CustDesc].text = "Cannibalize Suit " & myPts & " cust. pts (" & myTimes & 
     <usesource source="pPsiUn"/>
     <tag group="AbilType" tag="Super"/>
     <tag group="User" tag="Tracker"/>
+    <tag group="Usage" tag="Day"/>
     <eval phase="Final" priority="10000"><![CDATA[var myPts as number
 var myTimes as number
 var myLev as number
@@ -1635,6 +1635,7 @@ hero.childfound[xPwrRes].field[abValue].value += myVal</eval>
     <usesource source="pPsiUn"/>
     <tag group="SpecSource" tag="cHelpPU1"/>
     <tag group="AbilType" tag="Super"/>
+    <eval phase="Final" priority="10000"><![CDATA[field[abSumm].text = "'Mark' target with Ranged touch attack as swift action. Gain " & signed(#attrmod[aINT]) & " to damage against mark until next turn."]]></eval>
     </thing>
   <thing id="cPUInsBypa" name="Bypass Pattern" description="The cryptic learns how to temporarily displace a pattern without damaging it. As a standard action, the cryptic can treat one trap or lock as if it did not exist for a number of rounds equal to her Intelligence modifier, although the object to be affected must have a weight under 100 lbs and the cryptic must make a successful Disable Device check on the trap or lock to be affected. When the cryptic successfully uses this ability, her allies also ignore that trap or lock. After the effect expires, the lock or trap functions as normal, although if the trap would have been triggered due to the cryptic not returning everything to its original state, such as a trap triggered by a door opening, the trap immediately activates. Otherwise, the trap is left untriggered." compset="CustomSpec" uniqueness="unique">
     <usesource source="pPsiUn"/>
@@ -1695,6 +1696,10 @@ hero.childfound[xPwrRes].field[abValue].value += myVal</eval>
     <usesource source="pPsiUn"/>
     <tag group="SpecSource" tag="cHelpPU1"/>
     <tag group="AbilType" tag="Extra"/>
+    <tag group="User" tag="Tracker"/>
+    <tag group="ChargeCalc" tag="AttrOnly"/>
+    <tag group="ChargeAttr" tag="aINT"/>
+    <tag group="Usage" tag="Day"/>
     </thing>
   <thing id="cPUInsExpP" name="Explosive Pattern" description="A cryptic with this insight can cause her disrupt pattern ability to explode upon impact. If the cryptic&#146;s disrupt pattern attack successfully hits, it causes splash damage to nearby creatures. The splash damage is equal to the minimum damage of the disrupt pattern. A cryptic must be at least 6th level to select this insight." compset="CustomSpec" uniqueness="unique">
     <usesource source="pPsiUn"/>
@@ -1741,10 +1746,14 @@ hero.childfound[xPwrRes].field[abValue].value += myVal</eval>
       <validate><![CDATA[validif (#levelcount[Cryptic] >= 14)]]></validate>
       </prereq>
     </thing>
-  <thing id="cPUOnsLigB" name="Efficient Trapsmith" description="The cryptic learns how to mask her pattern entirely. As a standard action, the cryptic can become invisible for one round per cryptic level. The effect ends as soon as the cryptic attacks any creature. This insight can be used a number of times per day equal to 3 + the Cryptic&#146;s Intelligence modifier. A cryptic must be at least 10th level before selecting this insight." compset="CustomSpec" uniqueness="unique">
+  <thing id="cPUOnsLigB" name="Light-bending Pattern" description="The cryptic learns how to mask her pattern entirely. As a standard action, the cryptic can become invisible for one round per cryptic level. The effect ends as soon as the cryptic attacks any creature. This insight can be used a number of times per day equal to 3 + the Cryptic&#146;s Intelligence modifier. A cryptic must be at least 10th level before selecting this insight." compset="CustomSpec" uniqueness="unique">
     <usesource source="pPsiUn"/>
     <tag group="SpecSource" tag="cHelpPU1"/>
     <tag group="AbilType" tag="Super"/>
+    <tag group="User" tag="Tracker"/>
+    <tag group="ChargeCalc" tag="AttrUses3"/>
+    <tag group="ChargeAttr" tag="aINT"/>
+    <tag group="Usage" tag="Day"/>
     <prereq message="Cryptic level 10 or greater required for this Insight">
       <validate><![CDATA[validif (#levelcount[Cryptic] >= 10)]]></validate>
       </prereq>
@@ -1903,6 +1912,7 @@ hero.childfound[xPwrRes].field[abValue].value += myVal</eval>
     <usesource source="pPsiUn"/>
     <tag group="SpecSource" tag="cHelpPU1"/>
     <tag group="AbilType" tag="Super"/>
+    <tag group="StandardDC" tag="aINT"/>
     <prereq message="Cryptic level 12 or greater required for this Insight">
       <validate><![CDATA[validif (#levelcount[Cryptic] >= 12)]]></validate>
       </prereq>
@@ -1929,6 +1939,10 @@ hero.childfound[xPwrRes].field[abValue].value += myVal</eval>
     <usesource source="pPsiUn"/>
     <tag group="SpecSource" tag="cHelpPU1"/>
     <tag group="Helper" tag="Secondary"/>
+    <eval phase="PreLevel" priority="5000">hero.child[aINT].field[Bonus].value += 2
+
+~ add to our languages known
+herofield[tLangsSpk].value += 1</eval>
     </thing>
   <thing id="cPUSinDisV" name="Discerning Vision" description="The cryptic sees all things as they truly are and is always treated as if under the effect of pierce the veils. In addition, the cryptic automatically succeeds on any saving throw against spells or powers of 8th level or lower that deal with modifying vision or some sort of visual pattern, such as symbol of pain." compset="CustomSpec" uniqueness="unique">
     <usesource source="pPsiUn"/>
