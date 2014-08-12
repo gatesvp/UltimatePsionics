@@ -511,9 +511,18 @@ perform hero.assign[User.PsionTal]]]></eval>
     <exprreq message="Constitution 13 required." iserror="no"><![CDATA[child[aCON].field[aFinalVal].value >= 13]]></exprreq>
     </thing>
   <thing id="fPUReckOff" name="Reckless Offense" description="{b}Prerequisites{/b}: Base attack bonus +1.{br}{br}{b}Benefit{/b}: When you use the attack action or full attack action in melee, you can take a penalty of -4 to your Armor Class and add a +2 bonus on your melee attack roll. The bonus on attack rolls and penalty to Armor Class last until the beginning of your next turn." compset="Feat" summary="You can shift your focus from defense to offense." uniqueness="useronce">
+    <fieldval field="actName" value="Reckless Offense"/>
     <usesource source="pPsiUn"/>
-    <tag group="Helper" tag="ShowSpec" name="ShowSpec" abbrev="ShowSpec"/>
     <tag group="fCategory" tag="General" name="General" abbrev="General"/>
+    <tag group="User" tag="Activation"/>
+    <tag group="Helper" tag="ShowSpec" name="ShowSpec" abbrev="ShowSpec"/>
+    <eval phase="PostAttr" priority="14001"><![CDATA[      ~ If we're disabled, do nothing
+      doneif (tagis[Helper.FtDisable] <> 0)
+
+      doneif (field[abilActive].value = 0)
+
+      hero.child[Attack].field[atmPenalty].value += 2
+      hero.child[ArmorClass].field[Bonus].value -= 4]]></eval>
     <exprreq message="Base attack bonus +1 required." iserror="no"><![CDATA[child[Attack].field[tAtkBase].value >= 1]]></exprreq>
     </thing>
   <thing id="fPUReturnS" name="Return Shot" description="{b}Prerequisites{/b}: Point Blank Shot, Psionic Shot, Fell Shot, base attack bonus +6.\n\n{b}Benefit{/b}: To use this feat, you must expend your psionic focus and have at least one hand free. Once per round when you would normally be hit by a projectile or a thrown weapon no more than one size category larger than your size, you can deflect the attack so that you take no damage from it. The attack is deflected back at your attacker, using the attack bonus of the original attack on you. You must be aware of the attack and not flat-footed. Attempting to return a shot is a free action.\n\n{b}Special{/b}: If you also have the Deflect Arrows feat, the deflected attack is made with the original attack bonus plus your Dexterity bonus." compset="Feat" summary="You can return incoming arrows, as well as crossbow bolts, spears, and other projectile or thrown weapons." uniqueness="useronce">
