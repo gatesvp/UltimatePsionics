@@ -521,8 +521,13 @@ perform hero.assign[User.PsionTal]]]></eval>
 
       doneif (field[abilActive].value = 0)
 
-      hero.child[Attack].field[atmPenalty].value += 2
-      hero.child[ArmorClass].field[Bonus].value -= 4]]></eval>
+      ~ Set bonus/penalty values
+      field[abValue].value += 2
+      field[abValue2].value += -4
+
+      ~ Give attack bonus and AC penalty
+      hero.child[Attack].field[atmBonus].value += field[abValue].value
+      hero.child[ArmorClass].field[Penalty].value += field[abValue2].value]]></eval>
     <exprreq message="Base attack bonus +1 required." iserror="no"><![CDATA[child[Attack].field[tAtkBase].value >= 1]]></exprreq>
     </thing>
   <thing id="fPUReturnS" name="Return Shot" description="{b}Prerequisites{/b}: Point Blank Shot, Psionic Shot, Fell Shot, base attack bonus +6.\n\n{b}Benefit{/b}: To use this feat, you must expend your psionic focus and have at least one hand free. Once per round when you would normally be hit by a projectile or a thrown weapon no more than one size category larger than your size, you can deflect the attack so that you take no damage from it. The attack is deflected back at your attacker, using the attack bonus of the original attack on you. You must be aware of the attack and not flat-footed. Attempting to return a shot is a free action.\n\n{b}Special{/b}: If you also have the Deflect Arrows feat, the deflected attack is made with the original attack bonus plus your Dexterity bonus." compset="Feat" summary="You can return incoming arrows, as well as crossbow bolts, spears, and other projectile or thrown weapons." uniqueness="useronce">
